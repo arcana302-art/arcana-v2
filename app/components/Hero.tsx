@@ -72,7 +72,7 @@ export default function Hero() {
             }}
           />
           <Image
-            src="/brand/hero-card-eye.png" // asegúrate que exista en /public/brand/
+            src="/brand/hero-card-eye.png" // Debe existir en /public/brand/
             alt="Carta Arcana con ojo místico"
             width={420}
             height={560}
