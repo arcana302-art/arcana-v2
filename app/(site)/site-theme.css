@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fondo sobrio (sin brillo en la esquina) */
+.hero-surface{
+  background:
+    linear-gradient(180deg,#0B0C14 0%,#0A0B12 100%);
+}
+
+/* Animación sutil (para que no se vea plana) */
+@keyframes float {
+  0%,100% { transform: translateY(0) }
+  50% { transform: translateY(-6px) }
+}
+.card-float{
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Sombra múltiple suave (profundidad sin halo que “corte” la página) */
+.card-shadow{
+  filter:
+    drop-shadow(0 10px 30px rgba(0,0,0,.45))
+    drop-shadow(0 0 28px rgba(142,97,255,.28));
+}
+
+/* Botones */
+@layer components{
+  .btn-primary{
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium
+           text-white shadow-[0_10px_30px_rgba(142,97,255,0.25)]
+           bg-[#7E4DF2] hover:bg-[#7443EB] transition;
+  }
+  .btn-secondary{
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium
+           text-white/80 ring-1 ring-white/10 hover:ring-white/20
+           bg-white/5 hover:bg-white/[0.07] transition;
+  }
+}
