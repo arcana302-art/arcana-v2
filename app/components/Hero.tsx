@@ -6,13 +6,13 @@ import Link from 'next/link';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#0B1120]">
-      {/* fondo suave en diagonal (no rompe el layout) */}
+      {/* Fondo suave y moderno */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(1200px 600px at -10% -10%, rgba(155,135,255,.10) 0%, rgba(11,17,32,0) 60%), radial-gradient(900px 500px at 110% 20%, rgba(36,0,255,.12) 0%, rgba(11,17,32,0) 55%), radial-gradient(800px 400px at 40% 120%, rgba(107,33,168,.12) 0%, rgba(11,17,32,0) 60%)',
+            'radial-gradient(1200px 600px at -10% -10%, rgba(155,135,255,.08) 0%, rgba(11,17,32,0) 60%), radial-gradient(900px 500px at 110% 20%, rgba(79,42,255,.10) 0%, rgba(11,17,32,0) 55%), radial-gradient(800px 400px at 40% 120%, rgba(107,33,168,.10) 0%, rgba(11,17,32,0) 60%)',
         }}
       />
 
@@ -35,18 +35,15 @@ export default function Hero() {
               concreta en un espacio cuidado, seguro y sin juicios.
             </p>
 
-            {/* Botones (como antes) */}
+            {/* Botones (como los tenías) */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="#agenda"
                 className={[
                   'inline-flex items-center justify-center',
                   'rounded-2xl px-6 py-4 text-base font-semibold text-white',
-                  // morado luminoso
                   'bg-gradient-to-b from-[#9F66FF] to-[#7C4DFF]',
-                  // brillo
-                  'shadow-[0_18px_40px_-10px_rgba(124,58,237,.45)]',
-                  'ring-1 ring-white/10',
+                  'shadow-[0_18px_40px_-10px_rgba(124,58,237,.45)] ring-1 ring-white/10',
                   'transition will-change-transform',
                   'hover:brightness-110 hover:shadow-[0_22px_60px_-12px_rgba(124,58,237,.6)]',
                   'active:translate-y-[1px]',
@@ -60,8 +57,7 @@ export default function Hero() {
                 className={[
                   'inline-flex items-center justify-center',
                   'rounded-2xl px-6 py-4 text-base font-semibold text-white',
-                  'border border-white/12 bg-white/5',
-                  'backdrop-blur-[2px]',
+                  'border border-white/12 bg-white/5 backdrop-blur-[2px]',
                   'transition hover:bg-white/8',
                 ].join(' ')}
               >
@@ -72,38 +68,28 @@ export default function Hero() {
 
           {/* Ilustración */}
           <div className="relative">
-            {/* halo detrás de la carta */}
-            <div
-              aria-hidden
-              className="absolute right-6 top-10 -z-10 h-56 w-56 rounded-full blur-3xl lg:right-12 lg:top-16 lg:h-72 lg:w-72"
-              style={{
-                background:
-                  'radial-gradient(circle at 50% 50%, rgba(169,129,255,.45) 0%, rgba(169,129,255,0) 60%)',
-              }}
-            />
-
-            <div className="flex justify-end pr-2 sm:pr-4">
+            {/* Contenedor con hover parecido al botón */}
+            <div className="group relative flex justify-end pr-2 sm:pr-4">
               <Image
                 src="/brand/hero-card-eye.png"
                 alt="Carta Arcana con ojo místico"
-                width={420}
-                height={560}
+                width={380}
+                height={520}
                 priority
-                // tamaño + posición + brillo/glow
                 className={[
-                  // tamaño responsive (más pequeña que antes)
-                  'w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[380px]',
+                  // 30% más pequeña que antes
+                  'w-[150px] sm:w-[180px] md:w-[210px] lg:w-[240px] xl:w-[270px]',
                   // acercarla al texto y bajarla un poco
-                  'translate-y-6 md:translate-y-8 lg:translate-y-10',
-                  'md:-mr-4 lg:mr-2',
+                  'translate-y-8 md:translate-y-10 md:-mr-6 lg:-mr-2',
                   // inclinación sutil
-                  'rotate-[-9deg]',
-                  // color más vivo
-                  'saturate-125 contrast-110 brightness-110',
-                  // glow alrededor
-                  'drop-shadow-[0_20px_70px_rgba(155,135,255,.35)]',
-                  // suavizar en hover
-                  'transition-transform duration-300 hover:rotate-[-7deg]',
+                  'rotate-[-6deg]',
+                  // morado oscuro pero con vida (no lavar la imagen)
+                  'saturate-[1.25] contrast-[1.25] brightness-[.95]',
+                  // animación suave similar a botón
+                  'transition-all duration-300',
+                  'group-hover:brightness-105 group-hover:rotate-[-5deg]',
+                  // glow morado sutil (sin halo blanco)
+                  'drop-shadow-[0_14px_38px_rgba(124,58,237,.35)] group-hover:drop-shadow-[0_18px_60px_rgba(124,58,237,.5)]',
                 ].join(' ')}
               />
             </div>
