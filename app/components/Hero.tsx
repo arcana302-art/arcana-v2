@@ -6,15 +6,18 @@ import Link from 'next/link';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#0B1120]">
-      {/* Fondo suave y moderno */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(1200px 600px at -10% -10%, rgba(155,135,255,.08) 0%, rgba(11,17,32,0) 60%), radial-gradient(900px 500px at 110% 20%, rgba(79,42,255,.10) 0%, rgba(11,17,32,0) 55%), radial-gradient(800px 400px at 40% 120%, rgba(107,33,168,.10) 0%, rgba(11,17,32,0) 60%)',
-        }}
-      />
+      {/* Fondo suave y UNIFORME (sin líneas) */}
+      <div aria-hidden className="pointer-events-none absolute -inset-28">
+        <div
+          className="h-full w-full"
+          style={{
+            background: `
+              radial-gradient(1200px 700px at -10% -10%, rgba(155,135,255,.08) 0%, rgba(11,17,32,0) 60%),
+              radial-gradient(900px 600px at 115% 15%, rgba(124,77,255,.12) 0%, rgba(11,17,32,0) 55%)
+            `,
+          }}
+        />
+      </div>
 
       <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16 lg:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -35,7 +38,7 @@ export default function Hero() {
               concreta en un espacio cuidado, seguro y sin juicios.
             </p>
 
-            {/* Botones (como los tenías) */}
+            {/* Botones (igual que antes) */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="#agenda"
@@ -68,8 +71,14 @@ export default function Hero() {
 
           {/* Ilustración */}
           <div className="relative">
-            {/* Contenedor con hover parecido al botón */}
-            <div className="group relative flex justify-end pr-2 sm:pr-4">
+            <div className="group relative ml-auto max-w-[520px] pr-2 sm:pr-4">
+              {/* Glow morado sutil detrás (sin halo blanco) */}
+              <span
+                aria-hidden
+                className="absolute -inset-8 z-0 rounded-[30px] bg-[#7C4DFF] opacity-25 blur-2xl transition group-hover:opacity-35"
+              />
+
+              {/* Imagen */}
               <Image
                 src="/brand/hero-card-eye.png"
                 alt="Carta Arcana con ojo místico"
@@ -77,19 +86,29 @@ export default function Hero() {
                 height={520}
                 priority
                 className={[
-                  // 30% más pequeña que antes
+                  'relative z-10',
+                  // tamaño final (ya reducido); puedes tocar estos valores si quieres más pequeño
                   'w-[150px] sm:w-[180px] md:w-[210px] lg:w-[240px] xl:w-[270px]',
-                  // acercarla al texto y bajarla un poco
+                  // posicionamiento: más cerca del texto y un poco más abajo
                   'translate-y-8 md:translate-y-10 md:-mr-6 lg:-mr-2',
-                  // inclinación sutil
                   'rotate-[-6deg]',
-                  // morado oscuro pero con vida (no lavar la imagen)
-                  'saturate-[1.25] contrast-[1.25] brightness-[.95]',
-                  // animación suave similar a botón
-                  'transition-all duration-300',
-                  'group-hover:brightness-105 group-hover:rotate-[-5deg]',
-                  // glow morado sutil (sin halo blanco)
-                  'drop-shadow-[0_14px_38px_rgba(124,58,237,.35)] group-hover:drop-shadow-[0_18px_60px_rgba(124,58,237,.5)]',
+                  // “oscuro pero con vida” (sin lavar colores)
+                  'brightness-[.9] contrast-[1.18] saturate-[1.12]',
+                  // sombra morada suave
+                  'drop-shadow-[0_14px_38px_rgba(124,58,237,.35)]',
+                  // hover parecido al botón
+                  'transition-all duration-300 group-hover:brightness-105 group-hover:rotate-[-5deg] group-hover:drop-shadow-[0_18px_60px_rgba(124,58,237,.5)]',
+                ].join(' ')}
+              />
+
+              {/* Tinte con el MISMO gradiente del botón para igualar color */}
+              <span
+                aria-hidden
+                className={[
+                  'pointer-events-none absolute inset-0 z-20 rounded-[24px]',
+                  'bg-gradient-to-b from-[#9F66FF] to-[#7C4DFF]',
+                  'opacity-60 group-hover:opacity-70',
+                  'mix-blend-color', // clave: empareja el morado a la paleta de los botones
                 ].join(' ')}
               />
             </div>
