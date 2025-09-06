@@ -2,24 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===========================
+   Arcana – Variables & Base
+   =========================== */
 :root{
-  --arcana-500:#8b5cf6; --arcana-600:#7c3aed; --arcana-700:#6d28d9;
+  --arcana-bg: #0b0f1f;                /* fondo base */
+  --arcana-primary: #7c3aed;           /* morado principal */
+  --arcana-primary-600: #8b5cf6;       /* morado hover */
+  --arcana-accent: #f6cf4a;            /* dorado */
 }
 
-/* Botón morado */
-.btn-arcana{
-  @apply rounded-xl px-4 py-2 font-semibold text-white shadow;
-  background: linear-gradient(180deg, var(--arcana-500) 0%, var(--arcana-700) 100%);
-}
-.btn-arcana:hover{
-  background: linear-gradient(180deg, var(--arcana-500) 0%, var(--arcana-600) 100%);
-  transform: translateY(-1px);
+html, body {
+  background: var(--arcana-bg);
+  color: #e5e7eb; /* slate-200 */
+  min-height: 100%;
 }
 
-/* “Apaga” cualquier amarillo heredado */
-[class*="bg-yellow"],[class*="bg-amber"],
-[class*="from-yellow"],[class*="from-amber"],
-[class*="to-yellow"],[class*="to-amber"]{
-  background: linear-gradient(180deg, var(--arcana-500) 0%, var(--arcana-700) 100%) !important;
-  color:#fff !important; border-color: transparent !important;
+/* Evita banding en degradados oscuros */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* ===========================
+   Hero – Fondo, viñeta y grano
+   =========================== */
+
+/* Fondo con nebulosas y profundidad */
+.bg-arcana-hero{
+  background:
+    radial-gradient(1200px 800px at 78% 40%, rgba(124,58,237,.14), transparent 60%),
+    radial-gradient(900px 600px at 10% 75%, rgba(246,207,74,.12), transparent 60%),
+    radial-gradient(1200px 700px at 50% -10%, rgba(17,24,39,.45), transparent 70%),
+    var(--arcana-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Viñeta suave por encima */
+.bg-arcana-vignette{
+  background: radial-gradient(80% 60% at 50% 42%,
+              rgba(255,255,255,0) 0%,
+              rgba(11,15,31,.25) 60%,
+              rgba(11,15,31,.75) 100%);
+}
+
+/* “Grano/estrellas” sutil */
+.bg-arcana-hero::after{
+  content:"";
+  position:absolute; inset:-2px;
+  background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+  background-size: 2px 2px;
+  opacity:.035;
+  pointer-events:none;
+}
+
+/* ===========================
+   Utilidades menores
+   =========================== */
+
+/* Balance en títulos muy largos (por si el navegador no lo soporta) */
+.text-balance{
+  text-wrap: balance;
 }
