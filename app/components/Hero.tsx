@@ -5,13 +5,13 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section
-      className="relative isolate overflow-hidden bg-[#0f1221] py-20 md:py-28"
+      className="relative isolate bg-arcana-hero overflow-hidden py-20 md:py-28"
       aria-label="Hero Arcana"
     >
-      {/* --- Viñeta suave sobre todo el hero --- */}
-      <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(120%_100%_at_center,_rgba(12,14,28,0)_0%,_rgba(12,14,28,0.25)_55%,_rgba(12,14,28,0.75)_100%)]" />
+      {/* Capa de viñeta suave */}
+      <div className="pointer-events-none absolute inset-0 opacity-70 bg-arcana-vignette" />
 
-      {/* --- Brillos en esquinas (glow) --- */}
+      {/* Glows en esquinas */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full opacity-50 blur-3xl"
@@ -25,12 +25,12 @@ export default function Hero() {
         className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full opacity-50 blur-3xl"
         style={{
           background:
-            "radial-gradient(closest-side, rgba(250,204,21,0.35), rgba(250,204,21,0) 70%)",
+            "radial-gradient(closest-side, rgba(246,207,74,0.35), rgba(246,207,74,0) 70%)",
         }}
       />
 
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2 lg:gap-16">
-        {/* --- Texto --- */}
+        {/* Texto */}
         <div className="relative z-10">
           <h1 className="text-balance text-4xl font-extrabold leading-[1.05] text-white md:text-6xl">
             Claridad aquí y ahora
@@ -46,7 +46,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="#agenda"
-              className="inline-flex items-center rounded-xl bg-violet-500 px-5 py-3 text-sm font-medium text-white shadow-[0_8px_30px_rgba(139,92,246,0.35)] transition hover:bg-violet-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
+              className="inline-flex items-center rounded-xl bg-[var(--arcana-primary)] px-5 py-3 text-sm font-medium text-white shadow-[0_8px_30px_rgba(124,58,237,0.45)] transition hover:bg-[var(--arcana-primary-600)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
             >
               Agendar una consulta
             </Link>
@@ -60,26 +60,25 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* --- Imagen (carta) --- */}
+        {/* Imagen (carta) */}
         <div className="relative z-10 flex justify-center md:justify-end">
-          {/* Aro de luz detrás de la carta */}
+          {/* Halo detrás de la carta */}
           <div
             aria-hidden
-            className="absolute -inset-6 -z-10 rounded-[2rem] opacity-60 blur-2xl"
+            className="absolute right-2 top-6 -z-10 h-[85%] w-[85%] max-w-[380px] rounded-[2rem] opacity-70 blur-2xl"
             style={{
               background:
-                "radial-gradient(closest-side, rgba(250,204,21,0.25), rgba(250,204,21,0) 70%)",
+                "radial-gradient(closest-side, rgba(246,207,74,0.28), rgba(246,207,74,0) 70%)",
             }}
           />
-
           <Image
-            src="/brand/hero-card-eye.png" // 👈 archivo en public/brand/hero-card-eye.png
+            src="/brand/hero-card-eye.png" // asegúrate que exista en /public/brand/
             alt="Carta Arcana con ojo místico"
             width={420}
             height={560}
             priority
-            sizes="(max-width: 768px) 260px, (max-width: 1024px) 340px, 420px"
-            className="h-auto w-[260px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] md:w-[340px] lg:w-[420px]"
+            sizes="(max-width: 768px) 240px, (max-width: 1024px) 320px, 360px"
+            className="h-auto w-[240px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] md:w-[320px] lg:w-[360px]"
           />
         </div>
       </div>
