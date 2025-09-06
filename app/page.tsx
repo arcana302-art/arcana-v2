@@ -1,12 +1,21 @@
+// app/page.tsx
 import Hero from "./components/Hero";
+import HowItWorks from "./components/HowItWorks";
+import Footer from "./components/Footer";
 
-export default function Page() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-brand-bg text-white">
-      <div className="mx-auto max-w-7xl px-6">
+    <>
+      <main className="relative">
+        {/* HERO */}
         <Hero />
-        {/* Aquí seguirá el resto de secciones… */}
-      </div>
-    </main>
+
+        {/* ¿CÓMO FUNCIONA? */}
+        <HowItWorks />
+      </main>
+
+      {/* FOOTER */}
+      <Footer />
+    </>
   );
 }
