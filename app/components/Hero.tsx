@@ -21,28 +21,25 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex items-center gap-4">
-            <Link
-              href="#agenda"
-              className="btn-primary"
-            >
+            <Link href="#agenda" className="btn-primary">
               Agendar una consulta
             </Link>
 
-            <Link
-              href="#talent"
-              className="btn-secondary"
-            >
+            <Link href="#talent" className="btn-secondary">
               Únete como especialista
             </Link>
           </div>
         </div>
 
-        {/* Carta a la derecha (más chica, con sombra suave, sin glow) */}
+        {/* Carta a la derecha: más pequeña + glow sutil */}
         <div
           aria-hidden
-          className="pointer-events-none absolute right-2 -top-6 md:right-6 md:top-6 lg:right-8 lg:top-4 xl:right-16"
+          className="pointer-events-none absolute right-2 -top-2 md:right-6 md:top-6 lg:right-10 lg:top-4 xl:right-16"
         >
-          <div className="relative -right-2 md:-right-4 rotate-6">
+          <div className="relative rotate-6 card-wrap">
+            {/* Glow detrás */}
+            <div className="card-glow absolute inset-0 -z-10"></div>
+
             <Image
               src="/brand/hero-card-eye.png"
               alt=""
@@ -50,8 +47,8 @@ export default function Hero() {
               height={560}
               priority
               className="
-                select-none card-shadow card-float
-                w-[210px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[380px] 2xl:w-[420px]
+                select-none card-img
+                w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[320px] 2xl:w-[340px]
               "
             />
           </div>
