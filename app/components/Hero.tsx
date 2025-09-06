@@ -6,7 +6,37 @@ import Link from 'next/link';
 export default function Hero() {
   return (
     <section className="relative bg-[#17031F]">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-18 lg:py-20">
+      {/* NUBES: detrás del contenido */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      >
+        {/* Pista de nubes, se anima con translateX */}
+        <div className="absolute left-0 top-0 h-full w-[260%] cloudTrack">
+          {/* Usamos la misma nube en 2 "copias" para lograr loop continuo */}
+          <img
+            src="/brand/Nube1.png"
+            alt=""
+            className="cloudPiece cloudA"
+            style={{
+              top: '14%',
+              width: '900px',
+            }}
+          />
+          <img
+            src="/brand/Nube1.png"
+            alt=""
+            className="cloudPiece cloudB"
+            style={{
+              top: '58%',
+              width: '1000px',
+              opacity: 0.65,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:py-18 lg:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           {/* Texto */}
           <div>
@@ -43,7 +73,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Ilustración (sin overlays/gradientes) */}
+          {/* Carta */}
           <div className="flex justify-end">
             <Image
               src="/brand/hero-card-eye.png"
@@ -54,13 +84,50 @@ export default function Hero() {
               className={[
                 'w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px] xl:w-[260px]',
                 'rotate-[-6deg]',
-                // ajustes suaves de color para armonizar con #9434EC
+                // Ajuste fino de tonos para armonizar con #9434EC
                 'brightness-[0.95] contrast-[1.07] saturate-[1.08] hue-rotate-[8deg]',
               ].join(' ')}
             />
           </div>
         </div>
       </div>
+
+      {/* Estilos para la animación y brillo de la nube */}
+      <style jsx global>{`
+        @keyframes cloud-scroll {
+          0% {
+            transform: translateX(-35%);
+          }
+          100% {
+            transform: translateX(-5%);
+          }
+        }
+
+        /* Contenedor que se anima, muy ancho para que la nube camine por detrás */
+        .cloudTrack {
+          animation: cloud-scroll 55s linear infinite;
+        }
+
+        /* Cada imagen de nube: sólo brillo alrededor de su alfa (no toca el fondo) */
+        .cloudPiece {
+          position: absolute;
+          left: 0;
+          /* halo morado sutil + uno más suave y grande */
+          filter:
+            drop-shadow(0 0 22px rgba(148, 52, 236, 0.35))
+            drop-shadow(0 0 48px rgba(148, 52, 236, 0.2));
+          opacity: 0.8;
+        }
+
+        /* Desfase para que el loop sea continuo */
+        .cloudA {
+          animation: cloud-scroll 55s linear infinite;
+        }
+        .cloudB {
+          animation: cloud-scroll 55s linear infinite;
+          animation-delay: -27.5s; /* mitad del tiempo para intercalar */
+        }
+      `}</style>
     </section>
   );
 }
