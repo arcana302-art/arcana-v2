@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import './globals.css';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Arcana",
-  description: "Guía mística con especialistas verificados",
+  title: 'Arcana',
+  description: 'Lecturas en vivo con guías auténticas',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className="min-h-screen bg-[#0b1022] text-white antialiased">
-        <main className="relative z-10">{children}</main>
+      <body className="bg-[#17031F] text-white antialiased">
+        {children}
       </body>
     </html>
   );
