@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#0B1120]">
+    <section className="relative bg-[#17031F]">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-18 lg:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           {/* Texto */}
@@ -25,7 +25,7 @@ export default function Hero() {
               concreta en un espacio cuidado, seguro y sin juicios.
             </p>
 
-            {/* Botones: primario #9434EC y secundario transparente */}
+            {/* Botones */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="#agenda"
@@ -43,7 +43,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Ilustración (sin overlays/efectos de fondo) */}
+          {/* Ilustración (sin overlays/gradientes) */}
           <div className="flex justify-end">
             <Image
               src="/brand/hero-card-eye.png"
@@ -52,14 +52,10 @@ export default function Hero() {
               height={360}
               priority
               className={[
-                // tamaño final (más pequeño)
                 'w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px] xl:w-[260px]',
-                // ligera inclinación como referencia anterior
                 'rotate-[-6deg]',
-                // SOLO ajuste de color por filtro (sin cuadros encima)
-                // busca que el morado sea más cercano al #9434EC
+                // ajustes suaves de color para armonizar con #9434EC
                 'brightness-[0.95] contrast-[1.07] saturate-[1.08] hue-rotate-[8deg]',
-                // sin sombras ni brillos extra
               ].join(' ')}
             />
           </div>
