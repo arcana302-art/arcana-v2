@@ -1,58 +1,86 @@
 // app/components/Hero.tsx
-import TarotFan from "./illustrations/TarotFan";
-import SolarEye from "./illustrations/SolarEye";
-import EyeLaurel from "./illustrations/EyeLaurel";
-import MysticYinYang from "./illustrations/MysticYinYang";
+import Image from "next/image";
+import Link from "next/link";
 
-type IllustrationKey = "tarot-fan" | "solar-eye" | "eye-laurel" | "yin-yang";
-
-const ILLUSTRATIONS: Record<IllustrationKey, React.FC<{ className?: string }>> = {
-  "tarot-fan": TarotFan,
-  "solar-eye": SolarEye,
-  "eye-laurel": EyeLaurel,
-  "yin-yang": MysticYinYang,
-};
-
-export default function Hero({ illustration = "tarot-fan" as IllustrationKey }) {
-  const Illustration = ILLUSTRATIONS[illustration];
-
+export default function Hero() {
   return (
-    <section className="relative mx-auto max-w-6xl px-6 pt-28 pb-20">
-      <div className="grid items-center gap-12 md:grid-cols-2">
-        {/* Copy — tono místico-poético */}
-        <div className="text-center md:text-left">
-          <h1 className="text-5xl/tight md:text-6xl/tight font-semibold text-white">
+    <section
+      className="relative isolate overflow-hidden bg-[#0f1221] py-20 md:py-28"
+      aria-label="Hero Arcana"
+    >
+      {/* --- Viñeta suave sobre todo el hero --- */}
+      <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(120%_100%_at_center,_rgba(12,14,28,0)_0%,_rgba(12,14,28,0.25)_55%,_rgba(12,14,28,0.75)_100%)]" />
+
+      {/* --- Brillos en esquinas (glow) --- */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full opacity-50 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(167,139,250,0.35), rgba(167,139,250,0) 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full opacity-50 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(250,204,21,0.35), rgba(250,204,21,0) 70%)",
+        }}
+      />
+
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2 lg:gap-16">
+        {/* --- Texto --- */}
+        <div className="relative z-10">
+          <h1 className="text-balance text-4xl font-extrabold leading-[1.05] text-white md:text-6xl">
             Claridad aquí y ahora
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">
-              con guías auténticas
-            </span>
+            <br />
+            <span className="text-violet-300">con guías auténticas</span>
           </h1>
 
-          <p className="mt-5 text-lg text-white/70">
+          <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-slate-300 md:text-lg">
             Tarot, astrología y oráculos. Agenda en minutos y recibe orientación
             concreta en un espacio cuidado, seguro y sin juicios.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
-            <a
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
               href="#agenda"
-              className="rounded-xl px-5 py-3 text-base font-medium bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-900/30 transition"
+              className="inline-flex items-center rounded-xl bg-violet-500 px-5 py-3 text-sm font-medium text-white shadow-[0_8px_30px_rgba(139,92,246,0.35)] transition hover:bg-violet-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
             >
               Agendar una consulta
-            </a>
-            <a
-              href="#talento"
-              className="rounded-xl px-5 py-3 text-base font-medium bg-white/10 hover:bg-white/15 text-white border border-white/15 transition"
+            </Link>
+
+            <Link
+              href="/especialistas"
+              className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-slate-200 backdrop-blur transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
             >
               Únete como especialista
-            </a>
+            </Link>
           </div>
         </div>
 
-        {/* Ilustración */}
-        <div className="relative">
-          <div className="absolute -inset-6 rounded-full bg-purple-500/10 blur-2xl" />
-          <Illustration className="relative w-full h-auto" />
+        {/* --- Imagen (carta) --- */}
+        <div className="relative z-10 flex justify-center md:justify-end">
+          {/* Aro de luz detrás de la carta */}
+          <div
+            aria-hidden
+            className="absolute -inset-6 -z-10 rounded-[2rem] opacity-60 blur-2xl"
+            style={{
+              background:
+                "radial-gradient(closest-side, rgba(250,204,21,0.25), rgba(250,204,21,0) 70%)",
+            }}
+          />
+
+          <Image
+            src="/brand/hero-card-eye.png" // 👈 archivo en public/brand/hero-card-eye.png
+            alt="Carta Arcana con ojo místico"
+            width={420}
+            height={560}
+            priority
+            sizes="(max-width: 768px) 260px, (max-width: 1024px) 340px, 420px"
+            className="h-auto w-[260px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] md:w-[340px] lg:w-[420px]"
+          />
         </div>
       </div>
     </section>
