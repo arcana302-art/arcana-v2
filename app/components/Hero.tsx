@@ -5,52 +5,108 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="hero-surface relative isolate overflow-visible">
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-24 md:pt-28 lg:pb-36">
-        {/* Texto */}
-        <div className="relative z-10 max-w-2xl lg:max-w-3xl">
-          <h1 className="text-white font-extrabold tracking-tight text-5xl sm:text-6xl leading-[1.05]">
-            <span className="block">Claridad</span>
-            <span className="block">aquí y ahora</span>
-            <span className="block text-[#C9B4FF]">con guías auténticas</span>
-          </h1>
+    <section className="relative overflow-hidden bg-[#0B1120]">
+      {/* fondo suave en diagonal (no rompe el layout) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(1200px 600px at -10% -10%, rgba(155,135,255,.10) 0%, rgba(11,17,32,0) 60%), radial-gradient(900px 500px at 110% 20%, rgba(36,0,255,.12) 0%, rgba(11,17,32,0) 55%), radial-gradient(800px 400px at 40% 120%, rgba(107,33,168,.12) 0%, rgba(11,17,32,0) 60%)',
+        }}
+      />
 
-          <p className="mt-6 text-lg/7 text-white/70 max-w-xl">
-            Tarot, astrología y oráculos. Agenda en minutos y recibe orientación
-            concreta en un espacio cuidado, seguro y sin juicios.
-          </p>
+      <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16 lg:py-20">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          {/* Texto */}
+          <div>
+            <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl">
+              Claridad
+              <br />
+              aquí y ahora
+            </h1>
 
-          <div className="mt-8 flex items-center gap-4">
-            <Link href="#agenda" className="btn-primary">
-              Agendar una consulta
-            </Link>
+            <p className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-[#C8B6FF] sm:text-5xl">
+              con guías auténticas
+            </p>
 
-            <Link href="#talent" className="btn-secondary">
-              Únete como especialista
-            </Link>
+            <p className="mt-6 max-w-2xl text-lg/7 text-white/80">
+              Tarot, astrología y oráculos. Agenda en minutos y recibe orientación
+              concreta en un espacio cuidado, seguro y sin juicios.
+            </p>
+
+            {/* Botones (como antes) */}
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="#agenda"
+                className={[
+                  'inline-flex items-center justify-center',
+                  'rounded-2xl px-6 py-4 text-base font-semibold text-white',
+                  // morado luminoso
+                  'bg-gradient-to-b from-[#9F66FF] to-[#7C4DFF]',
+                  // brillo
+                  'shadow-[0_18px_40px_-10px_rgba(124,58,237,.45)]',
+                  'ring-1 ring-white/10',
+                  'transition will-change-transform',
+                  'hover:brightness-110 hover:shadow-[0_22px_60px_-12px_rgba(124,58,237,.6)]',
+                  'active:translate-y-[1px]',
+                ].join(' ')}
+              >
+                Agendar una consulta
+              </Link>
+
+              <Link
+                href="#unete"
+                className={[
+                  'inline-flex items-center justify-center',
+                  'rounded-2xl px-6 py-4 text-base font-semibold text-white',
+                  'border border-white/12 bg-white/5',
+                  'backdrop-blur-[2px]',
+                  'transition hover:bg-white/8',
+                ].join(' ')}
+              >
+                Únete como especialista
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Carta a la derecha: más pequeña + glow sutil */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute right-2 -top-2 md:right-6 md:top-6 lg:right-10 lg:top-4 xl:right-16"
-        >
-          <div className="relative rotate-6 card-wrap">
-            {/* Glow detrás */}
-            <div className="card-glow absolute inset-0 -z-10"></div>
-
-            <Image
-              src="/brand/hero-card-eye.png"
-              alt=""
-              width={420}
-              height={560}
-              priority
-              className="
-                select-none card-img
-                w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[320px] 2xl:w-[340px]
-              "
+          {/* Ilustración */}
+          <div className="relative">
+            {/* halo detrás de la carta */}
+            <div
+              aria-hidden
+              className="absolute right-6 top-10 -z-10 h-56 w-56 rounded-full blur-3xl lg:right-12 lg:top-16 lg:h-72 lg:w-72"
+              style={{
+                background:
+                  'radial-gradient(circle at 50% 50%, rgba(169,129,255,.45) 0%, rgba(169,129,255,0) 60%)',
+              }}
             />
+
+            <div className="flex justify-end pr-2 sm:pr-4">
+              <Image
+                src="/brand/hero-card-eye.png"
+                alt="Carta Arcana con ojo místico"
+                width={420}
+                height={560}
+                priority
+                // tamaño + posición + brillo/glow
+                className={[
+                  // tamaño responsive (más pequeña que antes)
+                  'w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[380px]',
+                  // acercarla al texto y bajarla un poco
+                  'translate-y-6 md:translate-y-8 lg:translate-y-10',
+                  'md:-mr-4 lg:mr-2',
+                  // inclinación sutil
+                  'rotate-[-9deg]',
+                  // color más vivo
+                  'saturate-125 contrast-110 brightness-110',
+                  // glow alrededor
+                  'drop-shadow-[0_20px_70px_rgba(155,135,255,.35)]',
+                  // suavizar en hover
+                  'transition-transform duration-300 hover:rotate-[-7deg]',
+                ].join(' ')}
+              />
+            </div>
           </div>
         </div>
       </div>
