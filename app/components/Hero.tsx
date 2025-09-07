@@ -63,7 +63,6 @@ function Star({
         className="twinkle"
         style={{ animationDelay: `var(--twinkle-delay)`, animationDuration: `var(--twinkle-dur)` }}
       >
-        {/* Estrella en rombo (8 puntas) */}
         <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
       </g>
 
@@ -147,21 +146,21 @@ export default function Hero() {
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
             {/* ===== ESTRELLAS (12 en total; 7 izquierda y 5 derecha) ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* --- IZQUIERDA (7) — más cerca de la carta y bien espaciadas --- */}
-              <Star id="L1" className="absolute w-[20px]" style={{ left: '8%',  top: '6%' }}    delay="0.3s" duration="12s" bright />
-              <Star id="L2" className="absolute w-[16px]" style={{ left: '22%', top: '21%' }}   delay="1.4s" duration="11s" />
-              <Star id="L3" className="absolute w-[14px]" style={{ left: '12%', top: '38%' }}   delay="2.1s" duration="10s" />
-              <Star id="L4" className="absolute w-[18px]" style={{ left: '34%', top: '8%' }}    delay="0.8s" duration="13s" />
-              <Star id="L5" className="absolute w-[12px]" style={{ left: '28%', bottom: '10%' }} delay="1.9s" duration="12.8s" />
-              <Star id="L6" className="absolute w-[24px]" style={{ left: '45%', bottom: '22%' }} delay="1.2s" duration="14s" bright />
-              <Star id="L7" className="absolute w-[13px]" style={{ left: '15%', bottom: '4%' }}  delay="0.6s" duration="10.6s" />
+              {/* --- IZQUIERDA (7) — más extendidas horizontalmente y sin tocar carta ni bordes --- */}
+              <Star id="L1" className="absolute w-[20px]" style={{ left: '6%',  top: '6%' }}    delay="0.3s" duration="12s" bright />
+              <Star id="L2" className="absolute w-[16px]" style={{ left: '18%', top: '18%' }}   delay="1.4s" duration="11s" />
+              <Star id="L3" className="absolute w-[14px]" style={{ left: '10%', top: '34%' }}   delay="2.1s" duration="10s" />
+              <Star id="L4" className="absolute w-[18px]" style={{ left: '26%', top: '10%' }}   delay="0.8s" duration="13s" />
+              <Star id="L5" className="absolute w-[12px]" style={{ left: '20%', bottom: '12%' }} delay="1.9s" duration="12.8s" />
+              <Star id="L6" className="absolute w-[24px]" style={{ left: '32%', bottom: '24%' }} delay="1.2s" duration="14s" bright />
+              <Star id="L7" className="absolute w-[13px]" style={{ left: '8%',  bottom: '8%' }}  delay="0.6s" duration="10.6s" />
 
-              {/* --- DERECHA (5) — bien repartidas --- */}
-              <Star id="R1" className="absolute w-[22px]" style={{ right: '6%',  top: '4%' }}    delay="0.2s" duration="11s" bright />
-              <Star id="R2" className="absolute w-[14px]" style={{ right: '20%', top: '18%' }}   delay="1.1s" duration="12.5s" />
-              <Star id="R3" className="absolute w-[18px]" style={{ right: '12%', top: '36%' }}   delay="2.0s" duration="10.5s" />
-              <Star id="R4" className="absolute w-[24px]" style={{ right: '2%',  bottom: '20%' }} delay="0.8s" duration="13s" bright />
-              <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '6%' }}  delay="1.5s" duration="9.8s" />
+              {/* --- DERECHA (5) — separadas y lejos de bordes/carta --- */}
+              <Star id="R1" className="absolute w-[22px]" style={{ right: '8%',  top: '8%' }}    delay="0.2s" duration="11s" bright />
+              <Star id="R2" className="absolute w-[14px]" style={{ right: '18%', top: '22%' }}   delay="1.1s" duration="12.5s" />
+              <Star id="R3" className="absolute w-[18px]" style={{ right: '10%', top: '40%' }}   delay="2.0s" duration="10.5s" />
+              <Star id="R4" className="absolute w-[24px]" style={{ right: '6%',  bottom: '24%' }} delay="0.8s" duration="13s" bright />
+              <Star id="R5" className="absolute w-[12px]" style={{ right: '16%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
             {/* CARTA (sin cambios) */}
