@@ -1,80 +1,43 @@
-// app/components/Hero.tsx
-"use client";
+'use client';
 
-const HERO_IMG = "/brand/hero-card-eye.png";
-const CLOUD_IMG = "/brand/Nube1.png";
+import Image from 'next/image';
+
+const HERO_IMG = '/brand/hero-card-eye.png';
+const CLOUD_IMG = '/brand/Nube1.png';
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#17031F]">
-      {/* Nube detrás: derecha → izquierda, más pequeña y sin línea dura */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {/* Wrapper para escala y centrado vertical */}
-        <div
-          className="
-            absolute left-0 right-0 top-[56%] -translate-y-1/2
-            scale-[0.88]
-          "
-        >
-          {/* Capa animada horizontalmente */}
-          <div
-            className="
-              cloud-track
-              relative w-[1700px] h-auto
-              mx-auto
-            "
-            style={{
-              animation: "cloud-pan 42s linear infinite",
-            }}
-          >
-            <img
-              src={CLOUD_IMG}
-              alt=""
-              className="
-                block w-full h-auto
-                select-none pointer-events-none
-                [filter:drop-shadow(0_0_22px_rgba(148,52,236,0.22))_brightness(1.05)_contrast(1.03)]
-                cloud-mask
-              "
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Contenido */}
-      <div className="relative z-10 mx-auto max-w-[120rem] px-6 md:px-10 pt-20 md:pt-24 lg:pt-28 pb-14 md:pb-24">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          {/* Texto — columna más ancha */}
-          <div className="relative z-10 lg:max-w-3xl xl:max-w-4xl">
-            <h1 className="text-[46px] leading-[1.08] font-extrabold text-white sm:text-[62px] md:text-[76px]">
+      <div className="mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
+        <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
+          {/* Columna de texto (más ancha) */}
+          <div className="col-span-12 lg:col-span-7 xl:col-span-7">
+            <h1 className="text-white font-extrabold tracking-tight text-5xl sm:text-6xl">
               Claridad
               <br />
               aquí y ahora
             </h1>
 
-            <p className="mt-6 text-[38px] sm:text-[46px] md:text-[56px] font-extrabold tracking-tight text-[#CDB6FF]">
+            <h2 className="mt-6 text-[42px] sm:text-[46px] font-extrabold tracking-tight text-[#c9a6ff]">
               con guías auténticas
-            </p>
+            </h2>
 
-            <p className="mt-6 max-w-[46rem] text-lg leading-relaxed text-neutral-300">
+            <p className="mt-6 max-w-2xl text-white/70 text-lg leading-relaxed">
               Tarot, astrología y oráculos. Agenda en minutos y recibe orientación
               concreta en un espacio cuidado, seguro y sin juicios.
             </p>
 
             {/* Botones */}
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="#"
                 className="
-                  inline-flex items-center justify-center
-                  rounded-2xl px-6 py-4 text-base font-semibold text-white
+                  inline-flex items-center justify-center rounded-2xl px-6 h-14
+                  text-white text-base font-semibold
+                  bg-[#9434ec]
                   shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)]
-                  transition
-                  hover:shadow-[0_12px_48px_-8px_rgba(148,52,236,0.75)]
+                  transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]
                 "
-                style={{ backgroundColor: "#9434EC" }}
               >
                 Agendar una consulta
               </a>
@@ -82,11 +45,10 @@ export default function Hero() {
               <a
                 href="#"
                 className="
-                  inline-flex items-center justify-center
-                  rounded-2xl px-6 py-4 text-base font-semibold
-                  border border-white/14 text-white/90
-                  bg-white/[0.02]
-                  hover:bg-white/[0.05] hover:text-white transition
+                  inline-flex items-center justify-center rounded-2xl px-6 h-14
+                  text-white/90 text-base font-semibold
+                  ring-1 ring-white/15 bg-white/5 backdrop-blur
+                  transition-all duration-200 hover:bg-white/[0.07]
                 "
               >
                 Únete como especialista
@@ -94,21 +56,34 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Imagen — un poco más grande, movida a la izquierda, con hover */}
-          <div className="relative z-10 flex justify-center lg:justify-end">
+          {/* Columna visual */}
+          <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
+            {/* Nube animada detrás */}
+            <div className="pointer-events-none absolute inset-0 -z-10 overflow-visible">
+              <div className="cloud-track">
+                <img
+                  src={CLOUD_IMG}
+                  alt=""
+                  className="cloud-img"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+
+            {/* Carta — tamaño -15% e inclinación -10° */}
             <div
               className="
                 group relative
-                w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[380px]
+                w-[188px] sm:w-[222px] md:w-[255px] lg:w-[290px] xl:w-[324px]
                 -translate-x-6 md:-translate-x-10 lg:-translate-x-14 xl:-translate-x-20
-                pointer-events-auto select-none
+                -rotate-[10deg]
                 transition-transform duration-500 will-change-transform
-                -rotate-[20deg]
-                hover:-rotate-[16deg] hover:scale-[1.05]
+                hover:-rotate-[6deg] hover:scale-[1.05]
                 drop-shadow-[0_0_22px_rgba(148,52,236,0.16)]
+                select-none
               "
             >
-              {/* Halo adaptable al hover */}
+              {/* Halo suave que aparece al hover */}
               <span
                 className="
                   absolute inset-0 -z-10
@@ -119,51 +94,58 @@ export default function Hero() {
                 "
                 style={{
                   background:
-                    "radial-gradient(60% 60% at 50% 50%, rgba(148,52,236,0.35) 0%, rgba(148,52,236,0.0) 70%)",
+                    'radial-gradient(60% 60% at 50% 50%, rgba(148,52,236,0.35) 0%, rgba(148,52,236,0) 70%)',
                 }}
               />
-              <img
+              <Image
                 src={HERO_IMG}
-                alt="Carta / Símbolo místico"
+                alt="Carta / símbolo místico"
+                width={700}
+                height={980}
+                priority
                 className="h-auto w-full"
-                loading="eager"
-                decoding="async"
               />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Estilos: animación y máscaras de nube */}
+      {/* Estilos locales: animación y halo natural de la nube */}
       <style jsx>{`
-        @keyframes cloud-pan {
+        /* Pista para animar la nube sin tocar el wrapper del layout */
+        .cloud-track {
+          position: absolute;
+          inset: 0;
+          overflow: visible;
+        }
+
+        /* Nube: inicia fuera a la derecha y cruza toda la sección hacia la izquierda */
+        .cloud-img {
+          position: absolute;
+          top: 14%;
+          left: 110%;
+          width: 920px;         /* un poco más pequeña para que no “corte” abajo */
+          max-width: none;
+          opacity: 0.55;        /* transparencia */
+          filter: drop-shadow(0 0 26px rgba(148, 52, 236, 0.28)); /* halo natural */
+          animation: cloudRightToLeft 42s linear infinite;
+          pointer-events: none;
+        }
+
+        @media (min-width: 1024px) {
+          .cloud-img {
+            top: 10%;
+            width: 1080px;
+          }
+        }
+
+        @keyframes cloudRightToLeft {
           0% {
-            transform: translateX(60vw);
+            transform: translateX(0);
           }
           100% {
-            transform: translateX(-130vw);
+            transform: translateX(-220%);
           }
-        }
-        /* Suaviza arriba/abajo para evitar línea dura y conservar forma */
-        .cloud-mask {
-          -webkit-mask-image: linear-gradient(
-              to bottom,
-              transparent 0%,
-              #000 10%,
-              #000 90%,
-              transparent 100%
-            );
-          mask-image: linear-gradient(
-              to bottom,
-              transparent 0%,
-              #000 10%,
-              #000 90%,
-              transparent 100%
-            );
-        }
-        /* Evita que el contenedor recorte sombras en la parte baja */
-        .cloud-track {
-          padding-bottom: 24px; /* un respiro para el blur */
         }
       `}</style>
     </section>
