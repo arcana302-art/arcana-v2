@@ -39,10 +39,22 @@ function Star({
       }
     >
       <defs>
-        <filter id={`glow-${id}`} filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
-          <feFlood floodColor={bright ? '#FFD97E' : '#FBD671'} floodOpacity={bright ? 0.7 : 0.55} result="gold" />
+        {/* Glow MUY sutil que se adapta a la forma */}
+        <filter
+          id={`glow-${id}`}
+          filterUnits="userSpaceOnUse"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+        >
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur1" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur2" />
+          <feFlood
+            floodColor={bright ? '#FFD97E' : '#FBD671'}
+            floodOpacity={bright ? 0.60 : 0.48}
+            result="gold"
+          />
           <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
           <feMerge>
             <feMergeNode in="glowColor" />
@@ -55,7 +67,11 @@ function Star({
       <g
         filter={`url(#glow-${id})`}
         className="twinkle"
-        style={{ animationDelay: `var(--twinkle-delay)`, animationDuration: `var(--twinkle-dur)` }}
+        style={{
+          animationDelay: `var(--twinkle-delay)`,
+          // ~15% más rápido sin tocar tus valores por estrella
+          animationDuration: `calc(var(--twinkle-dur) * 0.85)`,
+        }}
       >
         <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
       </g>
@@ -66,11 +82,12 @@ function Star({
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
         }
+        /* Dim un poco más marcado */
         @keyframes star-dim {
-          0% { opacity: 1; }
-          30% { opacity: 0.55; }
-          60% { opacity: 0.98; }
-          100% { opacity: 0.9; }
+          0%   { opacity: 1; }
+          30%  { opacity: 0.35; }
+          60%  { opacity: 0.96; }
+          100% { opacity: 0.88; }
         }
       `}</style>
     </svg>
@@ -127,10 +144,9 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS (redistribuidas para más espacio) ===== */}
+            {/* ===== ESTRELLAS – mismas posiciones ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* IZQUIERDA (10) */}
-              <Star id="L1"  className="absolute w-[20px]" style={{ left: '3%',  top: '6%'  }}   delay="0.3s" duration="12s" bright />
+              {/* IZQUIERDA */}
               <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
               <Star id="L3"  className="absolute w-[16px]" style={{ left: '6%',  top: '38%' }}   delay="2.1s" duration="10s" />
               <Star id="L4"  className="absolute w-[12px]" style={{ left: '24%', top: '9%'  }}   delay="0.8s" duration="13s" />
@@ -141,7 +157,7 @@ export default function Hero() {
               <Star id="L9"  className="absolute w-[12px]" style={{ left: '28%', top: '32%' }}   delay="1.7s" duration="11.6s" />
               <Star id="L10" className="absolute w-[18px]" style={{ left: '30%', bottom: '18%' }} delay="0.4s" duration="13.2s" bright />
 
-              {/* DERECHA (5) */}
+              {/* DERECHA */}
               <Star id="R1" className="absolute w-[20px]" style={{ right: '5%',  top: '12%' }}  delay="0.2s" duration="11s" bright />
               <Star id="R2" className="absolute w-[14px]" style={{ right: '16%', top: '30%' }} delay="1.1s" duration="12.5s" />
               <Star id="R3" className="absolute w-[18px]" style={{ right: '12%', top: '58%' }} delay="2.0s" duration="10.5s" />
@@ -175,7 +191,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube (sin cambios) */}
+      {/* Estilos locales para la nube */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
@@ -187,7 +203,8 @@ export default function Hero() {
           filter: none;
           -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          animation: cloud-rtl 42s linear infinite;
+          /* MÁS LENTA (antes 42s) */
+          animation: cloud-rtl 52s linear infinite;
         }
         @media (min-width: 1024px) {
           .cloud-img {
