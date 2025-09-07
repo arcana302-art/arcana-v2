@@ -5,7 +5,7 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ====== Estrella con halo adaptado + twinkle (más visible) ====== */
+/* ====== Estrella con halo adaptado + twinkle ====== */
 function Star({
   id,
   className = '',
@@ -60,7 +60,6 @@ function Star({
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
         }
-        /* misma velocidad, más amplitud (menos sutil) */
         @keyframes star-dim {
           0%   { opacity: 1; }
           30%  { opacity: 0.55; }
@@ -83,7 +82,7 @@ export default function Hero() {
       {/* CONTENIDO */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
-          {/* TEXTO (igual) */}
+          {/* TEXTO (sin cambios) */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
               <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
@@ -131,26 +130,26 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* COLUMNA CARTA + ESTRELLAS (estrellas fuera del hover) */}
+          {/* COLUMNA CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ESTRELLAS: al fondo, sin hover, debajo de nubes */}
+            {/* ESTRELLAS: más cerca de la carta (solo posiciones) */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* derecha alta */}
-              <Star id="s1" className="absolute -right-10 -top-6 w-[26px]" opacity={0.95} delay="0.2s" duration="11s" />
-              <Star id="s2" className="absolute right-1 -top-10 w-[18px]"  opacity={0.9}  delay="1.1s" duration="12.5s" />
-              <Star id="s3" className="absolute -right-6 top-14 w-[22px]"  opacity={0.85} delay="2.0s" duration="10.5s" />
-              {/* medio-derecha */}
-              <Star id="s4" className="absolute -right-14 top-28 w-[34px]" opacity={0.9}  delay="0.8s" duration="13s" />
-              <Star id="s5" className="absolute right-4 top-36 w-[16px]"     opacity={0.75} delay="1.7s" duration="9.8s" />
-              {/* izquierda cercana */}
-              <Star id="s6" className="absolute -left-6 top-4 w-[14px]"      opacity={0.7}  delay="0.4s" duration="12s" />
-              <Star id="s7" className="absolute -left-10 top-28 w-[20px]"    opacity={0.75} delay="2.3s" duration="11.2s" />
-              {/* baja derecha */}
-              <Star id="s8" className="absolute -right-12 bottom-10 w-[24px]" opacity={0.9}  delay="1.5s" duration="14s" />
-              <Star id="s9" className="absolute right-2 bottom-3 w-[16px]"    opacity={0.8}  delay="0.9s" duration="10.8s" />
+              {/* borde alto derecho */}
+              <Star id="s1" className="absolute right-2 -top-2 w-[26px]"  opacity={0.95} delay="0.2s" duration="11s" />
+              <Star id="s2" className="absolute right-6 -top-8 w-[18px]"  opacity={0.9}  delay="1.1s" duration="12.5s" />
+              <Star id="s3" className="absolute right-1 top-16 w-[22px]"  opacity={0.85} delay="2.0s" duration="10.5s" />
+              {/* lateral derecho medio */}
+              <Star id="s4" className="absolute right-0 top-28 w-[34px]"  opacity={0.9}  delay="0.8s" duration="13s" />
+              <Star id="s5" className="absolute right-4 top-36 w-[16px]"   opacity={0.75} delay="1.7s" duration="9.8s" />
+              {/* cerca pero un poco hacia la izquierda de la carta */}
+              <Star id="s6" className="absolute right-20 top-6 w-[14px]"   opacity={0.7}  delay="0.4s" duration="12s" />
+              <Star id="s7" className="absolute right-24 top-28 w/[20px]"  opacity={0.75} delay="2.3s" duration="11.2s" />
+              {/* parte baja derecha */}
+              <Star id="s8" className="absolute right-1 bottom-10 w-[24px]" opacity={0.9}  delay="1.5s" duration="14s" />
+              <Star id="s9" className="absolute right-6 bottom-3 w-[16px]"  opacity={0.8}  delay="0.9s" duration="10.8s" />
             </div>
 
-            {/* CARTA (igual, con su hover propio) */}
+            {/* CARTA (sin cambios) */}
             <div
               className="
                 group relative
@@ -180,7 +179,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: NUBE (subida de z-index) */}
+      {/* Estilos locales: NUBE (sin cambios) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
