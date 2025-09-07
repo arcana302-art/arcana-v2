@@ -25,13 +25,13 @@ export default function Hero() {
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             {/* Constrain: el texto NO rebasará este ancho; coincide con fila de botones */}
             <div className="max-w-[560px] sm:max-w-[600px]">
-              <h1 className="text-white font-extrabold tracking-tight text-5xl sm:text-6xl">
+              <h1 className="text-white font-extrabold tracking-tight text-[53px] sm:text-[69px]">
                 Claridad
                 <br />
                 aquí y ahora
               </h1>
 
-              <h2 className="mt-6 text-[42px] sm:text-[46px] font-extrabold tracking-tight text-[#c9a6ff]">
+              <h2 className="mt-6 text-[47px] sm:text-[51px] font-extrabold tracking-tight text-[#c9a6ff]">
                 con guías auténticas
               </h2>
 
@@ -72,12 +72,12 @@ export default function Hero() {
 
           {/* Columna visual (carta) */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* Carta — -10% extra de tamaño e inclinación -15° */}
+            {/* Carta — 5% más pequeña respecto a la anterior e inclinación -15° */}
             <div
               className="
                 group relative
-                w-[152px] sm:w-[180px] md:w-[207px] lg:w-[234px] xl:w-[263px]
-                -translate-x-8 md:-translate-x-12 lg:-translate-x-16 xl:-translate-x-20
+                w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
+                -translate-x-3 md:-translate-x-4 lg:-translate-x-6 xl:-translate-x-8
                 -rotate-[15deg]
                 transition-transform duration-500 will-change-transform
                 hover:-rotate-[11deg] hover:scale-[1.05]
@@ -112,18 +112,16 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: animación + suavizado de bordes de la nube */}
+      {/* Estilos locales: animación + suavizado de bordes de la nube (SIN cambios de efecto) */}
       <style jsx>{`
-        /* La nube cruza toda la sección de derecha → izquierda.
-           La máscara radial evita líneas duras o “cuadros” en bordes. */
         .cloud-img {
           position: absolute;
           top: 12%;
           left: 110%;
           width: 980px;
           max-width: none;
-          opacity: 0.55; /* ligera transparencia */
-          filter: drop-shadow(0 0 26px rgba(148, 52, 236, 0.28)); /* halo suave */
+          opacity: 0.55;
+          filter: drop-shadow(0 0 26px rgba(148, 52, 236, 0.28));
           animation: cloud-rtl 42s linear infinite;
 
           /* Difumina bordes inferior/laterales para que NO se vea línea de corte */
