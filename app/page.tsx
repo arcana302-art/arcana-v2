@@ -1,21 +1,32 @@
-// app/page.tsx
-import Hero from "./components/Hero";
-import HowItWorks from "./components/HowItWorks";
-import Footer from "./components/Footer";
+import Hero from "@/components/Hero";
+import HowItWorks from "@/components/HowItWorks";
+import Benefits from "@/components/Benefits";
+import Categories from "@/components/Categories";
+import FeaturedGuides from "@/components/FeaturedGuides";
+import MidCTA from "@/components/MidCTA";
+import Testimonials from "@/components/Testimonials";
+import Security from "@/components/Security";
+import FAQ from "@/components/FAQ";
+import JoinAsExpert from "@/components/JoinAsExpert";
+import Freebies from "@/components/Freebies";
+import SiteFooter from "@/components/SiteFooter";
 
-export default function Home() {
+export default function Page() {
   return (
-    <>
-      <main className="relative">
-        {/* HERO */}
-        <Hero />
+    <main className="bg-[#17031F] text-white">
+      <Hero />
 
-        {/* ¿CÓMO FUNCIONA? */}
-        <HowItWorks />
-      </main>
-
-      {/* FOOTER */}
-      <Footer />
-    </>
+      <HowItWorks />
+      <Benefits />
+      <Categories />
+      <FeaturedGuides />
+      <MidCTA />
+      <Testimonials />
+      <Security />
+      <FAQ />
+      <Freebies />
+      <JoinAsExpert />
+      <SiteFooter />
+    </main>
   );
 }
