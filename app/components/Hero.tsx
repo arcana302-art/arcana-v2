@@ -1,24 +1,25 @@
 'use client';
 
 import Image from 'next/image';
+import CloudLayer from './CloudLayer';
 
+/**
+ * Hero con:
+ * - Fondo parejo #17031F
+ * - Nube animada detrás (CloudLayer)
+ * - Carta con tamaño controlado
+ * - Botones (primario morado #9434EC, secundario contorno)
+ */
 export default function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-[#17031F]">
-      {/* === NUBE DETRÁS (z-0) === */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {/* Banda 300% con 3 copias para loop continuo y sin huecos */}
-        <div className="absolute right-0 top-[20%] h-[60%] w-[300%] cloud-belt flex">
-          <img src="/brand/Nube1.png" alt="" className="cloud-img w-1/3" />
-          <img src="/brand/Nube1.png" alt="" className="cloud-img w-1/3" />
-          <img src="/brand/Nube1.png" alt="" className="cloud-img w-1/3" />
-        </div>
-      </div>
+      {/* Nube detrás, sin halo */}
+      <CloudLayer />
 
-      {/* === CONTENIDO === */}
+      {/* Contenido */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-18 lg:py-20">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          {/* Texto (reducido) */}
+        <div className="grid items-center gap-6 lg:grid-cols-2">
+          {/* Texto */}
           <div className="max-w-3xl">
             <h1 className="text-white tracking-tight font-bold leading-tight text-[32px] sm:text-[40px] lg:text-[48px]">
               Claridad
@@ -64,51 +65,26 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Carta (más pequeña y más cerca) */}
-          <div className="relative flex items-start justify-center lg:justify-end">
+          {/* Carta (30% más pequeña respecto a la que tenías) y más cerca del texto */}
+          <div className="relative flex items-start justify-center lg:justify-end -mt-4 lg:-mt-2">
             <Image
               src="/brand/hero-card-eye.png"
               alt="Carta Arcana con ojo místico"
-              width={380}
-              height={520}
+              width={360}
+              height={500}
               priority
               className="
-                w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px]
-                -rotate-6 translate-y-2
+                w-[150px] sm:w-[180px] md:w-[200px] lg:w-[210px]
+                -rotate-6 translate-y-1
               "
               style={{
-                filter:
-                  'brightness(.94) contrast(1.08) saturate(1.05) ' +
-                  'drop-shadow(0 8px 24px rgba(0,0,0,.45)) ' +
-                  'drop-shadow(0 0 16px rgba(148,52,236,.22))',
+                /* sin halos; afinamos color/contraste para que combine con el violeta del CTA */
+                filter: 'brightness(.92) contrast(1.06) saturate(1.04) drop-shadow(0 8px 24px rgba(0,0,0,.45))',
               }}
             />
           </div>
         </div>
       </div>
-
-      {/* === Estilos nube === */}
-      <style jsx global>{`
-        @keyframes cloud-marquee-rtl {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
-        }
-        .cloud-belt {
-          animation: cloud-marquee-rtl 70s linear infinite;
-        }
-        .cloud-img {
-          height: 100%;
-          object-fit: contain;
-          opacity: 0.9;
-          filter:
-            drop-shadow(0 0 22px rgba(148, 52, 236, 0.30))
-            drop-shadow(0 0 44px rgba(148, 52, 236, 0.18));
-          min-width: 800px;
-        }
-        @media (max-width: 640px) {
-          .cloud-img { min-width: 640px; opacity: 0.95; }
-        }
-      `}</style>
     </section>
   );
 }
