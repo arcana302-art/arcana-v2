@@ -8,8 +8,8 @@ const CLOUD_IMG = '/brand/Nube1.png';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#17031F]">
-      {/* Capa de la nube (global, detrás de todo el contenido) */}
-      <div className="cloud-layer pointer-events-none absolute inset-0 z-0">
+      {/* Capa de la nube (detrás del contenido) */}
+      <div className="pointer-events-none absolute inset-0 z-0">
         <img
           src={CLOUD_IMG}
           alt=""
@@ -18,29 +18,27 @@ export default function Hero() {
         />
       </div>
 
-      {/* Contenido principal por encima de la nube */}
+      {/* Contenido principal */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
-          {/* Columna de texto (contenida para alinear con botones) */}
+          {/* Texto (ancho contenido para alinear con botones) */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
-            {/* Constrain: el texto NO rebasará este ancho; coincide con fila de botones */}
             <div className="max-w-[560px] sm:max-w-[600px]">
-              <h1 className="text-white font-extrabold tracking-tight text-[53px] sm:text-[69px]">
+              <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
                 Claridad
                 <br />
                 aquí y ahora
               </h1>
 
-              <h2 className="mt-6 text-[47px] sm:text-[51px] font-extrabold tracking-tight text-[#c9a6ff]">
+              <h2 className="mt-2 text-[47px] sm:text-[51px] font-extrabold tracking-tight leading-[1.02] text-[#c9a6ff]">
                 con guías auténticas
               </h2>
 
-              <p className="mt-6 text-white/70 text-lg leading-relaxed">
+              <p className="mt-5 text-white/75 text-[19px] sm:text-[20px] leading-relaxed">
                 Tarot, astrología y oráculos. Agenda en minutos y recibe orientación
                 concreta en un espacio cuidado, seguro y sin juicios.
               </p>
 
-              {/* Botones (mismo ancho visual que el texto al estar dentro del wrapper) */}
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#"
@@ -70,14 +68,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Columna visual (carta) */}
+          {/* Carta */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* Carta — 5% más pequeña respecto a la anterior e inclinación -15° */}
             <div
               className="
                 group relative
                 w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
-                -translate-x-3 md:-translate-x-4 lg:-translate-x-6 xl:-translate-x-8
+                translate-x-2 md:translate-x-3 lg:translate-x-4 xl:translate-x-6
                 -rotate-[15deg]
                 transition-transform duration-500 will-change-transform
                 hover:-rotate-[11deg] hover:scale-[1.05]
@@ -85,7 +82,6 @@ export default function Hero() {
                 select-none
               "
             >
-              {/* Halo suave al hover (radial, natural) */}
               <span
                 className="
                   absolute inset-0 -z-10
@@ -112,37 +108,38 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: animación + suavizado de bordes de la nube (SIN cambios de efecto) */}
+      {/* Estilos locales: nube sin cortes y animación RTL */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
-          top: 12%;
+          top: 7.5%;
           left: 110%;
-          width: 980px;
+          width: 960px;         /* un pelín más pequeña para evitar tocar borde inferior */
           max-width: none;
-          opacity: 0.55;
-          filter: drop-shadow(0 0 26px rgba(148, 52, 236, 0.28));
-          animation: cloud-rtl 42s linear infinite;
+          opacity: 0.5;         /* ligera transparencia */
 
-          /* Difumina bordes inferior/laterales para que NO se vea línea de corte */
-          -webkit-mask-image: radial-gradient(120% 85% at 50% 55%, #000 65%, transparent 100%);
-          mask-image: radial-gradient(120% 85% at 50% 55%, #000 65%, transparent 100%);
+          /* OJO: quitamos drop-shadow para que no aparezca borde rectangular en esquinas/borde inferior */
+          filter: none;
+
+          /* Máscara amplia y centrada para desvanecer bordes, especialmente inferior-izq */
+          -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
+
+          animation: cloud-rtl 42s linear infinite;
         }
 
         @media (min-width: 1024px) {
           .cloud-img {
-            top: 9%;
-            width: 1120px;
+            top: 7%;
+            width: 1080px;
+            -webkit-mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
+            mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
 
         @keyframes cloud-rtl {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-220%);
-          }
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-220%); }
         }
       `}</style>
     </section>
