@@ -5,7 +5,7 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ====== Estrella con halo adaptado + twinkle ====== */
+/* ====== Estrella con halo adaptado + twinkle sutil ====== */
 function Star({
   id,
   className = '',
@@ -74,7 +74,7 @@ function Star({
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#17031F]">
-      {/* NUBE: por encima de las estrellas pero debajo del contenido */}
+      {/* NUBE: encima de estrellas, debajo del contenido */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -82,7 +82,7 @@ export default function Hero() {
       {/* CONTENIDO */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
-          {/* TEXTO (sin cambios) */}
+          {/* TEXTO */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
               <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
@@ -130,23 +130,25 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* COLUMNA CARTA + ESTRELLAS */}
+          {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ESTRELLAS: más cerca de la carta (solo posiciones) */}
+            {/* ESTRELLAS (más cerca de la carta, tamaños pequeños y variados) */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* borde alto derecho */}
-              <Star id="s1" className="absolute right-2 -top-2 w-[26px]"  opacity={0.95} delay="0.2s" duration="11s" />
-              <Star id="s2" className="absolute right-6 -top-8 w-[18px]"  opacity={0.9}  delay="1.1s" duration="12.5s" />
-              <Star id="s3" className="absolute right-1 top-16 w-[22px]"  opacity={0.85} delay="2.0s" duration="10.5s" />
-              {/* lateral derecho medio */}
-              <Star id="s4" className="absolute right-0 top-28 w-[34px]"  opacity={0.9}  delay="0.8s" duration="13s" />
-              <Star id="s5" className="absolute right-4 top-36 w-[16px]"   opacity={0.75} delay="1.7s" duration="9.8s" />
-              {/* cerca pero un poco hacia la izquierda de la carta */}
-              <Star id="s6" className="absolute right-20 top-6 w-[14px]"   opacity={0.7}  delay="0.4s" duration="12s" />
-              <Star id="s7" className="absolute right-24 top-28 w/[20px]"  opacity={0.75} delay="2.3s" duration="11.2s" />
+              {/* derecha alta */}
+              <Star id="s1"  className="absolute right-2  -top-1  w-[22px]" opacity={0.95} delay="0.2s" duration="11s" />
+              <Star id="s2"  className="absolute right-7  -top-6  w-[14px]" opacity={0.90} delay="1.1s" duration="12.5s" />
+              <Star id="s3"  className="absolute right-1   top-16  w-[18px]" opacity={0.85} delay="2.0s" duration="10.5s" />
+              {/* lateral derecho */}
+              <Star id="s4"  className="absolute right-0   top-32  w-[24px]" opacity={0.92} delay="0.8s" duration="13s" />
+              <Star id="s5"  className="absolute right-4   top-40  w-[12px]" opacity={0.75} delay="1.7s" duration="9.8s" />
+              {/* cerca, un poco hacia la izquierda de la carta */}
+              <Star id="s6"  className="absolute right-20  top-6   w-[16px]" opacity={0.78} delay="0.4s" duration="12s" />
+              <Star id="s7"  className="absolute right-24  top-26  w-[20px]" opacity={0.82} delay="2.3s" duration="11.2s" />
               {/* parte baja derecha */}
-              <Star id="s8" className="absolute right-1 bottom-10 w-[24px]" opacity={0.9}  delay="1.5s" duration="14s" />
-              <Star id="s9" className="absolute right-6 bottom-3 w-[16px]"  opacity={0.8}  delay="0.9s" duration="10.8s" />
+              <Star id="s8"  className="absolute right-2  bottom-16 w-[15px]" opacity={0.9}  delay="1.5s" duration="14s" />
+              <Star id="s9"  className="absolute right-8  bottom-6  w-[13px]" opacity={0.8}  delay="0.9s" duration="10.8s" />
+              {/* una más pequeña para balance */}
+              <Star id="s10" className="absolute right-14 top-14 w-[12px]" opacity={0.85} delay="1.9s" duration="12.8s" />
             </div>
 
             {/* CARTA (sin cambios) */}
@@ -179,7 +181,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: NUBE (sin cambios) */}
+      {/* Estilos locales para la nube (sin cambios) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
@@ -220,7 +222,7 @@ export default function Hero() {
         }
 
         @keyframes cloud-rtl {
-          0% { transform: translateX(0); }
+          0%   { transform: translateX(0); }
           100% { transform: translateX(-220%); }
         }
       `}</style>
