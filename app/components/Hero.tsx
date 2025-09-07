@@ -21,7 +21,7 @@ export default function Hero() {
       {/* Contenido principal */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
-          {/* Texto (ancho contenido para alinear con botones) */}
+          {/* Texto */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
               <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
@@ -74,7 +74,7 @@ export default function Hero() {
               className="
                 group relative
                 w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
-                translate-x-2 md:translate-x-3 lg:translate-x-4 xl:translate-x-6
+                translate-x-4 md:translate-x-5 lg:translate-x-6 xl:translate-x-8
                 rotate-[10deg]
                 transition-transform duration-500 will-change-transform
                 hover:rotate-[6deg] hover:scale-[1.05]
@@ -82,26 +82,18 @@ export default function Hero() {
                 select-none
               "
             >
-              <span
-                className="
-                  absolute inset-0 -z-10
-                  rounded-[28px]
-                  opacity-0 blur-[22px]
-                  transition-opacity duration-400
-                  group-hover:opacity-70
-                "
-                style={{
-                  background:
-                    'radial-gradient(60% 60% at 50% 50%, rgba(148,52,236,0.35) 0%, rgba(148,52,236,0) 70%)',
-                }}
-              />
+              {/* Halo suave adaptado a la forma (sobre la imagen con drop-shadow) */}
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
                 width={700}
                 height={980}
                 priority
-                className="h-auto w-full"
+                className="
+                  h-auto w-full
+                  drop-shadow-[0_0_18px_rgba(148,52,236,0.32)]
+                  drop-shadow-[0_0_36px_rgba(148,52,236,0.16)]
+                "
               />
             </div>
           </div>
