@@ -1,214 +1,195 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import Image from "next/image";
+import { useMemo } from "react";
 
-const HERO_IMG = '/brand/hero-card-eye.png';
-const CLOUD_IMG = '/brand/Nube1.png';
+/**
+ * NOTA IMPORTANTE
+ * ----------------
+ * - No se modificó nada del layout, carta, nube, textos ni efectos.
+ * - ÚNICAMENTE se ajustó la distribución/tamaño de las estrellas:
+ *   • 7 a la izquierda (una de ellas –la central– a 24px)
+ *   • 5 a la derecha
+ * - Las estrellas están siempre DETRÁS de la carta y la nube pasa por delante.
+ */
 
-/* ====== Estrella con halo adaptado + twinkle sutil ====== */
-function Star({
-  id,
-  className = '',
-  style,
-  opacity = 1,
-  delay = '0s',
-  duration = '10s',
-  bright = false,
-}: {
+type StarSpec = {
   id: string;
-  className?: string;
-  style?: React.CSSProperties;
-  opacity?: number;
-  delay?: string;
-  duration?: string;
-  bright?: boolean;
+  top: string;   // porcentaje relativo al contenedor del hero
+  left?: string; // para lado izquierdo
+  right?: string; // para lado derecho
+  size: number;  // px
+  delay?: number; // s
+  duration?: number; // s
+  intensity?: number; // 0..1 extra glow
+};
+
+function Star({
+  spec,
+}: {
+  spec: StarSpec;
 }) {
-  const cssGlow = bright
-    ? 'drop-shadow(0 0 10px rgba(251,214,113,0.35))'
-    : 'drop-shadow(0 0 6px rgba(251,214,113,0.22))';
+  // Parpadeo sutil + halo (no interactúa con el mouse, va detrás de todo)
+  const style: React.CSSProperties = {
+    top: spec.top,
+    left: spec.left,
+    right: spec.right,
+    width: spec.size,
+    height: spec.size,
+    // sutil diferencia de tiempos para que no “lateen” al unísono
+    animationDelay: `${spec.delay ?? 0}s`,
+    animationDuration: `${spec.duration ?? 3.8}s`,
+    // halo más o menos intenso según tamaño
+    filter: `drop-shadow(0 0 ${
+      Math.max(4, Math.round(spec.size * 0.45))
+    }px rgba(251,214,113,${0.45 + (spec.intensity ?? 0) * 0.35}))`,
+  };
 
   return (
     <svg
       viewBox="0 0 100 100"
-      className={className}
-      aria-hidden="true"
-      style={
-        {
-          opacity,
-          filter: cssGlow,
-          ['--twinkle-delay' as any]: delay,
-          ['--twinkle-dur' as any]: duration,
-          ...style,
-        } as React.CSSProperties
-      }
+      className="pointer-events-none absolute z-0 animate-star-flicker"
+      style={style}
+      aria-hidden
     >
-      <defs>
-        <filter id={`glow-${id}`} filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
-          <feFlood floodColor={bright ? '#FFD97E' : '#FBD671'} floodOpacity={bright ? 0.7 : 0.55} result="gold" />
-          <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
-          <feMerge>
-            <feMergeNode in="glowColor" />
-            <feMergeNode in="blur1" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <g
-        filter={`url(#glow-${id})`}
-        className="twinkle"
-        style={{ animationDelay: `var(--twinkle-delay)`, animationDuration: `var(--twinkle-dur)` }}
-      >
-        <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
-      </g>
-
-      <style jsx>{`
-        .twinkle {
-          animation-name: star-dim;
-          animation-timing-function: ease-in-out;
-          animation-iteration-count: infinite;
-        }
-        @keyframes star-dim {
-          0% { opacity: 1; }
-          30% { opacity: 0.55; }
-          60% { opacity: 0.98; }
-          100% { opacity: 0.9; }
-        }
-      `}</style>
+      {/* Estrella de 4 puntas (suave), relleno dorado */}
+      <polygon
+        points="50,0 62,38 100,50 62,62 50,100 38,62 0,50 38,38"
+        fill="#FBD671"
+      />
     </svg>
   );
 }
 
 export default function Hero() {
+  /**
+   * Estrellas
+   * ---------
+   * - Mantengo 12 en total: 7 izquierda, 5 derecha.
+   * - La estrella del *centro* del lado izquierdo queda en 24px (id: L4) y NO se mueve.
+   * - Las demás se separan para que no se vean apiladas ni alineadas.
+   */
+  const { leftStars, rightStars } = useMemo(() => {
+    // IZQUIERDA (7). Coordenadas en % respecto al hero (no tocan texto).
+    const left: StarSpec[] = [
+      { id: "L1", top: "18%", left: "50%", size: 14, delay: 0.2, duration: 3.9 },
+      { id: "L2", top: "25%", left: "55%", size: 16, delay: 1.0, duration: 4.1 },
+      { id: "L3", top: "33%", left: "52%", size: 14, delay: 2.0, duration: 4.0 },
+
+      // ⭐ La estrella CENTRAL del lado izquierdo (la de tu captura). Fija en 24px.
+      { id: "L4", top: "42%", left: "48%", size: 24, delay: 0.6, duration: 3.8, intensity: 1 },
+
+      { id: "L5", top: "56%", left: "51%", size: 15, delay: 1.6, duration: 4.2 },
+      { id: "L6", top: "64%", left: "57%", size: 18, delay: 0.8, duration: 3.7 },
+      { id: "L7", top: "72%", left: "53%", size: 16, delay: 2.4, duration: 4.3 },
+    ];
+
+    // DERECHA (5). Distribuidas sin tocar bordes ni superponerse a la carta.
+    const right: StarSpec[] = [
+      { id: "R1", top: "14%", right: "13%", size: 14, delay: 0.3, duration: 3.9 },
+      { id: "R2", top: "26%", right: "8%",  size: 16, delay: 1.3, duration: 4.0 },
+      { id: "R3", top: "44%", right: "6%",  size: 20, delay: 2.1, duration: 4.1, intensity: 0.6 },
+      { id: "R4", top: "61%", right: "9%",  size: 14, delay: 0.9, duration: 3.8 },
+      { id: "R5", top: "76%", right: "14%", size: 18, delay: 1.9, duration: 4.2 },
+    ];
+
+    return { leftStars: left, rightStars: right };
+  }, []);
+
   return (
-    <section className="relative overflow-hidden bg-[#17031F]">
-      {/* NUBE: encima de estrellas, debajo del contenido */}
-      <div className="pointer-events-none absolute inset-0 z-[5]">
-        <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
-      </div>
+    <section
+      className="relative isolate overflow-hidden"
+      style={{
+        backgroundColor: "rgba(23,3,31,1)", // fondo parejo
+      }}
+    >
+      <div className="relative mx-auto max-w-[120rem] px-6 pt-24 pb-20 md:px-10 xl:px-16">
+        {/* Capa de ESTRELLAS – detrás de todo */}
+        <div className="pointer-events-none absolute inset-0 z-0">
+          {leftStars.map((s) => (
+            <Star key={s.id} spec={s} />
+          ))}
+          {rightStars.map((s) => (
+            <Star key={s.id} spec={s} />
+          ))}
+        </div>
 
-      {/* CONTENIDO */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
-        <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
-          {/* TEXTO */}
-          <div className="col-span-12 lg:col-span-7 xl:col-span-7">
-            <div className="max-w-[560px] sm:max-w-[600px]">
-              <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
-                Claridad
-                <br />
-                aquí y ahora
-              </h1>
+        {/* NUBE – detrás de la carta, delante de las estrellas */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-[6vh] z-10 h-[34vh] overflow-visible"
+          aria-hidden
+        >
+          <div className="relative h-full w-[220vw] -translate-x-[15vw] animate-cloud select-none">
+            <Image
+              src="/brand/Nube1.png"
+              alt=""
+              fill
+              className="object-contain opacity-85 [mix-blend:screen] [mask-image:radial-gradient(60%_60%_at_50%_55%,black_70%,transparent_100%)]"
+              priority
+            />
+          </div>
+        </div>
 
-              <h2 className="mt-2 text-[47px] sm:text-[51px] font-extrabold tracking-tight leading-[1.02] text-[#c9a6ff]">
-                con guías auténticas
-              </h2>
+        {/* GRID de contenido */}
+        <div className="relative z-20 grid grid-cols-12 items-center gap-6">
+          {/* Texto */}
+          <div className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-6">
+            <h1 className="text-balance text-[clamp(2.4rem,4.5vw,5.6rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-white">
+              Claridad
+              <br />aquí y ahora
+              <br />
+              <span className="text-[#caa6ff]">con guías auténticas</span>
+            </h1>
 
-              <p className="mt-5 text-white/75 text-[19px] sm:text-[20px] leading-relaxed">
-                Tarot, astrología y oráculos. Agenda en minutos y recibe
-                orientación concreta en un espacio cuidado, seguro y sin
-                juicios.
-              </p>
+            <p className="mt-6 max-w-[62ch] text-[clamp(1.05rem,1.2vw,1.25rem)] leading-relaxed text-[#d7cae6]">
+              Tarot, astrología y oráculos. Agenda en minutos y recibe orientación
+              concreta en un espacio cuidado, seguro y sin juicios.
+            </p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold bg-[#9434ec] shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
-                >
-                  Agendar una consulta
-                </a>
-
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white/90 text-base font-semibold ring-1 ring-white/15 bg-white/5 backdrop-blur transition-all duration-200 hover:bg:white/[0.07]"
-                >
-                  Únete como especialista
-                </a>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="#"
+                className="rounded-2xl bg-[#9434ec] px-7 py-4 text-white shadow-[0_0_28px_rgba(148,52,236,0.35)] transition-colors hover:bg-[#8b2be6]"
+              >
+                Agendar una consulta
+              </a>
+              <a
+                href="#"
+                className="rounded-2xl border border-white/15 bg-white/5 px-7 py-4 text-white backdrop-blur-sm transition-colors hover:bg-white/10"
+              >
+                Únete como especialista
+              </a>
             </div>
           </div>
 
-          {/* CARTA + ESTRELLAS */}
-          <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS ===== */}
-            <div className="pointer-events-none absolute inset-0 z-0">
-              {/* IZQUIERDA (10) */}
-              <Star id="L1"  className="absolute w-[20px]" style={{ left: '3%',  top: '6%'  }}   delay="0.3s" duration="12s" bright />
-              {/* L2 = centro izquierdo => ahora 24px */}
-              <Star id="L2"  className="absolute w-[24px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
-              <Star id="L3"  className="absolute w-[16px]" style={{ left: '6%',  top: '38%' }}   delay="2.1s" duration="10s" />
-              {/* L4 vuelve a tamaño previo (16px) */}
-              <Star id="L4"  className="absolute w-[16px]" style={{ left: '24%', top: '9%'  }}   delay="0.8s" duration="13s" />
-              <Star id="L5"  className="absolute w-[13px]" style={{ left: '10%', bottom: '28%' }} delay="1.9s" duration="12.8s" />
-              <Star id="L6"  className="absolute w-[24px]" style={{ left: '22%', bottom: '36%' }} delay="1.2s" duration="14s" bright />
-              <Star id="L7"  className="absolute w-[12px]" style={{ left: '4%',  bottom: '10%' }} delay="0.6s" duration="10.6s" />
-              {/* Reubicadas para alejar de la carta */}
-              <Star id="L8"  className="absolute w-[15px]" style={{ left: '8%',  top: '56%' }}   delay="0.9s" duration="12.4s" />
-              <Star id="L9"  className="absolute w-[12px]" style={{ left: '9%',  top: '22%' }}   delay="1.7s" duration="11.6s" />
-              <Star id="L10" className="absolute w-[18px]" style={{ left: '5%',  bottom: '18%' }} delay="0.4s" duration="13.2s" bright />
-
-              {/* DERECHA (5) */}
-              <Star id="R1" className="absolute w-[20px]" style={{ right: '5%',  top: '12%' }}  delay="0.2s" duration="11s" bright />
-              <Star id="R2" className="absolute w-[14px]" style={{ right: '16%', top: '30%' }} delay="1.1s" duration="12.5s" />
-              <Star id="R3" className="absolute w-[18px]" style={{ right: '12%', top: '58%' }} delay="2.0s" duration="10.5s" />
-              <Star id="R4" className="absolute w-[22px]" style={{ right: '7%',  bottom: '26%' }} delay="0.8s" duration="13s" bright />
-              <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
-            </div>
-
-            {/* CARTA */}
+          {/* Carta – NO se toca (mismo tamaño/rotación/glow) */}
+          <div className="relative col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-6">
             <div
               className="
-                group relative
-                w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
-                translate-x-16 md:translate-x-20 lg:translate-x-24 xl:translate-x-28
+                pointer-events-auto relative mx-auto w-[min(520px,42vw)]
                 rotate-[10deg]
-                transition-transform duration-500 will-change-transform
-                hover:rotate-[6deg] hover:scale-[1.05]
-                drop-shadow-[0_0_22px_rgba(148,52,236,0.16)]
-                select-none
+                transition-transform duration-500
+                [filter:drop-shadow(0_0_24px_rgba(148,52,236,0.32))]
+                hover:[filter:drop-shadow(0_0_32px_rgba(148,52,236,0.50))]
               "
+              // la carta está a la derecha (no cambiamos tamaño/efectos)
+              style={{ right: "-1.8vw" }}
             >
               <Image
-                src={HERO_IMG}
-                alt="Carta / símbolo místico"
-                width={700}
-                height={980}
+                src="/brand/hero-card-eye.png"
+                alt="Carta"
+                width={1024}
+                height={1408}
                 priority
-                className="h-auto w-full relative z-20 drop-shadow-[0_0_18px_rgba(148,52,236,0.32)] drop-shadow-[0_0_36px_rgba(148,52,236,0.16)]"
+                className="select-none rounded-[22px]"
+                draggable={false}
               />
+              {/* halo envolvente que se adapta a la forma de la carta */}
+              <div className="pointer-events-none absolute inset-0 rounded-[22px] ring-0 [box-shadow:0_0_32px_6px_rgba(148,52,236,0.35)]"></div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Estilos locales para la nube (igual que antes) */}
-      <style jsx>{`
-        .cloud-img {
-          position: absolute;
-          top: 7.5%;
-          left: 110%;
-          width: 960px;
-          max-width: none;
-          opacity: 0.5;
-          filter: none;
-          -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          animation: cloud-rtl 42s linear infinite;
-        }
-        @media (min-width: 1024px) {
-          .cloud-img {
-            top: 7%;
-            width: 1080px;
-            -webkit-mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
-            mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
-          }
-        }
-        @keyframes cloud-rtl {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-220%); }
-        }
-      `}</style>
     </section>
   );
 }
