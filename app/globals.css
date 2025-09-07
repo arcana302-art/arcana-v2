@@ -2,69 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =========================
-   Base: fondo uniforme y suavizado
-   ========================= */
-:root {
-  color-scheme: dark;
+/* ===========================
+   Arcana – Variables & Base
+   =========================== */
+:root{
+  --arcana-bg: #0b0f1f;                /* fondo base */
+  --arcana-primary: #7c3aed;           /* morado principal */
+  --arcana-primary-600: #8b5cf6;       /* morado hover */
+  --arcana-accent: #f6cf4a;            /* dorado */
 }
 
 html, body {
-  height: 100%;
-  background-color: #17031F; /* RGB: rgba(23,3,31,255) */
+  background: var(--arcana-bg);
+  color: #e5e7eb; /* slate-200 */
+  min-height: 100%;
 }
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Evita banding en degradados oscuros */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* ===========================
+   Hero – Fondo, viñeta y grano
+   =========================== */
+
+/* Fondo con nebulosas y profundidad */
+.bg-arcana-hero{
+  background:
+    radial-gradient(1200px 800px at 78% 40%, rgba(124,58,237,.14), transparent 60%),
+    radial-gradient(900px 600px at 10% 75%, rgba(246,207,74,.12), transparent 60%),
+    radial-gradient(1200px 700px at 50% -10%, rgba(17,24,39,.45), transparent 70%),
+    var(--arcana-bg);
+  position: relative;
+  overflow: hidden;
 }
 
-/* =========================
-   Estrellas (forma + parpadeo sutil)
-   ========================= */
-.star {
-  background: radial-gradient(ellipse at center,
-    #ffdf9a 0%,
-    #ffd37a 40%,
-    #e6b25e 60%,
-    rgba(255,211,122,0) 70%);
-  /* Forma de estrella (8 puntas) */
-  -webkit-clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
-          clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
-  display: block;
-  border-radius: 2px; /* bordes suaves en puntas */
-  will-change: opacity;
+/* Viñeta suave por encima */
+.bg-arcana-vignette{
+  background: radial-gradient(80% 60% at 50% 42%,
+              rgba(255,255,255,0) 0%,
+              rgba(11,15,31,.25) 60%,
+              rgba(11,15,31,.75) 100%);
 }
 
-@keyframes twinkle {
-  0%   { opacity: .85; }
-  50%  { opacity: .55; }
-  100% { opacity: .85; }
+/* “Grano/estrellas” sutil */
+.bg-arcana-hero::after{
+  content:"";
+  position:absolute; inset:-2px;
+  background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+  background-size: 2px 2px;
+  opacity:.035;
+  pointer-events:none;
 }
 
-.twinkle {
-  animation: twinkle 4.8s ease-in-out infinite;
-}
+/* ===========================
+   Utilidades menores
+   =========================== */
 
-/* =========================
-   Nube: desplazamiento derecha → izquierda
-   ========================= */
-@keyframes cloud-marquee {
-  0%   { transform: translateX(40%);   }
-  100% { transform: translateX(-120%); }
-}
-
-.animate-cloud-marquee {
-  animation: cloud-marquee 48s linear infinite;
-  will-change: transform;
-}
-
-/* =========================
-   Accesibilidad: respeta "reducir movimiento"
-   ========================= */
-@media (prefers-reduced-motion: reduce) {
-  .twinkle,
-  .animate-cloud-marquee {
-    animation: none !important;
-  }
+/* Balance en títulos muy largos (por si el navegador no lo soporta) */
+.text-balance{
+  text-wrap: balance;
 }
