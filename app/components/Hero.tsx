@@ -3,20 +3,13 @@
 import Image from 'next/image';
 import CloudLayer from './CloudLayer';
 
-/**
- * Hero con:
- * - Fondo parejo #17031F
- * - Nube animada detrás (CloudLayer)
- * - Carta con tamaño controlado
- * - Botones (primario morado #9434EC, secundario contorno)
- */
 export default function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-[#17031F]">
-      {/* Nube detrás, sin halo */}
+      {/* Nube detrás, z-0 */}
       <CloudLayer />
 
-      {/* Contenido */}
+      {/* Contenido arriba, z-10 */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-18 lg:py-20">
         <div className="grid items-center gap-6 lg:grid-cols-2">
           {/* Texto */}
@@ -65,7 +58,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Carta (30% más pequeña respecto a la que tenías) y más cerca del texto */}
+          {/* Carta: más cerca del texto y tamaño reducido */}
           <div className="relative flex items-start justify-center lg:justify-end -mt-4 lg:-mt-2">
             <Image
               src="/brand/hero-card-eye.png"
@@ -78,8 +71,8 @@ export default function Hero() {
                 -rotate-6 translate-y-1
               "
               style={{
-                /* sin halos; afinamos color/contraste para que combine con el violeta del CTA */
-                filter: 'brightness(.92) contrast(1.06) saturate(1.04) drop-shadow(0 8px 24px rgba(0,0,0,.45))',
+                filter:
+                  'brightness(.92) contrast(1.06) saturate(1.04) drop-shadow(0 8px 24px rgba(0,0,0,.45))',
               }}
             />
           </div>
