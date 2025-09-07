@@ -1,34 +1,70 @@
-/* ===== Estrella (forma + color) ===== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Base: fondo uniforme y suavizado
+   ========================= */
+:root {
+  color-scheme: dark;
+}
+
+html, body {
+  height: 100%;
+  background-color: #17031F; /* RGB: rgba(23,3,31,255) */
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   Estrellas (forma + parpadeo sutil)
+   ========================= */
 .star {
   background: radial-gradient(ellipse at center,
-      #ffdf9a 0%,
-      #ffd37a 40%,
-      #e6b25e 60%,
-      rgba(255, 211, 122, 0.0) 70%);
-  /* Forma de estrella con clip-path */
+    #ffdf9a 0%,
+    #ffd37a 40%,
+    #e6b25e 60%,
+    rgba(255,211,122,0) 70%);
+  /* Forma de estrella (8 puntas) */
   -webkit-clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
           clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
   display: block;
-  border-radius: 2px;
+  border-radius: 2px; /* bordes suaves en puntas */
+  will-change: opacity;
 }
 
-/* Twinkle MUY sutil, siempre de fondo (sin zoom por hover) */
 @keyframes twinkle {
   0%   { opacity: .85; }
   50%  { opacity: .55; }
   100% { opacity: .85; }
 }
+
 .twinkle {
   animation: twinkle 4.8s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 0.37s);
 }
 
-/* ===== Nube: derecha → izquierda (marquee suave y sin cortes) ===== */
+/* =========================
+   Nube: desplazamiento derecha → izquierda
+   ========================= */
 @keyframes cloud-marquee {
-  0%   { transform: translateX(40%);  }
-  100% { transform: translateX(-120%);}
+  0%   { transform: translateX(40%);   }
+  100% { transform: translateX(-120%); }
 }
+
 .animate-cloud-marquee {
   animation: cloud-marquee 48s linear infinite;
   will-change: transform;
+}
+
+/* =========================
+   Accesibilidad: respeta "reducir movimiento"
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  .twinkle,
+  .animate-cloud-marquee {
+    animation: none !important;
+  }
 }
