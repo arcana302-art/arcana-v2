@@ -127,23 +127,28 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS (solo redistribución) ===== */}
+            {/* ===== ESTRELLAS (redistribución pedida) ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* IZQUIERDA (7) — más separadas y extendidas */}
-              <Star id="L1" className="absolute w-[20px]" style={{ left: '6%',  top: '8%'  }}   delay="0.3s" duration="12s" bright />
-              <Star id="L2" className="absolute w-[14px]" style={{ left: '20%', top: '18%' }}   delay="1.4s" duration="11s" />
-              <Star id="L3" className="absolute w-[16px]" style={{ left: '9%',  top: '40%' }}   delay="2.1s" duration="10s" />
-              <Star id="L4" className="absolute w-[12px]" style={{ left: '30%', top: '7%'  }}   delay="0.8s" duration="13s" />
-              <Star id="L5" className="absolute w-[13px]" style={{ left: '14%', bottom: '22%' }} delay="1.9s" duration="12.8s" />
-              <Star id="L6" className="absolute w-[24px]" style={{ left: '26%', bottom: '28%' }} delay="1.2s" duration="14s" bright />
-              <Star id="L7" className="absolute w-[12px]" style={{ left: '8%',  bottom: '12%' }} delay="0.6s" duration="10.6s" />
+              {/* IZQUIERDA (7 originales + 3 nuevas = 10) */}
+              <Star id="L1"  className="absolute w-[20px]" style={{ left: '6%',  top: '8%'  }}   delay="0.3s" duration="12s" bright />
+              <Star id="L2"  className="absolute w-[14px]" style={{ left: '20%', top: '18%' }}   delay="1.4s" duration="11s" />
+              <Star id="L3"  className="absolute w-[16px]" style={{ left: '9%',  top: '40%' }}   delay="2.1s" duration="10s" />
+              <Star id="L4"  className="absolute w-[12px]" style={{ left: '30%', top: '7%'  }}   delay="0.8s" duration="13s" />
+              <Star id="L5"  className="absolute w-[13px]" style={{ left: '14%', bottom: '22%' }} delay="1.9s" duration="12.8s" />
+              <Star id="L6"  className="absolute w-[24px]" style={{ left: '26%', bottom: '28%' }} delay="1.2s" duration="14s" bright />
+              <Star id="L7"  className="absolute w-[12px]" style={{ left: '8%',  bottom: '12%' }} delay="0.6s" duration="10.6s" />
+              {/* NUEVAS (3) */}
+              <Star id="L8"  className="absolute w-[15px]" style={{ left: '18%', top: '55%' }}   delay="0.9s" duration="12.4s" />
+              <Star id="L9"  className="absolute w-[12px]" style={{ left: '12%', top: '26%' }}   delay="1.7s" duration="11.6s" />
+              <Star id="L10" className="absolute w-[18px]" style={{ left: '28%', bottom: '14%' }} delay="0.4s" duration="13.2s" bright />
 
-              {/* DERECHA (5) — fuera del área de la carta */}
+              {/* DERECHA (5) — reubicadas las 3 inferiores para separarlas */}
               <Star id="R1" className="absolute w-[20px]" style={{ right: '8%',  top: '12%' }}  delay="0.2s" duration="11s" bright />
               <Star id="R2" className="absolute w-[14px]" style={{ right: '16%', top: '22%' }} delay="1.1s" duration="12.5s" />
-              <Star id="R3" className="absolute w-[18px]" style={{ right: '10%', top: '70%' }} delay="2.0s" duration="10.5s" />
-              <Star id="R4" className="absolute w-[22px]" style={{ right: '7%',  bottom: '18%' }} delay="0.8s" duration="13s" bright />
-              <Star id="R5" className="absolute w-[12px]" style={{ right: '15%', bottom: '10%' }} delay="1.5s" duration="9.8s" />
+              {/* Estas tres estaban muy juntas; ahora más espaciadas */}
+              <Star id="R3" className="absolute w-[18px]" style={{ right: '12%', top: '64%' }}  delay="2.0s" duration="10.5s" />
+              <Star id="R4" className="absolute w-[22px]" style={{ right: '6%',  bottom: '28%' }} delay="0.8s" duration="13s" bright />
+              <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
             {/* CARTA (sin cambios) */}
