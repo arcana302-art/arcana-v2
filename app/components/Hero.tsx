@@ -13,7 +13,7 @@ function Star({
   opacity = 1,
   delay = '0s',
   duration = '10s',
-  bright = false, // estrellas grandes ligeramente más intensas
+  bright = false,
 }: {
   id: string;
   className?: string;
@@ -33,9 +33,7 @@ function Star({
           opacity,
           ['--twinkle-delay' as any]: delay,
           ['--twinkle-dur' as any]: duration,
-          ...(bright
-            ? { filter: 'drop-shadow(0 0 10px rgba(251,214,113,0.35))' }
-            : undefined),
+          ...(bright ? { filter: 'drop-shadow(0 0 10px rgba(251,214,113,0.35))' } : undefined),
           ...style,
         } as React.CSSProperties
       }
@@ -44,11 +42,7 @@ function Star({
         <filter id={`glow-${id}`} filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
           <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
-          <feFlood
-            floodColor={bright ? '#FFD97E' : '#FBD671'}
-            floodOpacity={bright ? 0.7 : 0.55}
-            result="gold"
-          />
+          <feFlood floodColor={bright ? '#FFD97E' : '#FBD671'} floodOpacity={bright ? 0.7 : 0.55} result="gold" />
           <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
           <feMerge>
             <feMergeNode in="glowColor" />
@@ -73,9 +67,9 @@ function Star({
           animation-iteration-count: infinite;
         }
         @keyframes star-dim {
-          0%   { opacity: 1; }
-          30%  { opacity: 0.55; }
-          60%  { opacity: 0.98; }
+          0% { opacity: 1; }
+          30% { opacity: 0.55; }
+          60% { opacity: 0.98; }
           100% { opacity: 0.9; }
         }
       `}</style>
@@ -116,25 +110,14 @@ export default function Hero() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#"
-                  className="
-                    inline-flex items-center justify-center rounded-2xl px-6 h-14
-                    text-white text-base font-semibold
-                    bg-[#9434ec]
-                    shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)]
-                    transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]
-                  "
+                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold bg-[#9434ec] shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Agendar una consulta
                 </a>
 
                 <a
                   href="#"
-                  className="
-                    inline-flex items-center justify-center rounded-2xl px-6 h-14
-                    text-white/90 text-base font-semibold
-                    ring-1 ring-white/15 bg-white/5 backdrop-blur
-                    transition-all duration-200 hover:bg-white/[0.07]
-                  "
+                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white/90 text-base font-semibold ring-1 ring-white/15 bg-white/5 backdrop-blur transition-all duration-200 hover:bg-white/[0.07]"
                 >
                   Únete como especialista
                 </a>
@@ -144,23 +127,23 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS (12 en total; 7 izquierda y 5 derecha) ===== */}
+            {/* ===== ESTRELLAS (redistribuidas) ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* --- IZQUIERDA (7) — más extendidas horizontalmente y sin tocar carta ni bordes --- */}
-              <Star id="L1" className="absolute w-[20px]" style={{ left: '6%',  top: '6%' }}    delay="0.3s" duration="12s" bright />
-              <Star id="L2" className="absolute w-[16px]" style={{ left: '18%', top: '18%' }}   delay="1.4s" duration="11s" />
-              <Star id="L3" className="absolute w-[14px]" style={{ left: '10%', top: '34%' }}   delay="2.1s" duration="10s" />
-              <Star id="L4" className="absolute w-[18px]" style={{ left: '26%', top: '10%' }}   delay="0.8s" duration="13s" />
-              <Star id="L5" className="absolute w-[12px]" style={{ left: '20%', bottom: '12%' }} delay="1.9s" duration="12.8s" />
-              <Star id="L6" className="absolute w-[24px]" style={{ left: '32%', bottom: '24%' }} delay="1.2s" duration="14s" bright />
-              <Star id="L7" className="absolute w-[13px]" style={{ left: '8%',  bottom: '8%' }}  delay="0.6s" duration="10.6s" />
+              {/* IZQUIERDA (7) — más hacia afuera y visibles */}
+              <Star id="L1" className="absolute w-[20px]" style={{ left: '5%',  top: '6%' }}    delay="0.3s" duration="12s" bright />
+              <Star id="L2" className="absolute w-[16px]" style={{ left: '14%', top: '14%' }}   delay="1.4s" duration="11s" />
+              <Star id="L3" className="absolute w-[14px]" style={{ left: '9%',  top: '29%' }}   delay="2.1s" duration="10s" />
+              <Star id="L4" className="absolute w-[18px]" style={{ left: '23%', top: '9%' }}    delay="0.8s" duration="13s" />
+              <Star id="L5" className="absolute w-[12px]" style={{ left: '16%', bottom: '16%' }} delay="1.9s" duration="12.8s" />
+              <Star id="L6" className="absolute w-[24px]" style={{ left: '29%', bottom: '24%' }} delay="1.2s" duration="14s" bright />
+              <Star id="L7" className="absolute w-[13px]" style={{ left: '7%',  bottom: '9%' }}  delay="0.6s" duration="10.6s" />
 
-              {/* --- DERECHA (5) — separadas y lejos de bordes/carta --- */}
-              <Star id="R1" className="absolute w-[22px]" style={{ right: '8%',  top: '8%' }}    delay="0.2s" duration="11s" bright />
-              <Star id="R2" className="absolute w-[14px]" style={{ right: '18%', top: '22%' }}   delay="1.1s" duration="12.5s" />
-              <Star id="R3" className="absolute w-[18px]" style={{ right: '10%', top: '40%' }}   delay="2.0s" duration="10.5s" />
-              <Star id="R4" className="absolute w-[24px]" style={{ right: '6%',  bottom: '24%' }} delay="0.8s" duration="13s" bright />
-              <Star id="R5" className="absolute w-[12px]" style={{ right: '16%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
+              {/* DERECHA (5) — alejadas del centro para no quedar bajo la carta */}
+              <Star id="R1" className="absolute w-[22px]" style={{ right: '3%',  top: '10%' }}   delay="0.2s" duration="11s" bright />
+              <Star id="R2" className="absolute w-[14px]" style={{ right: '14%', top: '6%' }}    delay="1.1s" duration="12.5s" />
+              <Star id="R3" className="absolute w-[18px]" style={{ right: '3%',  top: '74%' }}   delay="2.0s" duration="10.5s" />
+              <Star id="R4" className="absolute w-[24px]" style={{ right: '5%',  bottom: '20%' }} delay="0.8s" duration="13s" bright />
+              <Star id="R5" className="absolute w-[12px]" style={{ right: '14%', bottom: '9%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
             {/* CARTA (sin cambios) */}
@@ -182,11 +165,7 @@ export default function Hero() {
                 width={700}
                 height={980}
                 priority
-                className="
-                  h-auto w-full relative z-20
-                  drop-shadow-[0_0_18px_rgba(148,52,236,0.32)]
-                  drop-shadow-[0_0_36px_rgba(148,52,236,0.16)]
-                "
+                className="h-auto w-full relative z-20 drop-shadow-[0_0_18px_rgba(148,52,236,0.32)] drop-shadow-[0_0_36px_rgba(148,52,236,0.16)]"
               />
             </div>
           </div>
@@ -203,38 +182,20 @@ export default function Hero() {
           max-width: none;
           opacity: 0.5;
           filter: none;
-          -webkit-mask-image: radial-gradient(
-            145% 125% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
-          mask-image: radial-gradient(
-            145% 125% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
+          -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           animation: cloud-rtl 42s linear infinite;
         }
-
         @media (min-width: 1024px) {
           .cloud-img {
             top: 7%;
             width: 1080px;
-            -webkit-mask-image: radial-gradient(
-              150% 130% at 56% 46%,
-              #000 62%,
-              transparent 100%
-            );
-            mask-image: radial-gradient(
-              150% 130% at 56% 46%,
-              #000 62%,
-              transparent 100%
-            );
+            -webkit-mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
+            mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
-
         @keyframes cloud-rtl {
-          0%   { transform: translateX(0); }
+          0% { transform: translateX(0); }
           100% { transform: translateX(-220%); }
         }
       `}</style>
