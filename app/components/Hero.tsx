@@ -75,9 +75,9 @@ export default function Hero() {
                 group relative
                 w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
                 translate-x-2 md:translate-x-3 lg:translate-x-4 xl:translate-x-6
-                -rotate-[15deg]
+                rotate-[10deg]
                 transition-transform duration-500 will-change-transform
-                hover:-rotate-[11deg] hover:scale-[1.05]
+                hover:rotate-[6deg] hover:scale-[1.05]
                 drop-shadow-[0_0_22px_rgba(148,52,236,0.16)]
                 select-none
               "
@@ -114,17 +114,12 @@ export default function Hero() {
           position: absolute;
           top: 7.5%;
           left: 110%;
-          width: 960px;         /* un pelín más pequeña para evitar tocar borde inferior */
+          width: 960px;
           max-width: none;
-          opacity: 0.5;         /* ligera transparencia */
-
-          /* OJO: quitamos drop-shadow para que no aparezca borde rectangular en esquinas/borde inferior */
+          opacity: 0.5;
           filter: none;
-
-          /* Máscara amplia y centrada para desvanecer bordes, especialmente inferior-izq */
           -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-
           animation: cloud-rtl 42s linear infinite;
         }
 
