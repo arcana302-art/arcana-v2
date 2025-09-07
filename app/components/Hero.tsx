@@ -9,15 +9,19 @@ const CLOUD_IMG = '/brand/Nube1.png';
 function Star({
   id,
   className = '',
+  style,
   opacity = 1,
   delay = '0s',
   duration = '10s',
+  bright = false, // estrellas grandes ligeramente más intensas
 }: {
   id: string;
   className?: string;
+  style?: React.CSSProperties;
   opacity?: number;
   delay?: string;
   duration?: string;
+  bright?: boolean;
 }) {
   return (
     <svg
@@ -29,6 +33,10 @@ function Star({
           opacity,
           ['--twinkle-delay' as any]: delay,
           ['--twinkle-dur' as any]: duration,
+          ...(bright
+            ? { filter: 'drop-shadow(0 0 10px rgba(251,214,113,0.35))' }
+            : undefined),
+          ...style,
         } as React.CSSProperties
       }
     >
@@ -36,7 +44,11 @@ function Star({
         <filter id={`glow-${id}`} filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
           <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
-          <feFlood floodColor="#FBD671" floodOpacity="0.55" result="gold" />
+          <feFlood
+            floodColor={bright ? '#FFD97E' : '#FBD671'}
+            floodOpacity={bright ? 0.7 : 0.55}
+            result="gold"
+          />
           <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
           <feMerge>
             <feMergeNode in="glowColor" />
@@ -51,6 +63,7 @@ function Star({
         className="twinkle"
         style={{ animationDelay: `var(--twinkle-delay)`, animationDuration: `var(--twinkle-dur)` }}
       >
+        {/* Estrella en rombo (8 puntas) */}
         <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
       </g>
 
@@ -132,23 +145,23 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ESTRELLAS (más cerca de la carta, tamaños pequeños y variados) */}
+            {/* ===== ESTRELLAS (12 en total; 7 izquierda y 5 derecha) ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
-              {/* derecha alta */}
-              <Star id="s1"  className="absolute right-2  -top-1  w-[22px]" opacity={0.95} delay="0.2s" duration="11s" />
-              <Star id="s2"  className="absolute right-7  -top-6  w-[14px]" opacity={0.90} delay="1.1s" duration="12.5s" />
-              <Star id="s3"  className="absolute right-1   top-16  w-[18px]" opacity={0.85} delay="2.0s" duration="10.5s" />
-              {/* lateral derecho */}
-              <Star id="s4"  className="absolute right-0   top-32  w-[24px]" opacity={0.92} delay="0.8s" duration="13s" />
-              <Star id="s5"  className="absolute right-4   top-40  w-[12px]" opacity={0.75} delay="1.7s" duration="9.8s" />
-              {/* cerca, un poco hacia la izquierda de la carta */}
-              <Star id="s6"  className="absolute right-20  top-6   w-[16px]" opacity={0.78} delay="0.4s" duration="12s" />
-              <Star id="s7"  className="absolute right-24  top-26  w-[20px]" opacity={0.82} delay="2.3s" duration="11.2s" />
-              {/* parte baja derecha */}
-              <Star id="s8"  className="absolute right-2  bottom-16 w-[15px]" opacity={0.9}  delay="1.5s" duration="14s" />
-              <Star id="s9"  className="absolute right-8  bottom-6  w-[13px]" opacity={0.8}  delay="0.9s" duration="10.8s" />
-              {/* una más pequeña para balance */}
-              <Star id="s10" className="absolute right-14 top-14 w-[12px]" opacity={0.85} delay="1.9s" duration="12.8s" />
+              {/* --- IZQUIERDA (7) — más cerca de la carta --- */}
+              <Star id="L1" className="absolute w-[20px]" style={{ left: 10,  top: 6 }}   delay="0.3s" duration="12s" bright />
+              <Star id="L2" className="absolute w-[16px]" style={{ left: 22,  top: 20 }}  delay="1.4s" duration="11s" />
+              <Star id="L3" className="absolute w-[14px]" style={{ left: 12,  top: 34 }}  delay="2.1s" duration="10s" />
+              <Star id="L4" className="absolute w-[18px]" style={{ left: 28,  top: 46 }}  delay="0.8s" duration="13s" />
+              <Star id="L5" className="absolute w-[12px]" style={{ left: 8,   bottom: 18 }} delay="1.9s" duration="12.8s" />
+              <Star id="L6" className="absolute w-[24px]" style={{ left: 30,  bottom: 24 }} delay="1.2s" duration="14s" bright />
+              <Star id="L7" className="absolute w-[13px]" style={{ left: 18,  bottom: 8 }}  delay="0.6s" duration="10.6s" />
+
+              {/* --- DERECHA (5) --- */}
+              <Star id="R1" className="absolute w-[22px]" style={{ right: 8,   top: -6 }}  delay="0.2s" duration="11s" bright />
+              <Star id="R2" className="absolute w-[14px]" style={{ right: 14,  top: 8 }}   delay="1.1s" duration="12.5s" />
+              <Star id="R3" className="absolute w-[18px]" style={{ right: 6,   top: 30 }}  delay="2.0s" duration="10.5s" />
+              <Star id="R4" className="absolute w-[24px]" style={{ right: 0,   top: 44 }}  delay="0.8s" duration="13s" bright />
+              <Star id="R5" className="absolute w-[12px]" style={{ right: 10,  bottom: 14 }} delay="1.5s" duration="9.8s" />
             </div>
 
             {/* CARTA (sin cambios) */}
