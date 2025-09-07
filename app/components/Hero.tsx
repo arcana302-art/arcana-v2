@@ -39,7 +39,6 @@ function Star({
       }
     >
       <defs>
-        {/* Glow más marcado, adaptado a la forma */}
         <filter
           id={`glow-${id}`}
           filterUnits="userSpaceOnUse"
@@ -50,11 +49,7 @@ function Star({
         >
           <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur1" />
           <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur2" />
-          <feFlood
-            floodColor={bright ? '#FFD97E' : '#FBD671'}
-            floodOpacity={bright ? 0.85 : 0.66}
-            result="gold"
-          />
+          <feFlood floodColor={bright ? '#FFD97E' : '#FBD671'} floodOpacity={bright ? 0.85 : 0.66} result="gold" />
           <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
           <feMerge>
             <feMergeNode in="glowColor" />
@@ -69,7 +64,8 @@ function Star({
         className="twinkle"
         style={{
           animationDelay: `var(--twinkle-delay)`,
-          animationDuration: `calc(var(--twinkle-dur) * 0.85)`, // mantenemos el pequeño boost
+          /* DIM MÁS LENTO (solo velocidad) */
+          animationDuration: `calc(var(--twinkle-dur) * 1.35)`,
         }}
       >
         <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
@@ -81,10 +77,10 @@ function Star({
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
         }
-        /* Dim más profundo: algunas casi desaparecen */
+        /* Mantiene la profundidad del dim, solo cambiamos la velocidad arriba */
         @keyframes star-dim {
           0%   { opacity: 1; }
-          25%  { opacity: 0.12; } /* más bajo */
+          25%  { opacity: 0.12; }
           55%  { opacity: 0.99; }
           100% { opacity: 0.9; }
         }
@@ -202,8 +198,8 @@ export default function Hero() {
           filter: none;
           -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          /* MÁS LENTA (65s) */
-          animation: cloud-rtl 65s linear infinite;
+          /* MÁS LENTA y APARICIÓN INMEDIATA */
+          animation: cloud-rtl 85s linear infinite;
         }
         @media (min-width: 1024px) {
           .cloud-img {
@@ -213,9 +209,10 @@ export default function Hero() {
             mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
+        /* Arranca ya dentro de cuadro para que se vea desde el 0% */
         @keyframes cloud-rtl {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-220%); }
+          0%   { transform: translateX(-40%); }
+          100% { transform: translateX(-260%); }
         }
       `}</style>
     </section>
