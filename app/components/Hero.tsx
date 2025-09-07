@@ -5,31 +5,81 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-// Pequeño componente SVG para la estrella (no hace falta subir imagen)
+// ---------- Estrella con halo adaptado y twinkle lento ----------
 function Star({
+  id,
   className = '',
   opacity = 1,
+  delay = '0s',
+  duration = '10s',
 }: {
+  id: string; // único por estrella
   className?: string;
   opacity?: number;
+  delay?: string; // p.ej. '2.3s'
+  duration?: string; // p.ej. '11s'
 }) {
   return (
     <svg
       viewBox="0 0 100 100"
       className={className}
-      style={{ opacity }}
       aria-hidden="true"
+      // Variables CSS para manejar el twinkle sin tocar nada más
+      style={
+        {
+          opacity,
+          ['--twinkle-delay' as any]: delay,
+          ['--twinkle-dur' as any]: duration,
+        } as React.CSSProperties
+      }
     >
-      {/* 4 puntas tipo “sparkle” */}
-      <path
-        d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z"
-        fill="#FBD671"
-        // halo suave en la estrella (no afecta al fondo)
-        style={{
-          filter:
-            'drop-shadow(0 0 6px rgba(251,214,113,0.55)) drop-shadow(0 0 14px rgba(251,214,113,0.35))',
-        }}
-      />
+      {/* Glow que sigue la forma (color oro) */}
+      <defs>
+        <filter id={`glow-${id}`} filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
+          {/* Crea un blur de la propia forma */}
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
+          {/* Ampliamos el blur para un halo suave */}
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
+          {/* Teñimos el halo con el color de la estrella */}
+          <feFlood floodColor="#FBD671" floodOpacity="0.55" result="gold" />
+          <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
+          {/* Unimos halo + forma original */}
+          <feMerge>
+            <feMergeNode in="glowColor" />
+            <feMergeNode in="blur1" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      {/* Grupo con la animación twinkle (dim) */}
+      <g
+        filter={`url(#glow-${id})`}
+        className="twinkle"
+        // Seguridad por si algún navegador ignora la variable
+        style={{ animationDelay: `var(--twinkle-delay)`, animationDuration: `var(--twinkle-dur)` }}
+      >
+        {/* 4 puntas estilo sparkle */}
+        <path
+          d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z"
+          fill="#FBD671"
+        />
+      </g>
+
+      <style jsx>{`
+        .twinkle {
+          /* Lento y suave; repetido infinito */
+          animation-name: star-dim;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+        }
+        @keyframes star-dim {
+          0%   { opacity: 0.95; }
+          35%  { opacity: 0.6; }
+          70%  { opacity: 0.98; }
+          100% { opacity: 0.92; }
+        }
+      `}</style>
     </svg>
   );
 }
@@ -37,7 +87,7 @@ function Star({
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#17031F]">
-      {/* Capa de la nube (detrás del contenido) */}
+      {/* Nube animada (no tocada) */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -45,7 +95,7 @@ export default function Hero() {
       {/* Contenido principal */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
-          {/* Texto (sin cambios de estilos/efectos) */}
+          {/* Texto (sin cambios) */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
               <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
@@ -93,7 +143,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Carta + estrellas (solo movida más a la derecha y estrellas añadidas) */}
+          {/* Carta + estrellas (misma posición/efectos de la versión anterior) */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
             <div
               className="
@@ -107,24 +157,24 @@ export default function Hero() {
                 select-none
               "
             >
-              {/* Estrellas – más cargadas a la derecha de la carta */}
+              {/* Estrellas con halo + twinkle (solo añadido) */}
               <div className="pointer-events-none absolute inset-0 z-10">
                 {/* derecha alta */}
-                <Star className="absolute -right-10 -top-6 w-[26px]" opacity={0.95} />
-                <Star className="absolute right-1 -top-10 w-[18px]" opacity={0.9} />
-                <Star className="absolute -right-6 top-14 w-[22px]" opacity={0.85} />
+                <Star id="s1" className="absolute -right-10 -top-6 w-[26px]" opacity={0.95} delay="0.2s" duration="11s" />
+                <Star id="s2" className="absolute right-1 -top-10 w-[18px]"  opacity={0.9}  delay="1.1s" duration="12.5s" />
+                <Star id="s3" className="absolute -right-6 top-14 w-[22px]"  opacity={0.85} delay="2.0s" duration="10.5s" />
                 {/* medio-derecha */}
-                <Star className="absolute -right-14 top-28 w-[34px]" opacity={0.9} />
-                <Star className="absolute right-4 top-36 w-[16px]" opacity={0.75} />
-                {/* izquierda cercana (pocas para balance) */}
-                <Star className="absolute -left-6 top-4 w-[14px]" opacity={0.7} />
-                <Star className="absolute -left-10 top-28 w-[20px]" opacity={0.75} />
+                <Star id="s4" className="absolute -right-14 top-28 w-[34px]" opacity={0.9}  delay="0.8s" duration="13s" />
+                <Star id="s5" className="absolute right-4 top-36 w-[16px]"     opacity={0.75} delay="1.7s" duration="9.8s" />
+                {/* izquierda cercana */}
+                <Star id="s6" className="absolute -left-6 top-4 w-[14px]"      opacity={0.7}  delay="0.4s" duration="12s" />
+                <Star id="s7" className="absolute -left-10 top-28 w-[20px]"    opacity={0.75} delay="2.3s" duration="11.2s" />
                 {/* baja derecha */}
-                <Star className="absolute -right-12 bottom-10 w-[24px]" opacity={0.9} />
-                <Star className="absolute right-2 bottom-3 w-[16px]" opacity={0.8} />
+                <Star id="s8" className="absolute -right-12 bottom-10 w-[24px]" opacity={0.9}  delay="1.5s" duration="14s" />
+                <Star id="s9" className="absolute right-2 bottom-3 w-[16px]"    opacity={0.8}  delay="0.9s" duration="10.8s" />
               </div>
 
-              {/* Carta (sin cambios de tamaño/efectos) */}
+              {/* Carta */}
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
@@ -142,7 +192,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: nube sin cortes y animación RTL (sin cambios) */}
+      {/* Estilos locales: nube (sin cambios) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
