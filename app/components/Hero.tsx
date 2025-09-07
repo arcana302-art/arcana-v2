@@ -33,13 +33,13 @@ function Star({
           opacity,
           ['--twinkle-delay' as any]: delay,
           ['--twinkle-dur' as any]: duration,
-          ...(bright ? { filter: 'drop-shadow(0 0 10px rgba(251,214,113,0.35))' } : undefined),
+          ...(bright ? { filter: 'drop-shadow(0 0 12px rgba(251,214,113,0.45))' } : undefined),
           ...style,
         } as React.CSSProperties
       }
     >
       <defs>
-        {/* Glow MUY sutil que se adapta a la forma */}
+        {/* Glow más marcado, adaptado a la forma */}
         <filter
           id={`glow-${id}`}
           filterUnits="userSpaceOnUse"
@@ -48,11 +48,11 @@ function Star({
           width="200%"
           height="200%"
         >
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur1" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur2" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur1" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur2" />
           <feFlood
             floodColor={bright ? '#FFD97E' : '#FBD671'}
-            floodOpacity={bright ? 0.60 : 0.48}
+            floodOpacity={bright ? 0.85 : 0.66}
             result="gold"
           />
           <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
@@ -69,8 +69,7 @@ function Star({
         className="twinkle"
         style={{
           animationDelay: `var(--twinkle-delay)`,
-          // ~15% más rápido sin tocar tus valores por estrella
-          animationDuration: `calc(var(--twinkle-dur) * 0.85)`,
+          animationDuration: `calc(var(--twinkle-dur) * 0.85)`, // mantenemos el pequeño boost
         }}
       >
         <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
@@ -82,12 +81,12 @@ function Star({
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
         }
-        /* Dim un poco más marcado */
+        /* Dim más profundo: algunas casi desaparecen */
         @keyframes star-dim {
           0%   { opacity: 1; }
-          30%  { opacity: 0.35; }
-          60%  { opacity: 0.96; }
-          100% { opacity: 0.88; }
+          25%  { opacity: 0.12; } /* más bajo */
+          55%  { opacity: 0.99; }
+          100% { opacity: 0.9; }
         }
       `}</style>
     </svg>
@@ -144,7 +143,7 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS – mismas posiciones ===== */}
+            {/* ===== ESTRELLAS (mismas posiciones) ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
               {/* IZQUIERDA */}
               <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
@@ -203,8 +202,8 @@ export default function Hero() {
           filter: none;
           -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          /* MÁS LENTA (antes 42s) */
-          animation: cloud-rtl 52s linear infinite;
+          /* MÁS LENTA (65s) */
+          animation: cloud-rtl 65s linear infinite;
         }
         @media (min-width: 1024px) {
           .cloud-img {
