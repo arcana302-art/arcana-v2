@@ -23,7 +23,6 @@ function Star({
   duration?: string;
   bright?: boolean;
 }) {
-  // Glow ligero para todas y un poco más intenso para las "bright"
   const cssGlow = bright
     ? 'drop-shadow(0 0 10px rgba(251,214,113,0.35))'
     : 'drop-shadow(0 0 6px rgba(251,214,113,0.22))';
@@ -36,7 +35,7 @@ function Star({
       style={
         {
           opacity,
-          filter: cssGlow, // <-- glow ligero a todas
+          filter: cssGlow,
           ['--twinkle-delay' as any]: delay,
           ['--twinkle-dur' as any]: duration,
           ...style,
@@ -132,21 +131,22 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS (mismas que antes, salvo cambios solicitados) ===== */}
+            {/* ===== ESTRELLAS ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
               {/* IZQUIERDA (10) */}
               <Star id="L1"  className="absolute w-[20px]" style={{ left: '3%',  top: '6%'  }}   delay="0.3s" duration="12s" bright />
-              <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
+              {/* L2 = centro izquierdo => ahora 24px */}
+              <Star id="L2"  className="absolute w-[24px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
               <Star id="L3"  className="absolute w-[16px]" style={{ left: '6%',  top: '38%' }}   delay="2.1s" duration="10s" />
-              {/* #4 de arriba hacia abajo (lado izquierdo) => 24px */}
-              <Star id="L4"  className="absolute w-[24px]" style={{ left: '24%', top: '9%'  }}   delay="0.8s" duration="13s" />
+              {/* L4 vuelve a tamaño previo (16px) */}
+              <Star id="L4"  className="absolute w-[16px]" style={{ left: '24%', top: '9%'  }}   delay="0.8s" duration="13s" />
               <Star id="L5"  className="absolute w-[13px]" style={{ left: '10%', bottom: '28%' }} delay="1.9s" duration="12.8s" />
               <Star id="L6"  className="absolute w-[24px]" style={{ left: '22%', bottom: '36%' }} delay="1.2s" duration="14s" bright />
               <Star id="L7"  className="absolute w-[12px]" style={{ left: '4%',  bottom: '10%' }} delay="0.6s" duration="10.6s" />
-              {/* Reubicadas aleatoriamente: L8, L9, L10 */}
-              <Star id="L8"  className="absolute w-[15px]" style={{ left: '18%', top: '57%' }}   delay="0.9s" duration="12.4s" />
-              <Star id="L9"  className="absolute w-[12px]" style={{ left: '26%', top: '27%' }}   delay="1.7s" duration="11.6s" />
-              <Star id="L10" className="absolute w-[18px]" style={{ left: '33%', bottom: '21%' }} delay="0.4s" duration="13.2s" bright />
+              {/* Reubicadas para alejar de la carta */}
+              <Star id="L8"  className="absolute w-[15px]" style={{ left: '8%',  top: '56%' }}   delay="0.9s" duration="12.4s" />
+              <Star id="L9"  className="absolute w-[12px]" style={{ left: '9%',  top: '22%' }}   delay="1.7s" duration="11.6s" />
+              <Star id="L10" className="absolute w-[18px]" style={{ left: '5%',  bottom: '18%' }} delay="0.4s" duration="13.2s" bright />
 
               {/* DERECHA (5) */}
               <Star id="R1" className="absolute w-[20px]" style={{ right: '5%',  top: '12%' }}  delay="0.2s" duration="11s" bright />
@@ -156,7 +156,7 @@ export default function Hero() {
               <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
-            {/* CARTA (sin cambios) */}
+            {/* CARTA */}
             <div
               className="
                 group relative
@@ -182,7 +182,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube (sin cambios) */}
+      {/* Estilos locales para la nube (igual que antes) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
