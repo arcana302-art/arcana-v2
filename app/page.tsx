@@ -7,8 +7,8 @@ import MidCTA from "@/components/MidCTA";
 import Testimonials from "@/components/Testimonials";
 import Security from "@/components/Security";
 import FAQ from "@/components/FAQ";
-import JoinAsExpert from "@/components/JoinAsExpert";
 import Freebies from "@/components/Freebies";
+import JoinAsExpert from "@/components/JoinAsExpert";
 import SiteFooter from "@/components/SiteFooter";
 
 export default function Page() {
