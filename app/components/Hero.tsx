@@ -74,7 +74,7 @@ export default function Hero() {
               className="
                 group relative
                 w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
-                translate-x-4 md:translate-x-5 lg:translate-x-6 xl:translate-x-8
+                translate-x-8 md:translate-x-10 lg:translate-x-12 xl:translate-x-14
                 rotate-[10deg]
                 transition-transform duration-500 will-change-transform
                 hover:rotate-[6deg] hover:scale-[1.05]
@@ -82,7 +82,7 @@ export default function Hero() {
                 select-none
               "
             >
-              {/* Halo suave adaptado a la forma (sobre la imagen con drop-shadow) */}
+              {/* Halo suave adaptado a la forma (drop-shadow sobre la propia carta) */}
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
