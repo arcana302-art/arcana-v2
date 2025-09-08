@@ -18,25 +18,25 @@ export default function SiteHeader() {
   return (
     <header
       className="
-        sticky top-0 z-40
+        relative z-40
         border-b border-white/10
         bg-[#17031F]/55 backdrop-blur-md
       "
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        {/* Brand (logo + nombre) */}
+      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
+        {/* Brand: primero texto, luego logo */}
         <a href="/" className="flex items-center gap-3">
+          <span className="text-white/95 text-2xl font-semibold tracking-tight">
+            Arcana
+          </span>
           <Image
             src="/brand/logo.svg"
             alt="Arcana"
-            width={48}
-            height={48}
+            width={72}
+            height={72}
             priority
-            className="h-12 w-12"
+            className="w-[72px] h-[72px]"
           />
-          <span className="text-white text-2xl font-extrabold tracking-tight">
-            Arcana
-          </span>
         </a>
 
         {/* Desktop nav */}
@@ -91,16 +91,16 @@ export default function SiteHeader() {
           <div className="fixed right-0 top-0 z-50 h-full w-[78%] max-w-sm bg-[#17031F] border-l border-white/10 shadow-2xl">
             <div className="flex h-16 items-center justify-between px-5 border-b border-white/10">
               <div className="flex items-center gap-3">
+                <span className="text-white/95 text-lg font-semibold tracking-tight">
+                  Arcana
+                </span>
                 <Image
                   src="/brand/logo.svg"
                   alt="Arcana"
-                  width={32}
-                  height={32}
-                  className="h-8 w-8"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12"
                 />
-                <span className="text-white text-lg font-extrabold tracking-tight">
-                  Arcana
-                </span>
               </div>
               <button
                 aria-label="Cerrar menú"
