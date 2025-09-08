@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -17,11 +18,17 @@ export default function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#17031F]/55 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        {/* Brand */}
-        <a href="/" className="flex items-center gap-2">
-          <span className="text-white text-xl font-extrabold tracking-tight">
-            Arcana<span className="text-[#c9a6ff]">✶</span>
-          </span>
+        {/* Brand (usa /public/brand/logo.svg) */}
+        <a href="/" className="flex items-center gap-2" aria-label="Arcana — inicio">
+          <Image
+            src="/brand/logo.svg"
+            alt="Arcana"
+            width={28}
+            height={28}
+            priority
+            className="h-7 w-7"
+          />
+          <span className="sr-only">Arcana</span>
         </a>
 
         {/* Desktop nav */}
@@ -75,8 +82,15 @@ export default function SiteHeader() {
           />
           <div className="fixed right-0 top-0 z-50 h-full w-[78%] max-w-sm bg-[#17031F] border-l border-white/10 shadow-2xl">
             <div className="flex h-16 items-center justify-between px-5 border-b border-white/10">
-              <span className="text-white text-lg font-extrabold tracking-tight">
-                Arcana<span className="text-[#c9a6ff]">✶</span>
+              <span className="inline-flex items-center gap-2 text-white text-lg font-extrabold tracking-tight">
+                <Image
+                  src="/brand/logo.svg"
+                  alt="Arcana"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6"
+                />
+                Arcana
               </span>
               <button
                 aria-label="Cerrar menú"
