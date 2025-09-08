@@ -15,7 +15,7 @@ export default function SiteHeader() {
     { href: '#unete',          label: 'Únete' },
   ];
 
-  // Talentos (solo texto con links ancla; SIN desplegable)
+  // Talentos (links ancla; sin desplegables)
   const talentos = [
     { href: '#lecturas',    label: 'Lecturas' },
     { href: '#astrologia',  label: 'Astrología' },
@@ -26,11 +26,11 @@ export default function SiteHeader() {
   ];
 
   return (
-    <header className="inset-x-0 top-0 z-40 border-b border-[#9434ec]/20 bg-[#FBF3FB]">
+    <header className="inset-x-0 top-0 z-40 bg-[#FBF3FB]">
       {/* Barra principal */}
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 border-b border-[#9434ec]/20">
         {/* Brand */}
-        <a href="/" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-1.5">
           <Image
             src="/brand/logo.svg"
             alt="Arcana"
@@ -71,6 +71,12 @@ export default function SiteHeader() {
           >
             Agendar
           </a>
+          <a
+            href="#"
+            className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text-[#0f1020] ring-1 ring-[#9434ec]/25 bg-[#9434ec]/10 hover:bg-[#9434ec]/12 transition"
+          >
+            Suscripción
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -85,7 +91,10 @@ export default function SiteHeader() {
         </button>
       </div>
 
-      {/* Submenú de talentos (SIEMPRE visible en desktop) */}
+      {/* Línea morada */}
+      <div className="h-[2px] w-full bg-[#9434ec]/80" />
+
+      {/* Submenú de talentos (debajo de la línea) */}
       <div className="hidden lg:block bg-[#FBF3FB]">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 py-2">
@@ -93,7 +102,7 @@ export default function SiteHeader() {
               <a
                 key={t.href}
                 href={t.href}
-                className="text-[13.5px] text-[#0f1020]/80 hover:text-[#9434ec] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9434ec]/50 rounded px-1 py-0.5 transition-colors"
+                className="text-[13.5px] text-[#c9a6ff] hover:text-[#9434ec] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9434ec]/50 rounded px-1 py-0.5 transition-colors"
               >
                 {t.label}
               </a>
@@ -101,9 +110,6 @@ export default function SiteHeader() {
           </div>
         </div>
       </div>
-
-      {/* Línea morada que separa talentos del contenido */}
-      <div className="h-[2px] w-full bg-[#9434ec]/80" />
 
       {/* Mobile drawer */}
       {open && (
@@ -140,8 +146,29 @@ export default function SiteHeader() {
               ))}
             </nav>
 
-            {/* Talentos en mobile (lista simple) */}
-            <div className="px-5 pb-6">
+            <div className="px-5 pb-4 space-y-3">
+              <a
+                href="#"
+                className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#0f1020] ring-1 ring-[#9434ec]/25 hover:bg-[#9434ec]/10 transition"
+              >
+                Iniciar sesión
+              </a>
+              <a
+                href="#"
+                className="block w-full text-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.45)]"
+              >
+                Agendar
+              </a>
+              <a
+                href="#"
+                className="block w-full text-center rounded-xl px-5 py-2.5 text-sm font-semibold text-[#0f1020] ring-1 ring-[#9434ec]/25 bg-[#9434ec]/10 hover:bg-[#9434ec]/12 transition"
+              >
+                Suscripción
+              </a>
+            </div>
+
+            {/* Talentos en mobile */}
+            <div className="px-5 pb-8">
               <div className="mb-2 text-xs uppercase tracking-wide text-[#0f1020]/60">Talentos</div>
               <div className="flex flex-wrap gap-3">
                 {talentos.map((t) => (
@@ -149,13 +176,14 @@ export default function SiteHeader() {
                     key={t.href}
                     href={t.href}
                     onClick={() => setOpen(false)}
-                    className="text-sm text-[#0f1020] rounded px-2 py-1 hover:bg-[#9434ec]/10"
+                    className="text-sm text-[#c9a6ff] hover:text-[#9434ec] rounded px-2 py-1 transition-colors"
                   >
                     {t.label}
                   </a>
                 ))}
               </div>
             </div>
+
           </div>
         </div>
       )}
