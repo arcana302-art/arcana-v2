@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-type SubTalent = { label: string; href: string };
+type SubTalent = { label: string };
 type Talent = { label: string; id: string; items: SubTalent[] };
 
 const TALENTS: Talent[] = [
@@ -11,79 +11,76 @@ const TALENTS: Talent[] = [
     id: 'lecturas',
     label: 'Lecturas',
     items: [
-      { label: 'Tarot',               href: '#t-lecturas-tarot' },
-      { label: 'Clarividencia',       href: '#t-lecturas-clarividencia' },
-      { label: 'Oráculos',            href: '#t-lecturas-oraculos' },
-      { label: 'Lectura psíquica',    href: '#t-lecturas-psiquica' },
-      { label: 'Mediumnidad',         href: '#t-lecturas-mediumnidad' },
-      { label: 'Registros akáshicos', href: '#t-lecturas-akashicos' },
-      { label: 'Quiromancia',         href: '#t-lecturas-quiromancia' },
-      { label: 'Café',                href: '#t-lecturas-cafe' },
+      { label: 'Tarot' },
+      { label: 'Clarividencia' },
+      { label: 'Oráculos' },
+      { label: 'Lectura psíquica' },
+      { label: 'Mediumnidad' },
+      { label: 'Registros akáshicos' },
+      { label: 'Quiromancia' },
+      { label: 'Café' },
     ],
   },
   {
     id: 'astrologia',
     label: 'Astrología',
     items: [
-      { label: 'Carta natal',  href: '#t-astrologia-carta-natal' },
-      { label: 'Carta astral', href: '#t-astrologia-carta-astral' },
-      { label: 'Sinastría',    href: '#t-astrologia-sinastria' },
-      { label: 'Kármica',      href: '#t-astrologia-karmica' },
-      { label: 'Predictiva',   href: '#t-astrologia-predictiva' },
+      { label: 'Carta natal' },
+      { label: 'Carta astral' },
+      { label: 'Sinastría' },
+      { label: 'Kármica' },
+      { label: 'Predictiva' },
     ],
   },
   {
     id: 'sanacion',
     label: 'Sanación',
     items: [
-      { label: 'Terapia holística', href: '#t-sanacion-holistica' },
-      { label: 'Reiki',             href: '#t-sanacion-reiki' },
-      { label: 'Arcángeles',        href: '#t-sanacion-arcangeles' },
-      { label: 'Energética',        href: '#t-sanacion-energetica' },
+      { label: 'Terapia holística' },
+      { label: 'Reiki' },
+      { label: 'Arcángeles' },
+      { label: 'Energética' },
     ],
   },
   {
     id: 'adivinacion',
     label: 'Adivinación',
-    items: [
-      { label: 'Péndulo', href: '#t-adivinacion-pendulo' },
-      { label: 'Runas',   href: '#t-adivinacion-runas' },
-    ],
+    items: [{ label: 'Péndulo' }, { label: 'Runas' }],
   },
   {
     id: 'hipnosis',
     label: 'Hipnosis',
     items: [
-      { label: 'Clínica',            href: '#t-hipnosis-clinica' },
-      { label: 'Regresiva',          href: '#t-hipnosis-regresiva' },
-      { label: 'Desarrollo personal',href: '#t-hipnosis-desarrollo' },
-      { label: 'Espiritual',         href: '#t-hipnosis-espiritual' },
+      { label: 'Clínica' },
+      { label: 'Regresiva' },
+      { label: 'Desarrollo personal' },
+      { label: 'Espiritual' },
     ],
   },
   {
     id: 'numerologia',
     label: 'Numerología',
     items: [
-      { label: 'Tántrica',  href: '#t-numerologia-tantrica' },
-      { label: 'Kármica',   href: '#t-numerologia-karmica' },
-      { label: 'Personal',  href: '#t-numerologia-personal' },
-      { label: 'Negocios',  href: '#t-numerologia-negocios' },
-      { label: 'Amor',      href: '#t-numerologia-amor' },
+      { label: 'Tántrica' },
+      { label: 'Kármica' },
+      { label: 'Personal' },
+      { label: 'Negocios' },
+      { label: 'Amor' },
     ],
   },
 ];
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [openTalent, setOpenTalent] = useState<string | null>(null); // para acordeones en móvil
+  const [openTalent, setOpenTalent] = useState<string | null>(null);
 
   const nav = [
     { href: '#como-funciona', label: '¿Cómo funciona?' },
-    { href: '#beneficios',     label: 'Beneficios' },
-    { href: '#categorias',     label: 'Categorías' },
-    { href: '#guias',          label: 'Guías' },
-    { href: '#faq',            label: 'FAQ' },
-    { href: '#unete',          label: 'Únete' },
+    { href: '#beneficios', label: 'Beneficios' },
+    { href: '#categorias', label: 'Categorías' },
+    { href: '#guias', label: 'Guías' },
+    { href: '#faq', label: 'FAQ' },
+    { href: '#unete', label: 'Únete' },
   ];
 
   return (
@@ -94,11 +91,11 @@ export default function SiteHeader() {
         bg-[#17031F]/55 backdrop-blur-md
       "
     >
-      {/* Fila superior: marca + navegación + acciones */}
+      {/* Fila superior */}
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        {/* Brand (texto Arcana + logo a la derecha, tamaños según ajuste previo) */}
-        <a href="/" className="flex items-center gap-2">
-          <span className="text-white/95 text-[0.95rem] font-medium tracking-tight">
+        {/* Marca: Arcana (texto + logo) */}
+        <a href="/" className="flex items-center gap-1.5">
+          <span className="text-white/95 text-[0.85rem] font-medium tracking-tight">
             Arcana
           </span>
           <Image
@@ -111,7 +108,7 @@ export default function SiteHeader() {
           />
         </a>
 
-        {/* Desktop nav */}
+        {/* Nav desktop */}
         <nav className="hidden items-center gap-6 lg:flex">
           {nav.map((item) => (
             <a
@@ -124,7 +121,7 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        {/* Actions */}
+        {/* Acciones */}
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#"
@@ -140,7 +137,7 @@ export default function SiteHeader() {
           </a>
         </div>
 
-        {/* Mobile toggle */}
+        {/* Toggle mobile */}
         <button
           aria-label="Abrir menú"
           onClick={() => setOpen(true)}
@@ -152,42 +149,35 @@ export default function SiteHeader() {
         </button>
       </div>
 
-      {/* Línea morada separadora (mismo color que el botón) */}
+      {/* Separador morado */}
       <div className="h-[2px] bg-[#9434ec]" />
 
-      {/* Barra de talentos: dropdown en desktop (hover) y scroll si no cabe */}
+      {/* Talentos desktop (hover) */}
       <div className="mx-auto max-w-7xl px-6">
-        {/* Desktop */}
         <nav className="relative hidden lg:block">
           <ul className="flex flex-wrap items-center gap-3 py-3">
             {TALENTS.map((tal) => (
               <li key={tal.id} className="group relative">
-                {/* Trigger */}
+                {/* Trigger con highlight morado + glow al hover */}
                 <a
                   href={`#talento-${tal.id}`}
                   className="
                     inline-flex items-center gap-2
                     rounded-full px-4 py-1.5 text-sm
                     text-white/85 ring-1 ring-white/12
-                    bg-white/[0.04] hover:bg-white/[0.08]
-                    hover:text-white transition
+                    bg-white/[0.04] transition
+                    hover:bg-white/[0.08]
+                    group-hover:text-[#9434ec]
+                    group-hover:[text-shadow:0_0_10px_rgba(148,52,236,0.75)]
                   "
                 >
                   {tal.label}
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    className="opacity-80"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M7 10l5 5 5-5z"
-                    />
+                  <svg width="16" height="16" viewBox="0 0 24 24" className="opacity-80">
+                    <path fill="currentColor" d="M7 10l5 5 5-5z" />
                   </svg>
                 </a>
 
-                {/* Submenu */}
+                {/* Subtalentos informativos (sin links) */}
                 <div
                   className="
                     absolute left-0 top-full mt-2 hidden
@@ -197,17 +187,17 @@ export default function SiteHeader() {
                   "
                 >
                   <ul className="max-h-[60vh] overflow-auto pr-1">
-                    {tal.items.map((sub) => (
-                      <li key={sub.href}>
-                        <a
-                          href={sub.href}
+                    {tal.items.map((sub, i) => (
+                      <li key={`${tal.id}-${i}`}>
+                        <span
                           className="
-                            block rounded-lg px-3 py-2 text-sm
-                            text-white/85 hover:bg-white/5 hover:text-white transition
+                            block cursor-default select-text
+                            rounded-lg px-3 py-2 text-sm
+                            text-white/85
                           "
                         >
                           {sub.label}
-                        </a>
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -216,14 +206,9 @@ export default function SiteHeader() {
             ))}
           </ul>
         </nav>
-
-        {/* Mobile: mostramos talentos como acordeones dentro del drawer (abajo) */}
-        <nav className="relative lg:hidden">
-          {/* En móvil la barra no se muestra aquí; se renderiza dentro del Drawer más abajo */}
-        </nav>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Drawer móvil */}
       {open && (
         <div className="lg:hidden">
           <div
@@ -270,7 +255,7 @@ export default function SiteHeader() {
               ))}
             </nav>
 
-            {/* Talentos como acordeones */}
+            {/* Talentos como acordeones; subtalentos sin link */}
             <div className="px-5 pb-6">
               <div className="text-white/60 text-xs uppercase tracking-wider mb-2">
                 Talentos
@@ -295,27 +280,18 @@ export default function SiteHeader() {
                           width="18"
                           height="18"
                           viewBox="0 0 24 24"
-                          className={`transition-transform ${
-                            isOpen ? 'rotate-180' : ''
-                          }`}
+                          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
                         >
                           <path fill="currentColor" d="M7 10l5 5 5-5z" />
                         </svg>
                       </button>
                       {isOpen && (
-                        <ul
-                          id={`panel-${tal.id}`}
-                          className="mt-1 space-y-1 rounded-lg bg-white/[0.03] p-2"
-                        >
-                          {tal.items.map((sub) => (
-                            <li key={sub.href}>
-                              <a
-                                href={sub.href}
-                                onClick={() => setOpen(false)}
-                                className="block rounded-md px-3 py-2 text-[15px] text-white/85 hover:bg-white/5"
-                              >
+                        <ul id={`panel-${tal.id}`} className="mt-1 space-y-1 rounded-lg bg-white/[0.03] p-2">
+                          {tal.items.map((sub, i) => (
+                            <li key={`${tal.id}-m-${i}`}>
+                              <span className="block rounded-md px-3 py-2 text-[15px] text-white/85">
                                 {sub.label}
-                              </a>
+                              </span>
                             </li>
                           ))}
                         </ul>
