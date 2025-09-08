@@ -93,7 +93,7 @@ export default function SiteHeader() {
     >
       {/* Fila superior */}
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        {/* Marca: Arcana (texto + logo) */}
+        {/* Marca: texto Arcana + logo (no sticky) */}
         <a href="/" className="flex items-center gap-1.5">
           <span className="text-white/95 text-[0.85rem] font-medium tracking-tight">
             Arcana
@@ -108,7 +108,7 @@ export default function SiteHeader() {
           />
         </a>
 
-        {/* Nav desktop */}
+        {/* Navegación desktop */}
         <nav className="hidden items-center gap-6 lg:flex">
           {nav.map((item) => (
             <a
@@ -137,7 +137,7 @@ export default function SiteHeader() {
           </a>
         </div>
 
-        {/* Toggle mobile */}
+        {/* Toggle móvil */}
         <button
           aria-label="Abrir menú"
           onClick={() => setOpen(true)}
@@ -158,20 +158,23 @@ export default function SiteHeader() {
           <ul className="flex flex-wrap items-center gap-3 py-3">
             {TALENTS.map((tal) => (
               <li key={tal.id} className="group relative">
-                {/* Trigger con highlight morado + glow al hover */}
+                {/* Trigger con hover brand y focus accesible, sin outline azul */}
                 <a
                   href={`#talento-${tal.id}`}
                   className="
                     inline-flex items-center gap-2
                     rounded-full px-4 py-1.5 text-sm
-                    text-white/85 ring-1 ring-white/12
-                    bg-white/[0.04] transition
-                    hover:bg-white/[0.08]
-                    group-hover:text-[#9434ec]
-                    group-hover:[text-shadow:0_0_10px_rgba(148,52,236,0.75)]
+                    text-white/85 ring-1 ring-white/10
+                    bg-white/[0.04]
+                    transition-colors transition-shadow duration-200
+                    hover:bg-[#9434ec]/12 hover:text-[#9434ec] hover:ring-[#9434ec]/55
+                    hover:shadow-[0_0_24px_rgba(148,52,236,0.25)]
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9434ec]
+                    focus-visible:bg-[#9434ec]/10
                   "
                 >
                   {tal.label}
+                  {/* ícono sin cambios */}
                   <svg width="16" height="16" viewBox="0 0 24 24" className="opacity-80">
                     <path fill="currentColor" d="M7 10l5 5 5-5z" />
                   </svg>
@@ -248,7 +251,7 @@ export default function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-base font-medium text-white/90 hover:bg-white/5"
+                  className="block rounded-lg px-3 py-2 text-base font-medium text-white/90 hover:bg:white/5"
                 >
                   {item.label}
                 </a>
@@ -270,6 +273,7 @@ export default function SiteHeader() {
                           flex w-full items-center justify-between
                           rounded-lg px-3 py-2 text-left text-white/90
                           ring-1 ring-white/12 hover:bg-white/5
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9434ec]
                         "
                         onClick={() => setOpenTalent(isOpen ? null : tal.id)}
                         aria-expanded={isOpen}
