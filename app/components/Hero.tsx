@@ -33,23 +33,16 @@ function Star({
           opacity,
           ['--twinkle-delay' as any]: delay,
           ['--twinkle-dur' as any]: duration,
-          ...(bright ? { filter: 'drop-shadow(0 0 12px rgba(251,214,113,0.45))' } : undefined),
+          ...(bright ? { filter: 'drop-shadow(0 0 10px rgba(251,214,113,0.35))' } : undefined),
           ...style,
         } as React.CSSProperties
       }
     >
       <defs>
-        <filter
-          id={`glow-${id}`}
-          filterUnits="userSpaceOnUse"
-          x="-50%"
-          y="-50%"
-          width="200%"
-          height="200%"
-        >
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur1" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur2" />
-          <feFlood floodColor={bright ? '#FFD97E' : '#FBD671'} floodOpacity={bright ? 0.85 : 0.66} result="gold" />
+        <filter id={`glow-${id}`} filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
+          <feFlood floodColor={bright ? '#FFD97E' : '#FBD671'} floodOpacity={bright ? 0.7 : 0.55} result="gold" />
           <feComposite in="gold" in2="blur2" operator="in" result="glowColor" />
           <feMerge>
             <feMergeNode in="glowColor" />
@@ -62,11 +55,7 @@ function Star({
       <g
         filter={`url(#glow-${id})`}
         className="twinkle"
-        style={{
-          animationDelay: `var(--twinkle-delay)`,
-          /* DIM MÁS LENTO (solo velocidad) */
-          animationDuration: `calc(var(--twinkle-dur) * 1.35)`,
-        }}
+        style={{ animationDelay: `var(--twinkle-delay)`, animationDuration: `var(--twinkle-dur)` }}
       >
         <path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#FBD671" />
       </g>
@@ -77,11 +66,10 @@ function Star({
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
         }
-        /* Mantiene la profundidad del dim, solo cambiamos la velocidad arriba */
         @keyframes star-dim {
-          0%   { opacity: 1; }
-          25%  { opacity: 0.12; }
-          55%  { opacity: 0.99; }
+          0% { opacity: 1; }
+          30% { opacity: 0.55; }
+          60% { opacity: 0.98; }
           100% { opacity: 0.9; }
         }
       `}</style>
@@ -92,7 +80,7 @@ function Star({
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#17031F]">
-      {/* NUBE: encima de estrellas, debajo del contenido */}
+      {/* NUBE */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -104,19 +92,17 @@ export default function Hero() {
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
               <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
-                Claridad
+                La respuesta que buscas
                 <br />
-                aquí y ahora
+                te está esperando.
               </h1>
 
-              <h2 className="mt-2 text-[47px] sm:text-[51px] font-extrabold tracking-tight leading-[1.02] text-[#c9a6ff]">
-                con guías auténticas
+              <h2 className="mt-2 text-[47px] sm:text-[51px] font-extrabold tracking-tight leading-[1.02] text-[#9434ec]">
+                Descubre respuestas y claridad
               </h2>
 
               <p className="mt-5 text-white/75 text-[19px] sm:text-[20px] leading-relaxed">
-                Tarot, astrología y oráculos. Agenda en minutos y recibe
-                orientación concreta en un espacio cuidado, seguro y sin
-                juicios.
+                Conecta con guías expertos dedicados a iluminar tu presente y futuro.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -139,7 +125,6 @@ export default function Hero() {
 
           {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS (mismas posiciones) ===== */}
             <div className="pointer-events-none absolute inset-0 z-0">
               {/* IZQUIERDA */}
               <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
@@ -151,7 +136,6 @@ export default function Hero() {
               <Star id="L8"  className="absolute w-[15px]" style={{ left: '16%', top: '52%' }}   delay="0.9s" duration="12.4s" />
               <Star id="L9"  className="absolute w-[12px]" style={{ left: '28%', top: '32%' }}   delay="1.7s" duration="11.6s" />
               <Star id="L10" className="absolute w-[18px]" style={{ left: '30%', bottom: '18%' }} delay="0.4s" duration="13.2s" bright />
-
               {/* DERECHA */}
               <Star id="R1" className="absolute w-[20px]" style={{ right: '5%',  top: '12%' }}  delay="0.2s" duration="11s" bright />
               <Star id="R2" className="absolute w-[14px]" style={{ right: '16%', top: '30%' }} delay="1.1s" duration="12.5s" />
@@ -160,7 +144,6 @@ export default function Hero() {
               <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
-            {/* CARTA (igual) */}
             <div
               className="
                 group relative
@@ -186,7 +169,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube */}
+      {/* Estilos locales para la nube (sin cambios) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
@@ -198,8 +181,7 @@ export default function Hero() {
           filter: none;
           -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          /* MÁS LENTA y APARICIÓN INMEDIATA */
-          animation: cloud-rtl 85s linear infinite;
+          animation: cloud-rtl 42s linear infinite;
         }
         @media (min-width: 1024px) {
           .cloud-img {
@@ -209,10 +191,9 @@ export default function Hero() {
             mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
-        /* Arranca ya dentro de cuadro para que se vea desde el 0% */
         @keyframes cloud-rtl {
-          0%   { transform: translateX(-40%); }
-          100% { transform: translateX(-260%); }
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-220%); }
         }
       `}</style>
     </section>
