@@ -92,17 +92,17 @@ export default function Hero() {
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
               <h1 className="text-white font-extrabold tracking-tight leading-[0.95] text-[53px] sm:text-[69px]">
-                La respuesta que buscas
-                <br />
-                te está esperando.
+                El universo habla en un lenguaje de
               </h1>
 
-              <h2 className="mt-2 text-[47px] sm:text-[51px] font-extrabold tracking-tight leading-[1.02] text-[#9434ec]">
-                Descubre respuestas y claridad
+              <h2 className="mt-2 text-[47px] sm:text-[51px] font-extrabold tracking-tight leading-[1.02] text-[#c9a6ff]">
+                símbolos, energía y estrellas
               </h2>
 
               <p className="mt-5 text-white/75 text-[19px] sm:text-[20px] leading-relaxed">
-                Conecta con guías expertos dedicados a iluminar tu presente y futuro.
+                Descubre a las personas que dedican su vida a interpretar estas señales.
+                Conecta con videntes, sanadores y guías, y recibe el mensaje que te ayudará
+                a avanzar con confianza y propósito.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -169,7 +169,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube (sin cambios) */}
+      {/* Estilos locales para la nube (sin cambios funcionales) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
