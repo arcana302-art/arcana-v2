@@ -5,7 +5,6 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ====== Estrellas decorativas (igual que antes) ====== */
 function Star({
   id,
   className = '',
@@ -77,16 +76,9 @@ function Star({
   );
 }
 
-/* ====== Check minimal para bullets ====== */
 function CheckIcon({ className = '' }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="16"
-      height="16"
-      aria-hidden="true"
-      className={className}
-    >
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" className={className}>
       <path
         d="M20 6L9 17l-5-5"
         fill="none"
@@ -101,19 +93,18 @@ function CheckIcon({ className = '' }: { className?: string }) {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#FBF3FB]">
+    <section className="relative overflow-hidden bg-[#F7F2FF]">
       {/* NUBE */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
 
       {/* CONTENIDO */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-16 lg:pt-28 lg:pb-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-16 pb-16 lg:pt-20 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-12 lg:gap-x-12">
           {/* TEXTO */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
-              {/* Títulos sin bold */}
               <h1 className="text-[#0f1020] font-normal tracking-tight leading-[1.02] text-[40px] sm:text-[52px]">
                 El universo se comunica en
               </h1>
@@ -121,8 +112,8 @@ export default function Hero() {
                 símbolos, energía y estrellas
               </h2>
 
-              {/* Bullets con check (textos cortos y SIN punto final) */}
-              <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-[#0f1020] text-[16px] leading-relaxed">
+              {/* Bullets (más separados del título) */}
+              <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-[#0f1020] text-[16px] leading-relaxed">
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
                   <span>Conecta con videntes, sanadores y guías</span>
@@ -168,9 +159,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* CARTA + ESTRELLAS (sin cambios visuales) */}
+          {/* CARTA + ESTRELLAS */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* Estrellas */}
             <div className="pointer-events-none absolute inset-0 z-0">
               {/* IZQUIERDA */}
               <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
@@ -190,7 +180,6 @@ export default function Hero() {
               <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
-            {/* Carta */}
             <div
               className="
                 group relative
@@ -216,7 +205,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales de la nube (sin cambios estructurales) */}
+      {/* Nube */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
