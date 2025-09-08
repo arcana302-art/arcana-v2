@@ -16,19 +16,27 @@ export default function SiteHeader() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#17031F]/55 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        {/* Brand (usa /public/brand/logo.svg) */}
-        <a href="/" className="flex items-center gap-2" aria-label="Arcana — inicio">
+    <header
+      className="
+        sticky top-0 z-40
+        border-b border-white/10
+        bg-[#17031F]/55 backdrop-blur-md
+      "
+    >
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        {/* Brand (logo + nombre) */}
+        <a href="/" className="flex items-center gap-3">
           <Image
             src="/brand/logo.svg"
             alt="Arcana"
-            width={28}
-            height={28}
+            width={48}
+            height={48}
             priority
-            className="h-7 w-7"
+            className="h-12 w-12"
           />
-          <span className="sr-only">Arcana</span>
+          <span className="text-white text-2xl font-extrabold tracking-tight">
+            Arcana
+          </span>
         </a>
 
         {/* Desktop nav */}
@@ -48,13 +56,13 @@ export default function SiteHeader() {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#"
-            className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-white/90 ring-1 ring-white/15 hover:bg-white/5 transition"
+            className="inline-flex h-11 items-center justify-center rounded-xl px-4 text-sm font-semibold text-white/90 ring-1 ring-white/15 hover:bg-white/5 transition"
           >
             Iniciar sesión
           </a>
           <a
             href="#"
-            className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
+            className="inline-flex h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
           >
             Agendar
           </a>
@@ -82,16 +90,18 @@ export default function SiteHeader() {
           />
           <div className="fixed right-0 top-0 z-50 h-full w-[78%] max-w-sm bg-[#17031F] border-l border-white/10 shadow-2xl">
             <div className="flex h-16 items-center justify-between px-5 border-b border-white/10">
-              <span className="inline-flex items-center gap-2 text-white text-lg font-extrabold tracking-tight">
+              <div className="flex items-center gap-3">
                 <Image
                   src="/brand/logo.svg"
                   alt="Arcana"
-                  width={24}
-                  height={24}
-                  className="h-6 w-6"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8"
                 />
-                Arcana
-              </span>
+                <span className="text-white text-lg font-extrabold tracking-tight">
+                  Arcana
+                </span>
+              </div>
               <button
                 aria-label="Cerrar menú"
                 onClick={() => setOpen(false)}
