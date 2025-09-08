@@ -93,7 +93,7 @@ export default function SiteHeader() {
     >
       {/* Fila superior */}
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        {/* Marca: texto Arcana + logo (no sticky) */}
+        {/* Marca (texto Arcana + logo) */}
         <a href="/" className="flex items-center gap-1.5">
           <span className="text-white/95 text-[0.85rem] font-medium tracking-tight">
             Arcana
@@ -121,7 +121,7 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        {/* Acciones */}
+        {/* Acciones (ahora con “Suscribirme”) */}
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#"
@@ -129,6 +129,14 @@ export default function SiteHeader() {
           >
             Iniciar sesión
           </a>
+
+          <a
+            href="#suscripcion"
+            className="inline-flex h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
+          >
+            Suscribirme
+          </a>
+
           <a
             href="#"
             className="inline-flex h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
@@ -158,7 +166,6 @@ export default function SiteHeader() {
           <ul className="flex flex-wrap items-center gap-3 py-3">
             {TALENTS.map((tal) => (
               <li key={tal.id} className="group relative">
-                {/* Trigger con hover brand y focus accesible, sin outline azul */}
                 <a
                   href={`#talento-${tal.id}`}
                   className="
@@ -174,13 +181,11 @@ export default function SiteHeader() {
                   "
                 >
                   {tal.label}
-                  {/* ícono sin cambios */}
                   <svg width="16" height="16" viewBox="0 0 24 24" className="opacity-80">
                     <path fill="currentColor" d="M7 10l5 5 5-5z" />
                   </svg>
                 </a>
 
-                {/* Subtalentos informativos (sin links) */}
                 <div
                   className="
                     absolute left-0 top-full mt-2 hidden
@@ -258,7 +263,7 @@ export default function SiteHeader() {
               ))}
             </nav>
 
-            {/* Talentos como acordeones; subtalentos sin link */}
+            {/* Talentos acordeón */}
             <div className="px-5 pb-6">
               <div className="text-white/60 text-xs uppercase tracking-wider mb-2">
                 Talentos
@@ -306,13 +311,19 @@ export default function SiteHeader() {
               </ul>
             </div>
 
-            {/* Acciones */}
+            {/* Acciones móviles con Suscribirme */}
             <div className="px-5 pb-8 pt-2 space-y-3">
               <a
                 href="#"
                 className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-white/90 ring-1 ring-white/15 hover:bg-white/5 transition"
               >
                 Iniciar sesión
+              </a>
+              <a
+                href="#suscripcion"
+                className="block w-full text-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)]"
+              >
+                Suscribirme
               </a>
               <a
                 href="#"
