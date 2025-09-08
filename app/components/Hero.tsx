@@ -5,7 +5,7 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ====== Estrellas decorativas existentes (sin cambios) ====== */
+/* ====== Estrellas decorativas (igual que antes) ====== */
 function Star({
   id,
   className = '',
@@ -102,7 +102,7 @@ function CheckIcon({ className = '' }: { className?: string }) {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB]">
-      {/* NUBE (igual: sobre estrellas, bajo contenido) */}
+      {/* NUBE */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -113,43 +113,43 @@ export default function Hero() {
           {/* TEXTO */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
-              {/* Títulos sin bold, colores actualizados */}
+              {/* Títulos sin bold */}
               <h1 className="text-[#0f1020] font-normal tracking-tight leading-[1.02] text-[40px] sm:text-[52px]">
-                El universo se comunica en un lenguaje de
+                El universo se comunica en
               </h1>
               <h2 className="mt-1 text-[38px] sm:text-[48px] font-normal tracking-tight leading-[1.06] text-[#c9a6ff]">
                 símbolos, energía y estrellas
               </h2>
 
-              {/* Bullets con check (cortos) */}
+              {/* Bullets con check (textos cortos y SIN punto final) */}
               <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-[#0f1020] text-[16px] leading-relaxed">
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
-                  <span>Conecta con videntes, sanadores y guías.</span>
+                  <span>Conecta con videntes, sanadores y guías</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
-                  <span>Descubre tu camino de vida, amor y trabajo.</span>
+                  <span>Descubre tu camino de vida y amor</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
-                  <span>Explora talentos como Tarot, Astrología, Sanación y más.</span>
+                  <span>Explora talentos como Tarot y Astrología</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
-                  <span>Ilumina las áreas que se sienten estancadas.</span>
+                  <span>Ilumina las áreas que se sienten estancadas</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
-                  <span>Encuentra claridad y respuestas clave.</span>
+                  <span>Encuentra claridad y respuestas clave</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
-                  <span>Obtén seguridad para decidir con confianza.</span>
+                  <span>Obtén seguridad para decidir con confianza</span>
                 </li>
               </ul>
 
-              {/* Botones: mantienen estilo, adaptados a fondo claro */}
+              {/* Botones */}
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#"
@@ -168,9 +168,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* CARTA + ESTRELLAS (sin cambios de tamaño/posición/efectos) */}
+          {/* CARTA + ESTRELLAS (sin cambios visuales) */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* Estrellas (fondo) */}
+            {/* Estrellas */}
             <div className="pointer-events-none absolute inset-0 z-0">
               {/* IZQUIERDA */}
               <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
@@ -216,7 +216,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube (sin cambios de lógica) */}
+      {/* Estilos locales de la nube (sin cambios estructurales) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
