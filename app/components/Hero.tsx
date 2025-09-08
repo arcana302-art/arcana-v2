@@ -5,7 +5,7 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ====== Estrella decorativa (fondo) — se mantiene tal cual ====== */
+/* ====== Estrellas decorativas existentes (sin cambios) ====== */
 function Star({
   id,
   className = '',
@@ -77,62 +77,32 @@ function Star({
   );
 }
 
-/* ====== Estrellita para bullets (pequeña, con glow + dim sutil) ====== */
-function BulletStar({
-  size = 14,
-  delay = '0s',
-  duration = '4s',
-}: {
-  size?: number;
-  delay?: string;
-  duration?: string;
-}) {
-  const id = `bstar-${Math.random().toString(36).slice(2, 8)}`;
+/* ====== Check minimal para bullets ====== */
+function CheckIcon({ className = '' }: { className?: string }) {
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
       aria-hidden="true"
-      className="shrink-0"
-      style={{ animationDelay: delay, animationDuration: duration }}
+      className={className}
     >
-      <defs>
-        <filter id={id} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="b1" />
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4.2" result="b2" />
-          <feFlood floodColor="#FBD671" floodOpacity="0.65" result="gold" />
-          <feComposite in="gold" in2="b2" operator="in" result="glow" />
-          <feMerge>
-            <feMergeNode in="glow" />
-            <feMergeNode in="b1" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <g filter={`url(#${id})`} className="bullet-twinkle">
-        <path d="M50 6 L60 40 L94 50 L60 60 L50 94 L40 60 L6 50 L40 40 Z" fill="#FBD671" />
-      </g>
-      <style jsx>{`
-        .bullet-twinkle {
-          animation-name: bullet-dim;
-          animation-timing-function: ease-in-out;
-          animation-iteration-count: infinite;
-        }
-        @keyframes bullet-dim {
-          0%   { opacity: 1;   }
-          50%  { opacity: 0.55;}
-          100% { opacity: 1;   }
-        }
-      `}</style>
+      <path
+        d="M20 6L9 17l-5-5"
+        fill="none"
+        stroke="#0f1020"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#17031F]">
-      {/* NUBE: encima de estrellas, debajo del contenido (sin cambios) */}
+    <section className="relative overflow-hidden bg-[#FBF3FB]">
+      {/* NUBE (igual: sobre estrellas, bajo contenido) */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -143,54 +113,54 @@ export default function Hero() {
           {/* TEXTO */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[560px] sm:max-w-[600px]">
-              {/* Títulos SIN bold, mismos colores */}
-              <h1 className="text-white font-normal tracking-tight leading-[0.98] text-[44px] sm:text-[56px]">
-                El universo habla en un lenguaje de
+              {/* Títulos sin bold, colores actualizados */}
+              <h1 className="text-[#0f1020] font-normal tracking-tight leading-[1.02] text-[40px] sm:text-[52px]">
+                El universo se comunica en un lenguaje de
               </h1>
-              <h2 className="mt-1 text-[40px] sm:text-[50px] font-normal tracking-tight leading-[1.02] text-[#c9a6ff]">
-                símbolos, energía y estrellas.
+              <h2 className="mt-1 text-[38px] sm:text-[48px] font-normal tracking-tight leading-[1.06] text-[#c9a6ff]">
+                símbolos, energía y estrellas
               </h2>
 
-              {/* Bullets (sustituyen al párrafo) */}
-              <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-white/80 text-[16px] leading-relaxed">
+              {/* Bullets con check (cortos) */}
+              <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-[#0f1020] text-[16px] leading-relaxed">
                 <li className="flex items-start gap-2">
-                  <BulletStar delay="0s" />
+                  <CheckIcon className="mt-1" />
                   <span>Conecta con videntes, sanadores y guías.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <BulletStar delay="0.2s" />
-                  <span>Explora un universo de talentos: Tarot, Astrología, Sanación, Runas y más.</span>
+                  <CheckIcon className="mt-1" />
+                  <span>Descubre tu camino de vida, amor y trabajo.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <BulletStar delay="0.4s" />
-                  <span>Encuentra la claridad que buscas para tus preguntas más importantes.</span>
+                  <CheckIcon className="mt-1" />
+                  <span>Explora talentos como Tarot, Astrología, Sanación y más.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <BulletStar delay="0.6s" />
-                  <span>Descubre el camino hacia el amor, trabajo y tu camino de vida.</span>
+                  <CheckIcon className="mt-1" />
+                  <span>Ilumina las áreas que se sienten estancadas.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <BulletStar delay="0.8s" />
-                  <span>Ilumina las áreas de tu vida que se sienten más confusas o estancadas.</span>
+                  <CheckIcon className="mt-1" />
+                  <span>Encuentra claridad y respuestas clave.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <BulletStar delay="1s" />
-                  <span>Toma mejores decisiones con mayor seguridad.</span>
+                  <CheckIcon className="mt-1" />
+                  <span>Obtén seguridad para decidir con confianza.</span>
                 </li>
               </ul>
 
-              {/* Botones (sin cambios) */}
+              {/* Botones: mantienen estilo, adaptados a fondo claro */}
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold bg-[#9434ec] shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
+                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold bg-[#9434ec] shadow-[0_12px_40px_-10px_rgba(148,52,236,0.45)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Agendar una consulta
                 </a>
 
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white/90 text-base font-semibold ring-1 ring-white/15 bg-white/5 backdrop-blur transition-all duration-200 hover:bg:white/[0.07]"
+                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-base font-semibold text-[#0f1020] ring-1 ring-[#9434ec]/25 bg-[#9434ec]/10 hover:bg-[#9434ec]/12 transition"
                 >
                   Únete como especialista
                 </a>
@@ -198,9 +168,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* CARTA + ESTRELLAS (sin cambios de tamaño/posicion/efectos) */}
+          {/* CARTA + ESTRELLAS (sin cambios de tamaño/posición/efectos) */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
-            {/* ===== ESTRELLAS (fondo) ===== */}
+            {/* Estrellas (fondo) */}
             <div className="pointer-events-none absolute inset-0 z-0">
               {/* IZQUIERDA */}
               <Star id="L2"  className="absolute w-[14px]" style={{ left: '14%', top: '15%' }}   delay="1.4s" duration="11s" />
@@ -212,7 +182,6 @@ export default function Hero() {
               <Star id="L8"  className="absolute w-[15px]" style={{ left: '16%', top: '52%' }}   delay="0.9s" duration="12.4s" />
               <Star id="L9"  className="absolute w-[12px]" style={{ left: '28%', top: '32%' }}   delay="1.7s" duration="11.6s" />
               <Star id="L10" className="absolute w-[18px]" style={{ left: '30%', bottom: '18%' }} delay="0.4s" duration="13.2s" bright />
-
               {/* DERECHA */}
               <Star id="R1" className="absolute w-[20px]" style={{ right: '5%',  top: '12%' }}  delay="0.2s" duration="11s" bright />
               <Star id="R2" className="absolute w-[14px]" style={{ right: '16%', top: '30%' }} delay="1.1s" duration="12.5s" />
@@ -221,7 +190,7 @@ export default function Hero() {
               <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
-            {/* CARTA (igual) */}
+            {/* Carta */}
             <div
               className="
                 group relative
@@ -247,7 +216,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube (sin cambios) */}
+      {/* Estilos locales para la nube (sin cambios de lógica) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
