@@ -24,9 +24,9 @@ export default function SiteHeader() {
       "
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        {/* Brand: primero texto, luego logo (logo reducido 50%) */}
-        <a href="/" className="flex items-center gap-3">
-          <span className="text-white/95 text-2xl font-semibold tracking-tight">
+        {/* Brand: texto y logo (texto -20%, gap reducido) */}
+        <a href="/" className="flex items-center gap-2">
+          <span className="text-white/95 text-xl font-semibold tracking-tight">
             Arcana
           </span>
           <Image
@@ -90,8 +90,8 @@ export default function SiteHeader() {
           />
           <div className="fixed right-0 top-0 z-50 h-full w-[78%] max-w-sm bg-[#17031F] border-l border-white/10 shadow-2xl">
             <div className="flex h-16 items-center justify-between px-5 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <span className="text-white/95 text-lg font-semibold tracking-tight">
+              <div className="flex items-center gap-2">
+                <span className="text-white/95 text-base font-semibold tracking-tight">
                   Arcana
                 </span>
                 <Image
