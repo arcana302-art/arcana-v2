@@ -15,6 +15,17 @@ export default function SiteHeader() {
     { href: '#unete',          label: 'Únete' },
   ];
 
+  // Talentos solicitados
+  const talents = [
+    { href: '#talento-lecturas',   label: 'Lecturas (tarot, trabajo, amor, clarividencia, oráculos, psíquica)' },
+    { href: '#talento-astrologia', label: 'Astrología' },
+    { href: '#talento-sanacion',   label: 'Sanación (terapia holística)' },
+    { href: '#talento-pendulo',    label: 'Péndulo' },
+    { href: '#talento-runas',      label: 'Runas' },
+    { href: '#talento-hipnosis',   label: 'Hipnosis' },
+    { href: '#talento-numerologia',label: 'Numerología' },
+  ];
+
   return (
     <header
       className="
@@ -23,8 +34,9 @@ export default function SiteHeader() {
         bg-[#17031F]/55 backdrop-blur-md
       "
     >
+      {/* Fila superior: marca + navegación + acciones */}
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        {/* Brand: texto y logo (texto -20%, gap reducido) */}
+        {/* Brand (texto + logo). Mantengo tus tamaños y separación reducida */}
         <a href="/" className="flex items-center gap-2">
           <span className="text-white/95 text-xl font-semibold tracking-tight">
             Arcana
@@ -80,7 +92,34 @@ export default function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Línea morada separadora (mismo color que el botón) */}
+      <div className="h-[2px] bg-[#9434ec]" />
+
+      {/* Barra de talentos (scroll horizontal en móvil) */}
+      <div className="mx-auto max-w-7xl px-6">
+        <nav className="relative py-3 overflow-x-auto">
+          <ul className="flex min-w-max gap-3">
+            {talents.map((t) => (
+              <li key={t.href}>
+                <a
+                  href={t.href}
+                  className="
+                    inline-flex items-center whitespace-nowrap
+                    rounded-full px-4 py-1.5 text-[13px] md:text-sm
+                    text-white/85 ring-1 ring-white/12
+                    bg-white/[0.04] hover:bg-white/[0.08]
+                    hover:text-white transition
+                  "
+                >
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Mobile drawer (sin cambios) */}
       {open && (
         <div className="lg:hidden">
           <div
