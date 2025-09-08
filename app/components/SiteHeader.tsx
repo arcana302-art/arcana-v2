@@ -15,7 +15,6 @@ export default function SiteHeader() {
     { href: '#unete',          label: 'Únete' },
   ];
 
-  // Talentos (links ancla; sin desplegables)
   const talentos = [
     { href: '#lecturas',    label: 'Lecturas' },
     { href: '#astrologia',  label: 'Astrología' },
@@ -26,7 +25,7 @@ export default function SiteHeader() {
   ];
 
   return (
-    <header className="inset-x-0 top-0 z-40 bg-[#FBF3FB]">
+    <header className="inset-x-0 top-0 z-40 bg-[#F7F2FF]">
       {/* Barra principal */}
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 border-b border-[#9434ec]/20">
         {/* Brand */}
@@ -94,10 +93,10 @@ export default function SiteHeader() {
       {/* Línea morada */}
       <div className="h-[2px] w-full bg-[#9434ec]/80" />
 
-      {/* Submenú de talentos (debajo de la línea) */}
-      <div className="hidden lg:block bg-[#FBF3FB]">
+      {/* Submenú de talentos (debajo de la línea) - menos alto para acercar el héroe */}
+      <div className="hidden lg:block bg-[#F7F2FF]">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 py-2">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 py-1">
             {talentos.map((t) => (
               <a
                 key={t.href}
@@ -119,7 +118,7 @@ export default function SiteHeader() {
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
-          <div className="fixed right-0 top-0 z-50 h-full w-[78%] max-w-sm bg-[#FBF3FB] border-l border-[#9434ec]/20 shadow-2xl">
+          <div className="fixed right-0 top-0 z-50 h-full w-[78%] max-w-sm bg-[#F7F2FF] border-l border-[#9434ec]/20 shadow-2xl">
             <div className="flex h-16 items-center justify-between px-5 border-b border-[#9434ec]/20">
               <span className="text-[#0f1020] text-lg font-medium tracking-tight">Arcana</span>
               <button
