@@ -24,7 +24,7 @@ export default function SiteHeader() {
       "
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        {/* Brand: primero texto, luego logo */}
+        {/* Brand: primero texto, luego logo (logo reducido 50%) */}
         <a href="/" className="flex items-center gap-3">
           <span className="text-white/95 text-2xl font-semibold tracking-tight">
             Arcana
@@ -32,10 +32,10 @@ export default function SiteHeader() {
           <Image
             src="/brand/logo.svg"
             alt="Arcana"
-            width={72}
-            height={72}
+            width={36}
+            height={36}
             priority
-            className="w-[72px] h-[72px]"
+            className="w-[36px] h-[36px]"
           />
         </a>
 
@@ -97,9 +97,9 @@ export default function SiteHeader() {
                 <Image
                   src="/brand/logo.svg"
                   alt="Arcana"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6"
                 />
               </div>
               <button
