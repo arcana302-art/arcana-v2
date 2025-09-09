@@ -5,6 +5,7 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
+/* ====== Estrella con halo adaptado + twinkle sutil ====== */
 function Star({
   id,
   className = '',
@@ -94,7 +95,7 @@ function CheckIcon({ className = '' }: { className?: string }) {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#F7F2FF]">
-      {/* NUBE */}
+      {/* NUBE: detrás de todo el contenido del hero */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -112,7 +113,7 @@ export default function Hero() {
                 símbolos, energía y estrellas
               </h2>
 
-              {/* Bullets (más separados del título) */}
+              {/* Bullets */}
               <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-[#0f1020] text-[16px] leading-relaxed">
                 <li className="flex items-start gap-2">
                   <CheckIcon className="mt-1" />
@@ -180,14 +181,15 @@ export default function Hero() {
               <Star id="R5" className="absolute w-[12px]" style={{ right: '18%', bottom: '8%' }}  delay="1.5s" duration="9.8s" />
             </div>
 
+            {/* CARTA (enderezada y +15% tamaño) */}
             <div
               className="
                 group relative
-                w-[144px] sm:w-[171px] md:w-[197px] lg:w-[222px] xl:w-[250px]
+                w-[166px] sm:w-[197px] md:w-[227px] lg:w-[255px] xl:w-[288px]
                 translate-x-16 md:translate-x-20 lg:translate-x-24 xl:translate-x-28
-                rotate-[10deg]
+                rotate-0
                 transition-transform duration-500 will-change-transform
-                hover:rotate-[6deg] hover:scale-[1.05]
+                hover:scale-[1.05]
                 drop-shadow-[0_0_22px_rgba(148,52,236,0.16)]
                 select-none
               "
@@ -195,8 +197,8 @@ export default function Hero() {
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={700}
-                height={980}
+                width={805}   /* 700 * 1.15 */
+                height={1127} /* 980 * 1.15 */
                 priority
                 className="h-auto w-full relative z-20 drop-shadow-[0_0_18px_rgba(148,52,236,0.32)] drop-shadow-[0_0_36px_rgba(148,52,236,0.16)]"
               />
@@ -205,31 +207,33 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Nube */}
+      {/* Estilos locales: nube oscilando izquierda↔derecha detrás de la carta */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
           top: 7.5%;
-          left: 110%;
-          width: 960px;
+          left: 70%;
+          transform: translateX(-50%);
+          width: 980px;
           max-width: none;
           opacity: 0.5;
           filter: none;
           -webkit-mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(145% 125% at 56% 46%, #000 62%, transparent 100%);
-          animation: cloud-rtl 42s linear infinite;
+          animation: cloud-sway 55s ease-in-out infinite alternate;
         }
         @media (min-width: 1024px) {
           .cloud-img {
             top: 7%;
-            width: 1080px;
+            width: 1120px;
             -webkit-mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
             mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
-        @keyframes cloud-rtl {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-220%); }
+        @keyframes cloud-sway {
+          0%   { transform: translateX(-56%); }
+          50%  { transform: translateX(-44%); }
+          100% { transform: translateX(-56%); }
         }
       `}</style>
     </section>
