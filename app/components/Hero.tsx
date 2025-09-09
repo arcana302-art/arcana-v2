@@ -5,6 +5,8 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
+type Talent = { label: string; href: string };
+
 /* Estrella decorativa (borde de la carta) */
 function Star({ id, style, size = 14, delay = '0s', duration = '9s' }: {
   id: string; style?: React.CSSProperties; size?: number; delay?: string; duration?: string;
@@ -44,9 +46,18 @@ function Bullet({ children }: { children: React.ReactNode }) {
 }
 
 export default function Hero() {
+  const TALENTS: Talent[] = [
+    { label: 'Lecturas',     href: '/lecturas' },
+    { label: 'Astrología',   href: '/astrologia' },
+    { label: 'Sanación',     href: '/sanacion' },
+    { label: 'Adivinación',  href: '/adivinacion' },
+    { label: 'Hipnosis',     href: '/hipnosis' },
+    { label: 'Numerología',  href: '/numerologia' },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB]">
-      {/* Nube detrás de la carta (no se toca la línea del header) */}
+      {/* Nube detrás de la carta */}
       <div className="pointer-events-none absolute inset-0 z-[2]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -55,40 +66,36 @@ export default function Hero() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 lg:pb-20">
         <div className="grid grid-cols-12 items-start gap-y-8 lg:gap-x-12">
           {/* Columna izquierda */}
-          <div className="col-span-12 lg:col-span-7 xl:col-span-7">
-            {/* Botones de talentos: justo debajo de la línea morada */}
+          <div className="col-span-12 lg:col-span-7 xl:col-span-7 hero-left">
+            {/* Botones de talentos: debajo de la línea morada */}
             <nav aria-label="Talentos" className="mt-3">
               <div className="flex flex-wrap gap-8">
                 <div className="flex flex-wrap gap-2.5">
-                  {[
-                    'Lecturas',
-                    'Astrología',
-                    'Sanación',
-                    'Adivinación',
-                    'Hipnosis',
-                    'Numerología',
-                  ].map((t) => (
+                  {TALENTS.map((t) => (
                     <a
-                      key={t}
-                      href="#"
+                      key={t.href}
+                      href={t.href}
                       className="inline-flex items-center rounded-2xl px-3.5 py-1.5 text-sm font-semibold
                                  text-[#9434ec] border border-[#9434ec]
                                  hover:bg-[#9434ec]/10 transition
                                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
                     >
-                      {t}
+                      {t.label}
                     </a>
                   ))}
                 </div>
               </div>
             </nav>
 
+            {/* +50% de espacio debajo de los botones */}
+            <div className="mb-6" />
+
             {/* Títulos */}
-            <div className="max-w-[680px] mt-4">
+            <div className="max-w-[680px]">
               <h1 className="text-[#1f1630] font-medium tracking-tight leading-[1.02] text-[44px] sm:text-[54px]">
                 El universo se comunica en
               </h1>
-              <h2 className="mt-1 text-[42px] sm:text[50px] font-medium tracking-tight leading-[1.03] text-[#c9a6ff]">
+              <h2 className="mt-1 text-[42px] sm:text-[50px] font-medium tracking-tight leading-[1.03] text-[#c9a6ff]">
                 símbolos, energía y estrellas
               </h2>
             </div>
@@ -135,9 +142,10 @@ export default function Hero() {
               <Star id="e6" size={14} style={{ right: '10%', bottom: '22%' }} delay="2.0s" duration="11s" />
             </div>
 
-            {/* Carta (posición como la dejaste) */}
+            {/* Carta */}
             <div
               className="
+                hero-card
                 relative
                 w-[170px] sm:w-[198px] md:w-[222px] lg:w-[246px] xl:w-[278px]
                 -translate-x-10 sm:-translate-x-14 md:-translate-x-16 lg:-translate-x-20 xl:-translate-x-24
@@ -159,7 +167,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Nube: vaivén suave */}
+      {/* Estilos locales (nube + layout móvil para carta) */}
       <style jsx>{`
         .cloud-img{
           position:absolute; top:10%; left:56%;
@@ -169,6 +177,26 @@ export default function Hero() {
           animation:cloud-sway 38s ease-in-out infinite;
         }
         @keyframes cloud-sway{0%{transform:translateX(0)}50%{transform:translateX(-18%)}100%{transform:translateX(0)}}
+
+        /* --- Ajuste móvil: carta al lado del título, no debajo de los CTA --- */
+        @media (max-width: 639px){
+          .hero-card{
+            position:absolute;
+            right: 10px;
+            top: 9.5rem;          /* altura aproximada junto al título */
+            width: 160px;         /* tamaño más compacto en móvil */
+            transform: translateX(0) rotate(0deg);
+          }
+          .hero-left{
+            padding-right: 175px; /* deja espacio para la carta a la derecha del texto */
+          }
+          .cloud-img{
+            top: 24%;
+            left: 50%;
+            width: 520px;
+            animation: cloud-sway 34s ease-in-out infinite;
+          }
+        }
       `}</style>
     </section>
   );
