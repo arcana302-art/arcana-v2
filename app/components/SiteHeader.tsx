@@ -16,7 +16,7 @@ export default function SiteHeader() {
   ];
 
   return (
-    <header className="inset-x-0 top-0 z-40 border-b border-[#1f1630]/10 bg-[#FBF3FB]">
+    <header className="inset-x-0 top-0 z-40 bg-[#FBF3FB]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Brand */}
         <a href="/" className="flex items-center gap-2">
@@ -54,18 +54,15 @@ export default function SiteHeader() {
           >
             Iniciar sesión
           </a>
-
-          {/* Subscripción: igual estilo que “Iniciar sesión” */}
           <a
             href="#"
             className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630] ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5 transition"
           >
             Subscripción
           </a>
-
           <a
             href="#"
-            className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
+            className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text.white bg-[#9434ec] text-white shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
           >
             Agendar
           </a>
@@ -141,6 +138,9 @@ export default function SiteHeader() {
           </div>
         </div>
       )}
+
+      {/* ===== Línea morada separadora del contenido ===== */}
+      <div className="h-[2px] w-full bg-[#9434ec]" />
     </header>
   );
 }
