@@ -23,12 +23,12 @@ export default function SiteHeader() {
           <Image
             src="/brand/logo.svg"
             alt="Arcana"
-            width={26}
-            height={26}
+            width={32}  // <- más grande
+            height={32} // <- más grande
             className="shrink-0"
             priority
           />
-          <span className="text-[#1f1630] text-[15px] font-light tracking-tight">
+          <span className="text-[#1f1630] text-[16.5px] font-light tracking-tight">
             Arcana
           </span>
         </a>
@@ -50,19 +50,25 @@ export default function SiteHeader() {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#"
-            className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630] ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5 transition"
+            className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630]
+                       ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
           >
             Iniciar sesión
           </a>
           <a
             href="#"
-            className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630] ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5 transition"
+            className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630]
+                       ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
           >
             Subscripción
           </a>
           <a
             href="#"
-            className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text.white bg-[#9434ec] text-white shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)] hover:scale-[1.03] active:scale-[0.98] transition"
+            className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white bg-[#9434ec]
+                       shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)]
+                       hover:scale-[1.03] active:scale-[0.98] transition"
           >
             Agendar
           </a>
@@ -72,7 +78,9 @@ export default function SiteHeader() {
         <button
           aria-label="Abrir menú"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-[#1f1630]/80 ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5 lg:hidden"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-[#1f1630]/80
+                     ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 lg:hidden
+                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" className="fill-current">
             <path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z" />
@@ -94,7 +102,9 @@ export default function SiteHeader() {
               <button
                 aria-label="Cerrar menú"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center rounded-lg p-2 text-[#1f1630]/80 ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5"
+                className="inline-flex items-center justify-center rounded-lg p-2 text-[#1f1630]/80
+                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" className="fill-current">
                   <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.3 19.71 2.89 18.3 9.18 12 2.89 5.71 4.3 4.29 10.59 10.6l6.3-6.31 1.41 1.42Z" />
@@ -108,7 +118,8 @@ export default function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-base font-medium text-[#1f1630]/90 hover:bg-[#1f1630]/5"
+                  className="block rounded-lg px-3 py-2 text-base font-medium text-[#1f1630]/90 hover:bg-[#9434ec]/8
+                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
                 >
                   {item.label}
                 </a>
@@ -118,19 +129,24 @@ export default function SiteHeader() {
             <div className="px-5 pb-8 pt-2 space-y-3">
               <a
                 href="#"
-                className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#1f1630] ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5 transition"
+                className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#1f1630]
+                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
               >
                 Iniciar sesión
               </a>
               <a
                 href="#"
-                className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#1f1630] ring-1 ring-[#1f1630]/12 hover:bg-[#1f1630]/5 transition"
+                className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#1f1630]
+                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
               >
                 Subscripción
               </a>
               <a
                 href="#"
-                className="block w-full text-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-[#9434ec] shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)]"
+                className="block w-full text-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-[#9434ec]
+                           shadow-[0_10px_30px_-10px_rgba(148,52,236,0.55)]"
               >
                 Agendar
               </a>
@@ -139,7 +155,7 @@ export default function SiteHeader() {
         </div>
       )}
 
-      {/* ===== Línea morada separadora del contenido ===== */}
+      {/* Línea morada separadora */}
       <div className="h-[2px] w-full bg-[#9434ec]" />
     </header>
   );
