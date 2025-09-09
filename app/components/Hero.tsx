@@ -5,11 +5,11 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ===== Estrellita con glow + twinkle sutil (para el fondo) ===== */
+/* ===== Estrellita con glow + twinkle sutil ===== */
 function Star({
   id,
   style,
-  size = 16,
+  size = 14,
   delay = '0s',
   duration = '9s',
 }: {
@@ -66,30 +66,33 @@ function Star({
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB]">
-      {/* CAPA DE ESTRELLAS (detrás de nube y carta) */}
-      <div className="pointer-events-none absolute inset-0 z-[1]">
-        {/* distribuidas alrededor de la zona derecha */}
-        <Star id="s1"  size={16} style={{ right: '24%', top: '14%'  }} delay="0.1s" duration="10s" />
-        <Star id="s2"  size={12} style={{ right: '18%', top: '26%'  }} delay="1.5s" duration="9s"  />
-        <Star id="s3"  size={14} style={{ right: '10%', top: '38%'  }} delay="0.9s" duration="11s" />
-        <Star id="s4"  size={18} style={{ right: '8%',  top: '18%'  }} delay="0.6s" duration="10s" />
-        <Star id="s5"  size={12} style={{ right: '6%',  top: '50%'  }} delay="2.0s" duration="9.5s" />
-        <Star id="s6"  size={14} style={{ right: '22%', top: '56%'  }} delay="1.1s" duration="10.8s" />
-        <Star id="s7"  size={12} style={{ right: '15%', top: '70%'  }} delay="0.4s" duration="9.2s" />
-        <Star id="s8"  size={16} style={{ right: '30%', top: '34%'  }} delay="1.9s" duration="10.2s" />
+      {/* Línea morada + lista de talentos */}
+      <div className="mx-auto max-w-7xl px-6 pt-16">
+        <div className="h-[2px] w-full rounded-full bg-[#9434ec]/75" />
+        <div className="mt-3 flex flex-wrap gap-3 text-[#9434ec]">
+          {['Lecturas','Astrología','Sanación','Adivinación','Hipnosis','Numerología'].map((t) => (
+            <a
+              key={t}
+              href="#"
+              className="rounded-full px-3 py-1.5 text-sm ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
+            >
+              {t}
+            </a>
+          ))}
+        </div>
       </div>
 
-      {/* NUBE por encima de las estrellas, debajo de la carta y texto */}
+      {/* NUBE (debajo de carta, por encima de estrellas) */}
       <div className="pointer-events-none absolute inset-0 z-[2]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
 
       {/* CONTENIDO */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-16 pb-16 lg:pt-20 lg:pb-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 lg:pb-20">
         <div className="grid grid-cols-12 items-center gap-y-10 lg:gap-x-12">
           {/* TEXTO */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
-            <div className="max-w-[680px]">
+            <div className="max-w-[680px] mt-10">
               <h1 className="text-[#1f1630] font-medium tracking-tight leading-[1.02] text-[44px] sm:text-[54px]">
                 El universo se comunica en
               </h1>
@@ -126,13 +129,26 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* CARTA (más grande + desplazada a la derecha) */}
+          {/* CARTA + ESTRELLAS ANCLADAS A SU ORILLA */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-end">
+            {/* Estrellas alrededor de la carta (detrás de la carta y debajo de la nube) */}
+            <div className="pointer-events-none absolute inset-0 z-[1]">
+              {/* Orillas izquierda de la carta (columna) */}
+              <Star id="e1" size={16} style={{ left: '10%', top: '14%' }} delay="0.2s" duration="10s" />
+              <Star id="e2" size={12} style={{ left: '8%',  top: '42%' }} delay="1.1s" duration="9.4s" />
+              <Star id="e3" size={14} style={{ left: '12%', bottom: '20%' }} delay="1.8s" duration="10.6s" />
+              {/* Orillas derecha */}
+              <Star id="e4" size={18} style={{ right: '8%',  top: '10%' }} delay="0.6s" duration="10.2s" />
+              <Star id="e5" size={12} style={{ right: '6%',  top: '46%' }} delay="1.5s" duration="9.2s" />
+              <Star id="e6" size={14} style={{ right: '10%', bottom: '22%' }} delay="2.0s" duration="11s" />
+            </div>
+
+            {/* Carta (10% más pequeña y un poco a la izquierda) */}
             <div
               className="
                 relative
-                w-[210px] sm:w-[245px] md:w-[275px] lg:w-[315px] xl:w-[360px]
-                translate-x-6 sm:translate-x-8 lg:translate-x-12 xl:translate-x-16
+                w-[190px] sm:w-[220px] md:w-[248px] lg:w-[284px] xl:w-[324px]
+                translate-x-1 sm:translate-x-2 lg:translate-x-4 xl:translate-x-6
                 rotate-0
                 transition-transform duration-500
                 hover:scale-[1.05]
@@ -158,23 +174,15 @@ export default function Hero() {
       <style jsx>{`
         .cloud-img {
           position: absolute;
-          top: 12%;
+          top: 10%;
           left: 56%;
-          width: 660px;
+          width: 760px;
           max-width: none;
           opacity: 0.45;
           filter: none;
-          -webkit-mask-image: radial-gradient(140% 125% at 56% 46%, #000 62%, transparent 100%);
-                  mask-image: radial-gradient(140% 125% at 56% 46%, #000 62%, transparent 100%);
+          -webkit-mask-image: radial-gradient(145% 130% at 56% 46%, #000 62%, transparent 100%);
+                  mask-image: radial-gradient(145% 130% at 56% 46%, #000 62%, transparent 100%);
           animation: cloud-sway 38s ease-in-out infinite;
-        }
-        @media (min-width: 1024px) {
-          .cloud-img {
-            top: 10%;
-            width: 760px;
-            -webkit-mask-image: radial-gradient(145% 130% at 56% 46%, #000 62%, transparent 100%);
-                    mask-image: radial-gradient(145% 130% at 56% 46%, #000 62%, transparent 100%);
-          }
         }
         @keyframes cloud-sway {
           0%   { transform: translateX(0); }
