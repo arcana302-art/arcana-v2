@@ -5,11 +5,82 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
+/* ===== Estrellita con glow + twinkle sutil (para el fondo) ===== */
+function Star({
+  id,
+  style,
+  size = 16,
+  delay = '0s',
+  duration = '9s',
+}: {
+  id: string;
+  style?: React.CSSProperties;
+  size?: number;
+  delay?: string;
+  duration?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className="pointer-events-none"
+      style={{
+        filter: 'drop-shadow(0 0 6px rgba(251,214,113,0.45))',
+        ...style,
+      }}
+      aria-hidden="true"
+    >
+      <defs>
+        <filter id={`glow-${id}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="b1" />
+          <feMerge>
+            <feMergeNode in="b1" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g filter={`url(#glow-${id})`} className="twinkle" style={{ animationDelay: delay, animationDuration: duration }}>
+        <path
+          d="M12 2l2.1 6.2L20 10l-5.9 1.8L12 18l-2.1-6.2L4 10l5.9-1.8L12 2z"
+          fill="#FBD671"
+        />
+      </g>
+      <style jsx>{`
+        .twinkle {
+          animation-name: dim;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in-out;
+        }
+        @keyframes dim {
+          0%   { opacity: .95 }
+          40%  { opacity: .45 }
+          60%  { opacity: .9 }
+          100% { opacity: .75 }
+        }
+      `}</style>
+    </svg>
+  );
+}
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB]">
-      {/* NUBE: detrás de la carta y del contenido */}
-      <div className="pointer-events-none absolute inset-0 z-0">
+      {/* CAPA DE ESTRELLAS (detrás de nube y carta) */}
+      <div className="pointer-events-none absolute inset-0 z-[1]">
+        {/* distribuidas alrededor de la zona derecha */}
+        <Star id="s1"  size={16} style={{ right: '24%', top: '14%'  }} delay="0.1s" duration="10s" />
+        <Star id="s2"  size={12} style={{ right: '18%', top: '26%'  }} delay="1.5s" duration="9s"  />
+        <Star id="s3"  size={14} style={{ right: '10%', top: '38%'  }} delay="0.9s" duration="11s" />
+        <Star id="s4"  size={18} style={{ right: '8%',  top: '18%'  }} delay="0.6s" duration="10s" />
+        <Star id="s5"  size={12} style={{ right: '6%',  top: '50%'  }} delay="2.0s" duration="9.5s" />
+        <Star id="s6"  size={14} style={{ right: '22%', top: '56%'  }} delay="1.1s" duration="10.8s" />
+        <Star id="s7"  size={12} style={{ right: '15%', top: '70%'  }} delay="0.4s" duration="9.2s" />
+        <Star id="s8"  size={16} style={{ right: '30%', top: '34%'  }} delay="1.9s" duration="10.2s" />
+      </div>
+
+      {/* NUBE por encima de las estrellas, debajo de la carta y texto */}
+      <div className="pointer-events-none absolute inset-0 z-[2]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
 
@@ -19,7 +90,6 @@ export default function Hero() {
           {/* TEXTO */}
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="max-w-[680px]">
-              {/* Título */}
               <h1 className="text-[#1f1630] font-medium tracking-tight leading-[1.02] text-[44px] sm:text-[54px]">
                 El universo se comunica en
               </h1>
@@ -56,13 +126,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* CARTA */}
-          <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-start">
+          {/* CARTA (más grande + desplazada a la derecha) */}
+          <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-end">
             <div
               className="
                 relative
-                w-[72px] sm:w-[86px] md:w-[98px] lg:w-[111px] xl:w-[125px]
-                md:w-[180px] lg:w-[200px] xl:w-[225px]
+                w-[210px] sm:w-[245px] md:w-[275px] lg:w-[315px] xl:w-[360px]
+                translate-x-6 sm:translate-x-8 lg:translate-x-12 xl:translate-x-16
                 rotate-0
                 transition-transform duration-500
                 hover:scale-[1.05]
@@ -84,17 +154,16 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales para la nube (vaivén suave y tamaño controlado) */}
+      {/* Estilos locales nube (vaivén) */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
           top: 12%;
-          left: 65%;
-          width: 560px;          /* más pequeña que antes */
+          left: 56%;
+          width: 660px;
           max-width: none;
           opacity: 0.45;
           filter: none;
-          z-index: 0;
           -webkit-mask-image: radial-gradient(140% 125% at 56% 46%, #000 62%, transparent 100%);
                   mask-image: radial-gradient(140% 125% at 56% 46%, #000 62%, transparent 100%);
           animation: cloud-sway 38s ease-in-out infinite;
@@ -102,12 +171,11 @@ export default function Hero() {
         @media (min-width: 1024px) {
           .cloud-img {
             top: 10%;
-            width: 660px;
+            width: 760px;
             -webkit-mask-image: radial-gradient(145% 130% at 56% 46%, #000 62%, transparent 100%);
                     mask-image: radial-gradient(145% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
-        /* Vaivén sutil (izquierda-derecha) sin invadir el texto */
         @keyframes cloud-sway {
           0%   { transform: translateX(0); }
           50%  { transform: translateX(-18%); }
@@ -118,7 +186,7 @@ export default function Hero() {
   );
 }
 
-/* ===== Item de bullet (check minimal) ===== */
+/* ===== Bullet (check minimal) ===== */
 function Bullet({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-3">
