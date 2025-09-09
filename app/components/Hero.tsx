@@ -207,14 +207,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: nube 50% más pequeña y vaivén sutil */}
+      {/* Estilos locales: nube +30% tamaño y vaivén más amplio */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
           top: 7.5%;
           left: 70%;
           transform: translateX(-50%);
-          width: 490px;     /* antes ~980px -> 50% */
+          width: 637px;     /* +30% desde 490px */
           max-width: none;
           opacity: 0.5;
           filter: none;
@@ -225,16 +225,16 @@ export default function Hero() {
         @media (min-width: 1024px) {
           .cloud-img {
             top: 7%;
-            width: 560px;   /* antes ~1120px -> 50% */
+            width: 728px;   /* +30% desde 560px */
             -webkit-mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
             mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
-        /* Vaivén más sutil: ~ -52% ↔ -48% */
+        /* Vaivén más amplio: ~ -58% ↔ -42% */
         @keyframes cloud-sway {
-          0%   { transform: translateX(-52%); }
-          50%  { transform: translateX(-48%); }
-          100% { transform: translateX(-52%); }
+          0%   { transform: translateX(-58%); }
+          50%  { transform: translateX(-42%); }
+          100% { transform: translateX(-58%); }
         }
       `}</style>
     </section>
