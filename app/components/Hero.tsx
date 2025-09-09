@@ -197,8 +197,8 @@ export default function Hero() {
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={805}   /* 700 * 1.15 */
-                height={1127} /* 980 * 1.15 */
+                width={805}
+                height={1127}
                 priority
                 className="h-auto w-full relative z-20 drop-shadow-[0_0_18px_rgba(148,52,236,0.32)] drop-shadow-[0_0_36px_rgba(148,52,236,0.16)]"
               />
@@ -207,14 +207,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Estilos locales: nube oscilando izquierda↔derecha detrás de la carta */}
+      {/* Estilos locales: nube 50% más pequeña y vaivén sutil */}
       <style jsx>{`
         .cloud-img {
           position: absolute;
           top: 7.5%;
           left: 70%;
           transform: translateX(-50%);
-          width: 980px;
+          width: 490px;     /* antes ~980px -> 50% */
           max-width: none;
           opacity: 0.5;
           filter: none;
@@ -225,15 +225,16 @@ export default function Hero() {
         @media (min-width: 1024px) {
           .cloud-img {
             top: 7%;
-            width: 1120px;
+            width: 560px;   /* antes ~1120px -> 50% */
             -webkit-mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
             mask-image: radial-gradient(150% 130% at 56% 46%, #000 62%, transparent 100%);
           }
         }
+        /* Vaivén más sutil: ~ -52% ↔ -48% */
         @keyframes cloud-sway {
-          0%   { transform: translateX(-56%); }
-          50%  { transform: translateX(-44%); }
-          100% { transform: translateX(-56%); }
+          0%   { transform: translateX(-52%); }
+          50%  { transform: translateX(-48%); }
+          100% { transform: translateX(-52%); }
         }
       `}</style>
     </section>
