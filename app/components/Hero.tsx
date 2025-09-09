@@ -5,7 +5,6 @@ import Image from 'next/image';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-/* ===== Estrellita sutil (sin cambios de color) ===== */
 function Star({ id, style, size = 14, delay = '0s', duration = '9s' }: {
   id: string; style?: React.CSSProperties; size?: number; delay?: string; duration?: string;
 }) {
@@ -29,7 +28,6 @@ function Star({ id, style, size = 14, delay = '0s', duration = '9s' }: {
   );
 }
 
-/* ===== Bullet con check del color del botón #9434ec ===== */
 function Bullet({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-3">
@@ -46,9 +44,7 @@ function Bullet({ children }: { children: React.ReactNode }) {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB]">
-      {/* (La línea morada vive ahora en el header) */}
-
-      {/* Nube (debajo de carta, z-2) */}
+      {/* Nube detrás de la carta */}
       <div className="pointer-events-none absolute inset-0 z-[2]">
         <img src={CLOUD_IMG} alt="" className="cloud-img" aria-hidden="true" />
       </div>
@@ -62,10 +58,36 @@ export default function Hero() {
               <h1 className="text-[#1f1630] font-medium tracking-tight leading-[1.02] text-[44px] sm:text-[54px]">
                 El universo se comunica en
               </h1>
-              <h2 className="mt-1 text-[42px] sm:text-[50px] font-medium tracking-tight leading-[1.03] text-[#c9a6ff]">
+              <h2 className="mt-1 text-[42px] sm:text[50px] font-medium tracking-tight leading-[1.03] text-[#c9a6ff]">
                 símbolos, energía y estrellas
               </h2>
 
+              {/* Talentos como botones (en el Hero) */}
+              <nav aria-label="Talentos" className="mt-5">
+                <div className="flex flex-wrap gap-2.5">
+                  {[
+                    'Lecturas',
+                    'Astrología',
+                    'Sanación',
+                    'Adivinación',
+                    'Hipnosis',
+                    'Numerología',
+                  ].map((t) => (
+                    <a
+                      key={t}
+                      href="#"
+                      className="inline-flex items-center rounded-2xl px-3.5 py-1.5 text-sm font-semibold
+                                 text-[#9434ec] border border-[#9434ec]
+                                 hover:bg-[#9434ec]/10 transition
+                                 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
+                    >
+                      {t}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+
+              {/* Bullets */}
               <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 text-[16.5px] text-[#2b2140]">
                 <Bullet>Conecta con videntes, sanadores y guías</Bullet>
                 <Bullet>Descubre tu camino de vida y amor</Bullet>
@@ -75,16 +97,19 @@ export default function Hero() {
                 <Bullet>Obtén seguridad para decidir con confianza</Bullet>
               </div>
 
+              {/* CTAs */}
               <div className="mt-9 flex flex-wrap gap-4">
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold bg-[#9434ec] shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
+                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold bg-[#9434ec]
+                             shadow-[0_12px_40px_-10px_rgba(148,52,236,0.55)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Agendar una consulta
                 </a>
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] text-base font-semibold ring-1 ring-[#1f1630]/10 bg-white/70 backdrop-blur transition-all duration-200"
+                  className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] text-base font-semibold
+                             ring-1 ring-[#1f1630]/10 bg-white/70 backdrop-blur transition-all duration-200"
                 >
                   Únete como especialista
                 </a>
@@ -92,9 +117,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Carta + estrellas borde */}
+          {/* Carta + estrellas borde (sin cambios salvo posición previa) */}
           <div className="col-span-12 lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-end">
-            {/* estrellas alrededor (sin cambios) */}
             <div className="pointer-events-none absolute inset-0 z-[1]">
               <Star id="e1" size={16} style={{ left: '10%', top: '14%' }} delay="0.2s" duration="10s" />
               <Star id="e2" size={12} style={{ left: '8%',  top: '42%' }} delay="1.1s" duration="9.4s" />
@@ -104,7 +128,6 @@ export default function Hero() {
               <Star id="e6" size={14} style={{ right: '10%', bottom: '22%' }} delay="2.0s" duration="11s" />
             </div>
 
-            {/* CARTA — “mucho más” a la izquierda */}
             <div
               className="
                 relative
@@ -129,7 +152,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Nube: vaivén suave (sin cambios) */}
+      {/* Nube: vaivén suave */}
       <style jsx>{`
         .cloud-img{
           position:absolute; top:10%; left:56%;
