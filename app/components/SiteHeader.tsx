@@ -23,8 +23,8 @@ export default function SiteHeader() {
           <Image
             src="/brand/logo.svg"
             alt="Arcana"
-            width={32}  // <- más grande
-            height={32} // <- más grande
+            width={32}
+            height={32}
             className="shrink-0"
             priority
           />
@@ -51,7 +51,7 @@ export default function SiteHeader() {
           <a
             href="#"
             className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630]
-                       ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                       ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition
                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
           >
             Iniciar sesión
@@ -59,7 +59,7 @@ export default function SiteHeader() {
           <a
             href="#"
             className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold text-[#1f1630]
-                       ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                       ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition
                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
           >
             Subscripción
@@ -79,7 +79,7 @@ export default function SiteHeader() {
           aria-label="Abrir menú"
           onClick={() => setOpen(true)}
           className="inline-flex items-center justify-center rounded-lg p-2 text-[#1f1630]/80
-                     ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 lg:hidden
+                     ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 lg:hidden
                      focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" className="fill-current">
@@ -103,7 +103,7 @@ export default function SiteHeader() {
                 aria-label="Cerrar menú"
                 onClick={() => setOpen(false)}
                 className="inline-flex items-center justify-center rounded-lg p-2 text-[#1f1630]/80
-                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8
+                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" className="fill-current">
@@ -118,7 +118,7 @@ export default function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-base font-medium text-[#1f1630]/90 hover:bg-[#9434ec]/8
+                  className="block rounded-lg px-3 py-2 text-base font-medium text-[#1f1630]/90 hover:bg-[#9434ec]/10
                              focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
                 >
                   {item.label}
@@ -130,7 +130,7 @@ export default function SiteHeader() {
               <a
                 href="#"
                 className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#1f1630]
-                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
               >
                 Iniciar sesión
@@ -138,7 +138,7 @@ export default function SiteHeader() {
               <a
                 href="#"
                 className="block w-full text-center rounded-xl px-4 py-2 text-sm font-semibold text-[#1f1630]
-                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/8 transition
+                           ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9434ec] focus-visible:outline-offset-2"
               >
                 Subscripción
@@ -155,7 +155,7 @@ export default function SiteHeader() {
         </div>
       )}
 
-      {/* Línea morada separadora */}
+      {/* Línea morada separadora (misma posición) */}
       <div className="h-[2px] w-full bg-[#9434ec]" />
     </header>
   );
