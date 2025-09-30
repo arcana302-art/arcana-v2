@@ -7,9 +7,10 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-// Color botón (morado) y morado claro ya usados en el sitio
+// Colores
 const BTN_PURPLE = '#9434ec';
 const LIGHT_PURPLE = '#c9a6ff';
+const CHECK_PURPLE = '#9434ec';
 
 export default function Hero() {
   const talents = useMemo(
@@ -24,17 +25,23 @@ export default function Hero() {
     []
   );
 
+  const bullets = [
+    'Conecta con videntes, sanadores y guías',
+    'Descubre tu camino de vida y amor',
+    'Explora talentos como Tarot y Astrología',
+    'Ilumina las áreas que se sienten estancadas',
+    'Encuentra claridad y respuestas clave',
+    'Obtén seguridad para decidir con confianza',
+  ];
+
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB]">
-      {/* Línea divisoria morada (misma posición) */}
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-10 pb-14 sm:pt-14 sm:pb-16">
         {/* FILA TALENTOS (chips) */}
-        <nav
-          aria-label="Talentos"
-          className="flex flex-wrap gap-3 sm:gap-3.5 pt-3"
-        >
+        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 pt-3">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -64,7 +71,7 @@ export default function Hero() {
         <div className="relative mt-6 sm:mt-10 grid grid-cols-12 gap-y-10 lg:gap-x-10">
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7">
-            {/* Títulos sin bold */}
+            {/* Títulos */}
             <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04]">
               El universo se comunica en
             </h1>
@@ -74,6 +81,20 @@ export default function Hero() {
             >
               símbolos, energía y estrellas
             </h2>
+
+            {/* BULLETS CON CHECKS */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
+              {bullets.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-2">
+                  <span
+                    className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-xs font-bold"
+                  >
+                    ✓
+                  </span>
+                  <span className="text-sm text-[#22172f]/90">{item}</span>
+                </div>
+              ))}
+            </div>
 
             {/* Botones CTA */}
             <div className="mt-8 flex flex-wrap gap-4">
@@ -167,7 +188,6 @@ export default function Hero() {
 
         /* ====== Ajustes SOLO móvil (<= 639px) ====== */
         @media (max-width: 639px) {
-          /* Títulos más contenidos (~2 líneas) */
           .hero-title-1 {
             font-size: 26px;
             line-height: 1.08;
@@ -177,12 +197,10 @@ export default function Hero() {
             line-height: 1.08;
           }
 
-          /* Reserva de ancho para que la carta no pise el texto */
           .hero-left {
             padding-right: 180px;
           }
 
-          /* Carta: al lado del título, tamaño controlado */
           .hero-card {
             position: absolute;
             right: 10px;
@@ -195,7 +213,6 @@ export default function Hero() {
             scale: 0.75; /* REDUCCIÓN 25% */
           }
 
-          /* Nube: más a la derecha y más discreta */
           .cloud-img {
             top: 26%;
             left: 62%;
