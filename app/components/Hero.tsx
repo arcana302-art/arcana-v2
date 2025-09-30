@@ -34,11 +34,12 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-14 sm:pb-16">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* FILA TALENTOS */}
-        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-2 sm:mb-3">
+        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-6 sm:mb-6">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -69,18 +70,18 @@ export default function Hero() {
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Títulos */}
-            <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04]">
+            <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04] mb-4">
               El universo se comunica en
             </h1>
             <h2
-              className="hero-title-2 font-normal tracking-tight text-[42px] leading-[1.05] sm:text-[60px] sm:leading-[1.04]"
+              className="hero-title-2 font-normal tracking-tight text-[42px] leading-[1.05] sm:text-[60px] sm:leading-[1.04] mb-6"
               style={{ color: LIGHT_PURPLE }}
             >
               símbolos, energía y estrellas
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 sm:mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 sm:mt-3">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
@@ -125,15 +126,15 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
 
-            {/* Carta reducida 50% */}
+            {/* Carta tamaño ajustado */}
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={320}  // reducido 50%
-                height={450} // proporcional al ancho
+                width={640}  // tamaño aumentado
+                height={900}
                 priority
-                className="h-auto w-[50%] sm:w-[50%] lg:w-[50%]"
+                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px]"
               />
             </div>
           </div>
@@ -143,12 +144,12 @@ export default function Hero() {
       {/* Estilos locales */}
       <style jsx>{`
         .cloud-img {
-          top: 30%;
+          top: 50%; // ajustar a la mitad vertical de la carta
           left: 58%;
           width: 680px;
           opacity: 0.42;
           filter: none;
-          transform: translateX(-50%);
+          transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
           -webkit-mask-image: radial-gradient(
             140% 120% at 56% 46%,
@@ -175,11 +176,11 @@ export default function Hero() {
           .hero-left { padding-right: 140px; }
 
           .hero-card :global(img) {
-            width: 80px !important; // reduce 50% en móvil
+            width: 200px !important; // tamaño ajustado proporcional en móvil
           }
 
           .cloud-img {
-            top: 26%;
+            top: 50%; 
             left: 62%;
             width: 460px;
             opacity: 0.38;
