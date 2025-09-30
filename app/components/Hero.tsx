@@ -81,7 +81,7 @@ export default function Hero() {
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3 sm:mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-3 sm:mt-4">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
@@ -126,15 +126,15 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
 
-            {/* Carta tamaño ajustado */}
+            {/* Carta tamaño ajustado 5% menos */}
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={576}  // tamaño reducido 10%
-                height={810} // proporcional
+                width={547}  // reducido 5%
+                height={770} // proporcional
                 priority
-                className="h-auto w-[288px] sm:w-[342px] lg:w-[396px]"
+                className="h-auto w-[274px] sm:w-[325px] lg:w-[378px]"
               />
             </div>
           </div>
