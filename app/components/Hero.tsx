@@ -33,13 +33,13 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-14 sm:pb-16">
+    <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
       {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* FILA TALENTOS */}
-        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-4 sm:mb-4">
+        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -81,7 +81,7 @@ export default function Hero() {
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-3 sm:mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 mt-4 sm:mt-5">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
@@ -95,7 +95,7 @@ export default function Hero() {
             </div>
 
             {/* Botones CTA */}
-            <div className="mt-4 flex flex-wrap gap-4">
+            <div className="mt-5 flex flex-wrap gap-4">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
@@ -126,15 +126,15 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
 
-            {/* Carta tamaño ajustado 5% menos */}
+            {/* Carta tamaño ajustado */}
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={547}  // reducido 5%
-                height={770} // proporcional
+                width={580}  // tamaño armonizado
+                height={815} // proporcional
                 priority
-                className="h-auto w-[274px] sm:w-[325px] lg:w-[378px]"
+                className="h-auto w-[290px] sm:w-[345px] lg:w-[400px]"
               />
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function Hero() {
       {/* Estilos locales */}
       <style jsx>{`
         .cloud-img {
-          top: 50%;
+          top: 48%;
           left: 58%;
           width: 680px;
           opacity: 0.42;
@@ -175,17 +175,22 @@ export default function Hero() {
 
           .hero-left { padding-right: 140px; }
 
+          /* Carta móvil */
           .hero-card :global(img) {
             width: 180px !important;
           }
 
+          /* Nube móvil */
           .cloud-img {
-            top: 50%;
+            top: 48%;
             left: 62%;
             width: 460px;
             opacity: 0.38;
             animation: cloud-sway 34s ease-in-out infinite;
           }
+
+          /* Bullets móviles: dos columnas compactas */
+          .grid-cols-1 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
       `}</style>
     </section>
