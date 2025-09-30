@@ -75,41 +75,6 @@ export default function Hero() {
               símbolos, energía y estrellas
             </h2>
 
-            {/* Bullets (2 col en móvil, 3 col desde sm) */}
-            <div className="mt-7 max-w-[820px] grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-[15px] sm:text-[16.5px] text-[#2b2140]">
-              {[
-                'Conecta con videntes, sanadores y guías',
-                'Descubre tu camino de vida y amor',
-                'Explora talentos como Tarot y Astrología',
-                'Ilumina las áreas que se sienten estancadas',
-                'Encuentra claridad y respuestas clave',
-                'Obtén seguridad para decidir con confianza',
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-2">
-                  <span
-                    className="mt-[2px] inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border"
-                    style={{
-                      borderColor: BTN_PURPLE,
-                    }}
-                  >
-                    {/* check minimal */}
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-[14px] w-[14px]"
-                      stroke={BTN_PURPLE}
-                      strokeWidth="3"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M5 12l4 4 10-10" />
-                    </svg>
-                  </span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-
             {/* Botones CTA */}
             <div className="mt-8 flex flex-wrap gap-4">
               <a
@@ -151,7 +116,7 @@ export default function Hero() {
                 width={640}
                 height={900}
                 priority
-                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px]"
+                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.75]" // REDUCCIÓN 25%
               />
             </div>
           </div>
@@ -183,7 +148,7 @@ export default function Hero() {
 
         .hero-card {
           position: absolute;
-          right: 1.25rem; /* ~20px */
+          right: 1.25rem;
           top: 4.5rem;
           transform: translateX(0) rotate(0deg);
         }
@@ -224,8 +189,10 @@ export default function Hero() {
             top: 7.75rem;
             transform: translateX(0) rotate(0deg);
           }
+
           .hero-card :global(img) {
             width: 140px !important;
+            scale: 0.75; /* REDUCCIÓN 25% */
           }
 
           /* Nube: más a la derecha y más discreta */
