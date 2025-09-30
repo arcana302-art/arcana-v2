@@ -34,7 +34,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-14 sm:pb-16">
+    <section className="relative overflow-hidden bg-[#FBF3FB] pt-3 sm:pt-4 pb-14 sm:pb-16">
       {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
@@ -67,7 +67,7 @@ export default function Hero() {
         </nav>
 
         {/* GRID HERO */}
-        <div className="relative mt-4 sm:mt-6 grid grid-cols-12 gap-y-8 lg:gap-x-10">
+        <div className="relative mt-2 sm:mt-3 grid grid-cols-12 gap-y-8 lg:gap-x-10">
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Títulos */}
@@ -82,7 +82,7 @@ export default function Hero() {
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 sm:mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 sm:mt-3">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
@@ -96,7 +96,7 @@ export default function Hero() {
             </div>
 
             {/* Botones CTA */}
-            <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-4 flex flex-wrap gap-4">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
