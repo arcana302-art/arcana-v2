@@ -34,13 +34,13 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#FBF3FB] pt-3 sm:pt-4 pb-14 sm:pb-16">
+    <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-14 sm:pb-16">
       {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* FILA TALENTOS (chips) */}
-        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5">
+        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-2 sm:mb-3">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -67,7 +67,7 @@ export default function Hero() {
         </nav>
 
         {/* GRID HERO */}
-        <div className="relative mt-2 sm:mt-3 grid grid-cols-12 gap-y-8 lg:gap-x-10">
+        <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10">
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Títulos */}
@@ -135,7 +135,7 @@ export default function Hero() {
                 width={640}
                 height={900}
                 priority
-                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.825]" 
+                className="h-auto w-[352px] sm:w-[418px] lg:w-[484px]" 
               />
             </div>
           </div>
@@ -164,11 +164,6 @@ export default function Hero() {
           );
         }
 
-        .hero-card {
-          position: relative;
-          transform: scale(0.825);
-        }
-
         @keyframes cloud-sway {
           0% { transform: translateX(-52%); }
           50% { transform: translateX(-44%); }
@@ -183,7 +178,6 @@ export default function Hero() {
 
           .hero-card :global(img) {
             width: 160px !important;
-            scale: 0.825;
           }
 
           .cloud-img {
