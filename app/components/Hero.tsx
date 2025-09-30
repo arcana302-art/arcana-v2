@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 
-// Colores
 const BTN_PURPLE = '#9434ec';
 const LIGHT_PURPLE = '#c9a6ff';
 
@@ -35,11 +34,10 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-14 sm:pb-16">
-      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        {/* FILA TALENTOS (chips) */}
+        {/* FILA TALENTOS */}
         <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-2 sm:mb-3">
           {talents.map((t) => (
             <Link
@@ -82,7 +80,7 @@ export default function Hero() {
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 sm:mt-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 sm:mt-6">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
@@ -119,7 +117,7 @@ export default function Hero() {
 
           {/* LADO DERECHO – Carta + nube */}
           <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 flex items-center justify-center min-h-[1px]">
-            {/* Nube (detrás) */}
+            {/* Nube */}
             <img
               src={CLOUD_IMG}
               alt=""
@@ -127,15 +125,15 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
 
-            {/* Carta */}
+            {/* Carta reducida 50% */}
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={640}
-                height={900}
+                width={320}  // reducido 50%
+                height={450} // proporcional al ancho
                 priority
-                className="h-auto w-[352px] sm:w-[418px] lg:w-[484px]" 
+                className="h-auto w-[50%] sm:w-[50%] lg:w-[50%]"
               />
             </div>
           </div>
@@ -177,7 +175,7 @@ export default function Hero() {
           .hero-left { padding-right: 140px; }
 
           .hero-card :global(img) {
-            width: 160px !important;
+            width: 80px !important; // reduce 50% en móvil
           }
 
           .cloud-img {
