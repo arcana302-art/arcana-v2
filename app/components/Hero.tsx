@@ -83,15 +83,15 @@ export default function Hero() {
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
-                    className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-xs font-bold"
+                    className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold"
                   >
                     ✓
                   </span>
-                  <span className="text-sm text-[#22172f]/90">{item}</span>
+                  <span className="text-base text-[#22172f]/90">{item}</span> {/* Fuente más grande */}
                 </div>
               ))}
             </div>
@@ -137,7 +137,7 @@ export default function Hero() {
                 width={640}
                 height={900}
                 priority
-                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.75]" // REDUCCIÓN 25%
+                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.75] translate-x-[10%]" // Reducida + ajustada horizontalmente
               />
             </div>
           </div>
@@ -146,7 +146,6 @@ export default function Hero() {
 
       {/* Estilos locales */}
       <style jsx>{`
-        /* Nube ping-pong suave por defecto (desktop/tablet) */
         .cloud-img {
           top: 30%;
           left: 58%;
@@ -186,7 +185,6 @@ export default function Hero() {
           }
         }
 
-        /* ====== Ajustes SOLO móvil (<= 639px) ====== */
         @media (max-width: 639px) {
           .hero-title-1 {
             font-size: 26px;
@@ -210,7 +208,8 @@ export default function Hero() {
 
           .hero-card :global(img) {
             width: 140px !important;
-            scale: 0.75; /* REDUCCIÓN 25% */
+            scale: 0.75;
+            translate-x: 10%; /* misma horizontal que desktop */
           }
 
           .cloud-img {
