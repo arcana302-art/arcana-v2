@@ -38,7 +38,7 @@ export default function Hero() {
       {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-10 pb-14 sm:pt-14 sm:pb-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-10 sm:pt-14 pb-14 sm:pb-16">
         {/* FILA TALENTOS (chips) */}
         <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 pt-3">
           {talents.map((t) => (
@@ -69,7 +69,7 @@ export default function Hero() {
         {/* GRID HERO */}
         <div className="relative mt-6 sm:mt-10 grid grid-cols-12 gap-y-10 lg:gap-x-10">
           {/* LADO IZQUIERDO */}
-          <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7">
+          <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Títulos */}
             <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04]">
               El universo se comunica en
@@ -90,7 +90,7 @@ export default function Hero() {
                   >
                     ✓
                   </span>
-                  <span className="text-base text-[#22172f]/90">{item}</span>
+                  <span className="text-lg text-[#22172f]/90">{item}</span> {/* Fuente incrementada */}
                 </div>
               ))}
             </div>
@@ -119,7 +119,7 @@ export default function Hero() {
           </div>
 
           {/* LADO DERECHO – Carta + nube */}
-          <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 min-h-[320px] sm:min-h-[400px] flex items-center justify-center">
+          <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 flex items-center justify-center min-h-[1px]">
             {/* Nube (detrás) */}
             <img
               src={CLOUD_IMG}
@@ -136,7 +136,7 @@ export default function Hero() {
                 width={640}
                 height={900}
                 priority
-                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.75]" // Reducida 25%
+                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.825]" // Incremento tamaño 10%
               />
             </div>
           </div>
@@ -167,19 +167,13 @@ export default function Hero() {
 
         .hero-card {
           position: relative;
-          transform: scale(0.75);
+          transform: scale(0.825);
         }
 
         @keyframes cloud-sway {
-          0% {
-            transform: translateX(-52%);
-          }
-          50% {
-            transform: translateX(-44%);
-          }
-          100% {
-            transform: translateX(-52%);
-          }
+          0% { transform: translateX(-52%); }
+          50% { transform: translateX(-44%); }
+          100% { transform: translateX(-52%); }
         }
 
         @media (max-width: 639px) {
@@ -193,12 +187,12 @@ export default function Hero() {
           }
 
           .hero-left {
-            padding-right: 180px;
+            padding-right: 140px; /* Ajuste para que la carta no pise texto */
           }
 
           .hero-card :global(img) {
-            width: 140px !important;
-            scale: 0.75;
+            width: 160px !important; /* Incrementado */
+            scale: 0.825;
           }
 
           .cloud-img {
