@@ -34,13 +34,13 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#FBF3FB]">
+    <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-14 sm:pb-16">
       {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-10 sm:pt-14 pb-14 sm:pb-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* FILA TALENTOS (chips) */}
-        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 pt-3">
+        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -67,7 +67,7 @@ export default function Hero() {
         </nav>
 
         {/* GRID HERO */}
-        <div className="relative mt-6 sm:mt-10 grid grid-cols-12 gap-y-10 lg:gap-x-10">
+        <div className="relative mt-4 sm:mt-6 grid grid-cols-12 gap-y-8 lg:gap-x-10">
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Títulos */}
@@ -82,7 +82,7 @@ export default function Hero() {
             </h2>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 sm:mt-6">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span
@@ -90,13 +90,13 @@ export default function Hero() {
                   >
                     ✓
                   </span>
-                  <span className="text-lg text-[#22172f]/90">{item}</span> {/* Fuente incrementada */}
+                  <span className="text-lg text-[#22172f]/90">{item}</span>
                 </div>
               ))}
             </div>
 
             {/* Botones CTA */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-wrap gap-4">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
@@ -110,8 +110,7 @@ export default function Hero() {
 
               <a
                 href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[15px] font-semibold text-[#2b2140] bg-white/55 ring-1"
-                style={{ borderColor: 'rgba(148,52,236,0.35)' }}
+                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
               >
                 Únete como especialista
               </a>
@@ -136,7 +135,7 @@ export default function Hero() {
                 width={640}
                 height={900}
                 priority
-                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.825]" // Incremento tamaño 10%
+                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.825]" 
               />
             </div>
           </div>
@@ -177,21 +176,13 @@ export default function Hero() {
         }
 
         @media (max-width: 639px) {
-          .hero-title-1 {
-            font-size: 26px;
-            line-height: 1.08;
-          }
-          .hero-title-2 {
-            font-size: 28px;
-            line-height: 1.08;
-          }
+          .hero-title-1 { font-size: 26px; line-height: 1.08; }
+          .hero-title-2 { font-size: 28px; line-height: 1.08; }
 
-          .hero-left {
-            padding-right: 140px; /* Ajuste para que la carta no pise texto */
-          }
+          .hero-left { padding-right: 140px; }
 
           .hero-card :global(img) {
-            width: 160px !important; /* Incrementado */
+            width: 160px !important;
             scale: 0.825;
           }
 
