@@ -10,7 +10,6 @@ const CLOUD_IMG = '/brand/Nube1.png';
 // Colores
 const BTN_PURPLE = '#9434ec';
 const LIGHT_PURPLE = '#c9a6ff';
-const CHECK_PURPLE = '#9434ec';
 
 export default function Hero() {
   const talents = useMemo(
@@ -91,7 +90,7 @@ export default function Hero() {
                   >
                     ✓
                   </span>
-                  <span className="text-base text-[#22172f]/90">{item}</span> {/* Fuente más grande */}
+                  <span className="text-base text-[#22172f]/90">{item}</span>
                 </div>
               ))}
             </div>
@@ -120,7 +119,7 @@ export default function Hero() {
           </div>
 
           {/* LADO DERECHO – Carta + nube */}
-          <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 min-h-[320px] sm:min-h-[400px]">
+          <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 min-h-[320px] sm:min-h-[400px] flex items-center justify-center">
             {/* Nube (detrás) */}
             <img
               src={CLOUD_IMG}
@@ -137,7 +136,7 @@ export default function Hero() {
                 width={640}
                 height={900}
                 priority
-                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.75] translate-x-[10%]" // Reducida + ajustada horizontalmente
+                className="h-auto w-[320px] sm:w-[380px] lg:w-[440px] scale-[0.75]" // Reducida 25%
               />
             </div>
           </div>
@@ -167,10 +166,8 @@ export default function Hero() {
         }
 
         .hero-card {
-          position: absolute;
-          right: 1.25rem;
-          top: 4.5rem;
-          transform: translateX(0) rotate(0deg);
+          position: relative;
+          transform: scale(0.75);
         }
 
         @keyframes cloud-sway {
@@ -199,17 +196,9 @@ export default function Hero() {
             padding-right: 180px;
           }
 
-          .hero-card {
-            position: absolute;
-            right: 10px;
-            top: 7.75rem;
-            transform: translateX(0) rotate(0deg);
-          }
-
           .hero-card :global(img) {
             width: 140px !important;
             scale: 0.75;
-            translate-x: 10%; /* misma horizontal que desktop */
           }
 
           .cloud-img {
