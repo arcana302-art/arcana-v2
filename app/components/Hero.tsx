@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
+const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -66,31 +67,26 @@ export default function Hero() {
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* TITLE + CARD MOBILE */}
-            <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[#22172f]">
-                <span className="desktop-text">
-                  El universo se comunica en 
-                  <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
-                </span>
-              </h1>
+            {/* TITULO DESKTOP */}
+            <h1 className="hero-title-1 desktop-text text-[35px] sm:text-[65px] font-normal leading-[1.15]">
+              <span className="text-[#22172f]">El universo se comunica en </span>
+              <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+            </h1>
 
-              {/* Mobile: carta al lado del título */}
-              <div className="hero-mobile-row sm:hidden flex w-full gap-4">
-                <h1 className="mobile-text w-3/5 text-[#22172f]">
-                  El universo se comunica en 
-                  <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
-                </h1>
-                <div className="hero-card-mobile w-2/5">
-                  <Image
-                    src={HERO_IMG}
-                    alt="Carta / símbolo místico"
-                    width={560}
-                    height={790}
-                    priority
-                    className="h-auto w-full scale-[0.5]"
-                  />
-                </div>
+            {/* MOBILE: Título + Carta alineados */}
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4">
+              <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
+                El universo se comunica en <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+              </h1>
+              <div className="hero-card-mobile w-2/5">
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-full scale-[0.5]" // Reducida a la mitad en Mobile
+                />
               </div>
             </div>
 
@@ -107,7 +103,7 @@ export default function Hero() {
             </div>
 
             {/* CTA DESKTOP */}
-            <div className="hidden lg:flex lg:gap-4 mt-5">
+            <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
@@ -127,7 +123,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT DESKTOP */}
           <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
             <img
               src={CLOUD_IMG}
@@ -161,19 +157,15 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% {
-            transform: translateX(-52%);
-          }
-          50% {
-            transform: translateX(-44%);
-          }
-          100% {
-            transform: translateX(-52%);
-          }
+          0% { transform: translateX(-52%); }
+          50% { transform: translateX(-44%); }
+          100% { transform: translateX(-52%); }
         }
 
         /* MOBILE */
         @media (max-width: 639px) {
+          .desktop-text { display: none; }
+
           .talents-row {
             flex-wrap: wrap;
             justify-content: flex-start;
@@ -189,18 +181,12 @@ export default function Hero() {
             overflow: hidden;
             text-overflow: ellipsis;
           }
-          .mobile-text {
+          .hero-title-1 {
             font-size: 30px;
             line-height: 1.1;
           }
-          .hero-mobile-row {
-            display: flex;
-            align-items: center;
-          }
-          .hero-card-mobile img {
-            width: 100% !important;
-            height: auto;
-          }
+          .hero-mobile-row h1 { font-size: 30px; }
+
           .bullets-grid {
             grid-template-columns: 1fr;
             gap-y: 12px;
@@ -212,14 +198,17 @@ export default function Hero() {
         }
 
         /* DESKTOP */
-        @media (min-width: 640px) {
-          .desktop-text {
-            display: inline;
+        @media (min-width: 1024px) {
+          .hero-title-1 {
             font-size: 65px;
             line-height: 1.15;
           }
+          .bullet-text {
+            font-size: 16px;
+          }
         }
 
+        /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
