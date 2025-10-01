@@ -47,18 +47,16 @@ export default function Hero() {
               key={t.href}
               href={t.href}
               className="group rounded-full inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
-              style={
-                {
-                  ['--chip-border' as any]: BTN_PURPLE,
-                  ['--chip-bg' as any]: 'transparent',
-                  ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
-                  color: BTN_PURPLE,
-                  height: 40,
-                  fontSize: 15,
-                  paddingLeft: 16,
-                  paddingRight: 16,
-                } as React.CSSProperties
-              }
+              style={{
+                ['--chip-border' as any]: BTN_PURPLE,
+                ['--chip-bg' as any]: 'transparent',
+                ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
+                color: BTN_PURPLE,
+                height: 40,
+                fontSize: 15,
+                paddingLeft: 16,
+                paddingRight: 16,
+              } as React.CSSProperties}
             >
               {t.label}
             </Link>
@@ -76,14 +74,14 @@ export default function Hero() {
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
 
-              <div className="hero-card-mobile sm:hidden w-full">
+              <div className="hero-card-mobile sm:hidden w-full mt-4">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.05]" // +5% tamaño
+                  className="h-auto w-full scale-[1.0]" // Carta ajustada para mobile
                 />
               </div>
             </div>
@@ -184,21 +182,21 @@ export default function Hero() {
             margin-bottom: 16px;
           }
           .talents-row a {
-            font-size: 9px;  /* Tamaño de texto reducido */
-            height: 28px;    /* Altura más pequeña */
-            padding-left: 8px;
-            padding-right: 8px;
+            font-size: 10px;  /* Fuente más grande que antes pero no excesiva */
+            height: 28px;     /* Botón más compacto */
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 2px 2px 6px 0; /* Separación para 2 renglones */
             flex: none;
             min-width: 0;
-            margin: 0;
-            text-align: center;
+            text-align: left;
           }
           .hero-title-1 {
             font-size: 35px;
             line-height: 1.15;
           }
           .hero-card-mobile img {
-            width: 100% !important;
+            width: 95% !important; /* Carta más proporcionada */
             height: auto;
           }
           .bullets-grid {
