@@ -73,22 +73,24 @@ export default function Hero() {
                   El universo se comunica en 
                   <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
                 </span>
-                <span className="mobile-text sm:hidden">
-                  El universo se comunica en
-                  <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
-                </span>
               </h1>
 
               {/* Mobile: carta al lado del título */}
-              <div className="hero-card-mobile flex sm:hidden w-2/5 ml-4">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-full scale-[0.5]"
-                />
+              <div className="hero-mobile-row sm:hidden flex w-full gap-4">
+                <h1 className="mobile-text w-3/5 text-[#22172f]">
+                  El universo se comunica en 
+                  <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
+                </h1>
+                <div className="hero-card-mobile w-2/5">
+                  <Image
+                    src={HERO_IMG}
+                    alt="Carta / símbolo místico"
+                    width={560}
+                    height={790}
+                    priority
+                    className="h-auto w-full scale-[0.5]"
+                  />
+                </div>
               </div>
             </div>
 
@@ -188,12 +190,12 @@ export default function Hero() {
             text-overflow: ellipsis;
           }
           .mobile-text {
-            display: inline;
             font-size: 30px;
             line-height: 1.1;
           }
-          .desktop-text {
-            display: none;
+          .hero-mobile-row {
+            display: flex;
+            align-items: center;
           }
           .hero-card-mobile img {
             width: 100% !important;
@@ -213,9 +215,8 @@ export default function Hero() {
         @media (min-width: 640px) {
           .desktop-text {
             display: inline;
-          }
-          .mobile-text {
-            display: none;
+            font-size: 65px;
+            line-height: 1.15;
           }
         }
 
