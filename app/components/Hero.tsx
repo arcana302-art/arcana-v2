@@ -70,7 +70,7 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-tight">
+              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.1]">
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
@@ -82,18 +82,15 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.3]" // 5% más grande sobre tamaño anterior
+                  className="h-auto w-full scale-[1.3]" // +5% tamaño
                 />
               </div>
             </div>
 
-            {/* Espacio extra entre título y bullets */}
-            <div className="mt-6 sm:mt-[25%]"></div>
-
             {/* BULLETS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 mt-4 sm:mt-5 bullets-grid">
+            <div className="mt-0 bullets-grid">
               {bullets.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2">
+                <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">✓</span>
                   <span className="bullet-text text-[#22172f]/90">{item}</span>
                 </div>
@@ -142,8 +139,8 @@ export default function Hero() {
 
       <style jsx>{`
         .cloud-img {
-          top: 48%;
-          left: 58%;
+          top: 50%;
+          left: 50%;
           width: 680px;
           opacity: 0.42;
           transform: translate(-50%, -50%);
@@ -157,14 +154,14 @@ export default function Hero() {
         @media (max-width: 639px) {
           .talents-row {
             margin-bottom: 16px;
-            justify-content: center;
+            justify-content: flex-start; /* alineación izquierda */
             flex-wrap: wrap;
           }
           .talents-row a {
-            font-size: 9px;
-            height: 28px;
-            padding-left: 8px;
-            padding-right: 8px;
+            font-size: 8px; /* reducir texto */
+            height: 24px; /* reducir altura */
+            padding-left: 6px;
+            padding-right: 6px;
             margin: 2px;
           }
           .hero-title-1 {
@@ -199,7 +196,7 @@ export default function Hero() {
           .hero-title-1 {
             font-size: 65px;
             font-weight: normal;
-            line-height: 0.8; /* reducir espacio entre renglones */
+            line-height: 1.1; /* ligero espacio entre líneas */
           }
           .bullet-text { font-size: 16px; }
         }
