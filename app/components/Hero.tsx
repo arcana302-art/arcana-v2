@@ -33,7 +33,6 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
-      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -69,19 +68,31 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
-                <span className="text-[#22172f]">El universo se comunica en </span>
-                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
-              </h1>
-              <div className="hero-card-mobile sm:hidden w-full">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-full scale-[0.5]" // Reducida al 50% solo mobile
-                />
+              <div className="flex w-full sm:hidden gap-2 items-center">
+                {/* Mobile: Título 50% ancho */}
+                <h1 className="hero-title-1 text-[30px] font-normal leading-[1.15] w-1/2">
+                  <span className="text-[#22172f]">El universo se comunica en </span>
+                  <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+                </h1>
+                {/* Mobile: Carta 50% ancho */}
+                <div className="w-1/2">
+                  <Image
+                    src={HERO_IMG}
+                    alt="Carta / símbolo místico"
+                    width={560}
+                    height={790}
+                    priority
+                    className="h-auto w-full scale-[0.5]" // Reducida al 50%
+                  />
+                </div>
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden sm:flex flex-row sm:items-center sm:gap-6">
+                <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
+                  <span className="text-[#22172f]">El universo se comunica en </span>
+                  <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+                </h1>
               </div>
             </div>
 
@@ -151,7 +162,6 @@ export default function Hero() {
           -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
-
         @keyframes cloud-sway {
           0% {
             transform: translateX(-52%);
@@ -182,12 +192,8 @@ export default function Hero() {
             text-overflow: ellipsis;
           }
           .hero-title-1 {
-            font-size: 30px; /* REDUCIDO DE 35px a 30px */
+            font-size: 30px;
             line-height: 1.1;
-          }
-          .hero-card-mobile img {
-            width: 100% !important;
-            height: auto;
           }
           .bullets-grid {
             grid-template-columns: 1fr;
