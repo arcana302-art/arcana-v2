@@ -46,12 +46,14 @@ export default function Hero() {
             <Link
               key={t.href}
               href={t.href}
-              className="group rounded-full px-4 sm:px-5 h-10 inline-flex items-center text-[15px] sm:text-[15.5px] border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
+              className="group rounded-full px-4 sm:px-5 inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
               style={{
                 ['--chip-border' as any]: BTN_PURPLE,
                 ['--chip-bg' as any]: 'transparent',
                 ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
                 color: BTN_PURPLE,
+                height: '40px', // desktop
+                fontSize: '15px',
               } as React.CSSProperties}
             >
               {t.label}
@@ -153,17 +155,18 @@ export default function Hero() {
         /* MOBILE */
         @media (max-width: 639px) {
           .talents-row { margin-bottom: 16px; }
-          .talents-row a { font-size: 10px !important; font-family: sans-serif; height: 34px; padding-left: 12px; padding-right: 12px; }
+          .talents-row a { font-size: 8px !important; font-family: sans-serif; height: 34px; padding-left: 10px; padding-right: 10px; }
           .hero-title-1 { font-size: 30px; font-weight: normal; }
           .hero-card-mobile img { width: 140px !important; }
           .bullets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap-x: 12px; gap-y: 16px; margin-bottom: 16px; }
-          .bullet-text { font-size: 15px; line-height: 1.4; }
+          .bullet-text { font-size: 18px; line-height: 1.4; }
           .hero-title-wrapper { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
           .hero-title-1 { font-size: 60px; font-weight: normal; }
+          .bullet-text { font-size: 16px; }
         }
       `}</style>
     </section>
