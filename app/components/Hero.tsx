@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
-const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -66,7 +65,7 @@ export default function Hero() {
         {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
             {/* DESKTOP TITLE */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
@@ -79,22 +78,14 @@ export default function Hero() {
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile w-2/5 relative">
-                {/* ESTRELLAS */}
-                <div className="stars-container">
-                  {Array.from({ length: 7 }).map((_, idx) => (
-                    <span key={idx} className={`star star-${idx}`}>
-                      ✧
-                    </span>
-                  ))}
-                </div>
+              <div className="hero-card-mobile w-2/5">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.78]" // ajuste Mobile
+                  className="h-auto w-full scale-[0.93]" // Incremento 20% sobre escala base 0.78
                 />
               </div>
             </div>
@@ -130,6 +121,26 @@ export default function Hero() {
                 Únete como especialista
               </a>
             </div>
+
+            {/* ESTRELLAS */}
+            <div className="stars-container">
+              {Array.from({ length: 7 }).map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`star star-${idx}`}
+                  style={{
+                    top: `${Math.random() * 80}%`,
+                    left: `${Math.random() * 50}px`,
+                    fontSize: `${10 + Math.random() * 20}px`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    animationDuration: `${5 + Math.random() * 5}s`,
+                  }}
+                >
+                  ✧
+                  <span className="micro-stars">✧✧✧</span>
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* RIGHT */}
@@ -141,14 +152,6 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
             <div className="hero-card relative z-10 select-none">
-              {/* ESTRELLAS */}
-              <div className="stars-container">
-                {Array.from({ length: 7 }).map((_, idx) => (
-                  <span key={idx} className={`star star-${idx}`}>
-                    ✧
-                  </span>
-                ))}
-              </div>
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
@@ -157,6 +160,26 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
+            </div>
+
+            {/* ESTRELLAS */}
+            <div className="stars-container">
+              {Array.from({ length: 7 }).map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`star star-${idx}`}
+                  style={{
+                    top: `${Math.random() * 80}%`,
+                    left: `${-50 + Math.random() * 100}px`,
+                    fontSize: `${10 + Math.random() * 20}px`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    animationDuration: `${5 + Math.random() * 5}s`,
+                  }}
+                >
+                  ✧
+                  <span className="micro-stars">✧✧✧</span>
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -181,82 +204,39 @@ export default function Hero() {
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row {
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 4px;
-          }
-          .talents-row a {
-            font-size: 10px;
-            height: 24px;
-            padding-left: 8px;
-            padding-right: 8px;
-            max-width: calc(50% - 4px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .bullets-grid {
-            grid-template-columns: 1fr;
-            gap-y: 12px;
-            margin-top: 16px;
-          }
-          .bullet-text {
-            font-size: 14px;
-            line-height: 1.4;
-          }
-          .hero-mobile-row {
-            margin-bottom: 16px;
-          }
+          .talents-row { flex-wrap: wrap; justify-content: flex-start; gap: 4px; }
+          .talents-row a { font-size: 10px; height: 24px; padding-left: 8px; padding-right: 8px; max-width: calc(50% - 4px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+          .bullets-grid { grid-template-columns: 1fr; gap-y: 12px; margin-top: 16px; }
+          .bullet-text { font-size: 14px; line-height: 1.4; }
+          .hero-mobile-row { margin-bottom: 16px; }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 {
-            font-size: 65px;
-            line-height: 1.15;
-          }
-          .bullet-text {
-            font-size: 16px;
-          }
+          .hero-title-1 { font-size: 65px; line-height: 1.15; }
+          .bullet-text { font-size: 16px; }
         }
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          border: 1px solid rgba(0,0,0,0.08);
         }
 
         /* ESTRELLAS */
-        .stars-container {
-          position: absolute;
-          top: 0;
-          left: -40px;
-          width: 40px;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          pointer-events: none;
-          z-index: 20;
-        }
-        .star {
-          color: #FFD700;
-          opacity: 0;
-          animation: dimStars 6s linear infinite;
-        }
-        .star-0 { font-size: 18px; animation-delay: 0s; }
-        .star-1 { font-size: 14px; animation-delay: 0.8s; }
-        .star-2 { font-size: 22px; animation-delay: 1.4s; }
-        .star-3 { font-size: 10px; animation-delay: 2s; }
-        .star-4 { font-size: 25px; animation-delay: 2.6s; }
-        .star-5 { font-size: 16px; animation-delay: 3.2s; }
-        .star-6 { font-size: 20px; animation-delay: 3.8s; }
-
+        .stars-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; }
+        .star { position: absolute; color: #FFD700; opacity: 0; display: inline-block; animation: dimStars linear infinite, swayStars linear infinite; }
+        .micro-stars { position: absolute; top: 0; left: -2px; font-size: 0.5em; opacity: 0.8; color: #FFD700; }
         @keyframes dimStars {
-          0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-          10% { opacity: 1; transform: scale(1) rotate(10deg); }
-          90% { opacity: 1; transform: scale(1) rotate(-10deg); }
-          100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+          0% { opacity: 0; transform: scale(0.8); }
+          10% { opacity: 1; transform: scale(1); }
+          90% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(0.8); }
+        }
+        @keyframes swayStars {
+          0% { transform: translateX(0) rotate(0deg); }
+          50% { transform: translateX(calc(-5px + 10px * var(--rand))) rotate(5deg); }
+          100% { transform: translateX(0) rotate(0deg); }
         }
       `}</style>
     </section>
