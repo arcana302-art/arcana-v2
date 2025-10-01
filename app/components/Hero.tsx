@@ -39,14 +39,17 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* FILA TALENTOS */}
-        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4">
+        <nav
+          aria-label="Talentos"
+          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4"
+        >
           {talents.map((t) => (
             <Link
               key={t.href}
               href={t.href}
               className="
                 group rounded-full px-4 sm:px-5 h-10 inline-flex items-center
-                text-[15px] sm:text-[15.5px]
+                text-[13px] sm:text-[15px]   /* 👈 más chico en mobile */
                 border border-[--chip-border] bg-[--chip-bg]
                 hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)]
                 transition-colors
@@ -84,12 +87,12 @@ export default function Hero() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 mt-4 sm:mt-5">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
-                  <span
-                    className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold"
-                  >
+                  <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
                     ✓
                   </span>
-                  <span className="text-lg text-[#22172f]/90">{item}</span>
+                  <span className="text-lg sm:text-lg md:text-base text-[#22172f]/90">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -163,33 +166,60 @@ export default function Hero() {
         }
 
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
         }
 
         @media (max-width: 639px) {
-          .hero-title-1 { font-size: 26px; line-height: 1.08; }
-          .hero-title-2 { font-size: 28px; line-height: 1.08; }
+          /* Títulos más chicos */
+          .hero-title-1 {
+            font-size: 26px;
+            line-height: 1.08;
+          }
+          .hero-title-2 {
+            font-size: 28px;
+            line-height: 1.08;
+          }
 
-          .hero-left { padding-right: 120px; }
-
-          /* Carta móvil */
+          /* Hero en 2 columnas: texto + carta */
+          .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 12px;
+          }
+          .hero-left {
+            grid-column: span 1 / span 1;
+            padding-right: 0;
+          }
           .hero-card :global(img) {
-            width: 200px !important;
+            width: 160px !important;
           }
 
           /* Nube móvil */
           .cloud-img {
             top: 46%;
             left: 60%;
-            width: 430px;
+            width: 320px;
             opacity: 0.38;
             animation: cloud-sway 34s ease-in-out infinite;
           }
 
-          /* Bullets móviles: tres columnas */
-          .grid-cols-1 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+          /* Bullets móviles: tres columnas y texto más chico */
+          .grid-cols-1 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+          .grid-cols-1 span {
+            font-size: 13px !important;
+            line-height: 1.3;
+          }
         }
       `}</style>
     </section>
