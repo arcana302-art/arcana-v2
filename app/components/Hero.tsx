@@ -31,20 +31,39 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  const renderStars = (count: number) => {
-    const stars = [];
+  const renderStars = (count: number, width: number, height: number) => {
+    const stars: JSX.Element[] = [];
+    const positions: { x: number; y: number; size: number }[] = [];
+
     for (let i = 0; i < count; i++) {
-      const size = Math.random() * 12 + 8; // tamaño aleatorio entre 8px y 20px
-      const top = Math.random() * 100;
-      const left = Math.random() * 100;
-      const dim = Math.random() * 0.8 + 0.2; // opacidad aleatoria
+      let size = Math.random() * 12 + 8; // Tamaño 8px a 20px
+      let x: number;
+      let y: number;
+      let attempts = 0;
+
+      do {
+        x = Math.random() * (width - size);
+        y = Math.random() * (height - size);
+        attempts++;
+      } while (
+        positions.some(
+          (pos) =>
+            Math.abs(pos.x - x) < (pos.size + size) * 0.8 &&
+            Math.abs(pos.y - y) < (pos.size + size) * 0.8
+        ) &&
+        attempts < 50
+      );
+
+      positions.push({ x, y, size });
+      const dim = Math.random() * 0.8 + 0.2;
+
       stars.push(
         <span
           key={i}
           style={{
             position: 'absolute',
-            top: `${top}%`,
-            left: `${left}%`,
+            left: `${x}px`,
+            top: `${y}px`,
             fontSize: `${size}px`,
             color: `rgba(255, 223, 0, ${dim})`,
             pointerEvents: 'none',
@@ -54,12 +73,12 @@ export default function Hero() {
         </span>
       );
     }
+
     return stars;
   };
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
-      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -89,7 +108,6 @@ export default function Hero() {
           ))}
         </nav>
 
-        {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
@@ -99,36 +117,33 @@ export default function Hero() {
               <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
             </h1>
 
-            {/* MOBILE: Título + Carta lado a lado */}
+            {/* MOBILE: Título + Carta */}
             <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-
-              {/* Contenedor estrella + carta + nube */}
-              <div className="relative w-2/5 flex items-center justify-center">
-                {/* Nube detrás */}
-                <img
-                  src={CLOUD_IMG}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full opacity-30 select-none pointer-events-none"
+              <div className="hero-card-mobile w-2/5 relative">
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-full scale-[0.93]" // incremento 15% en mobile
                 />
-
-                <div className="hero-stars-mobile absolute inset-0">
-                  {renderStars(7)}
-                </div>
-
-                <div className="hero-card-mobile w-full z-10">
+                {/* Nube Mobile */}
+                <div className="mobile-cloud absolute top-0 left-0 w-full h-full -z-10">
                   <Image
-                    src={HERO_IMG}
-                    alt="Carta / símbolo místico"
-                    width={560}
-                    height={790}
-                    priority
-                    className="h-auto w-full scale-[0.93]" // incremento 15%
+                    src={CLOUD_IMG}
+                    alt=""
+                    fill
+                    className="object-contain cloud-motion-mobile"
                   />
+                </div>
+                {/* Estrellas Mobile */}
+                <div className="absolute inset-0 z-10">
+                  {renderStars(7, 130, 150)}
                 </div>
               </div>
             </div>
@@ -166,30 +181,29 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT DESKTOP */}
+          {/* RIGHT */}
           <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
-            <div className="relative w-full flex items-center justify-center">
-              {/* Nube detrás */}
-              <img
-                src={CLOUD_IMG}
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 w-[680px] opacity-40 select-none pointer-events-none"
+            <div className="relative w-full flex justify-center items-center">
+              <Image
+                src={HERO_IMG}
+                alt="Carta / símbolo místico"
+                width={560}
+                height={790}
+                priority
+                className="h-auto w-[330px] lg:w-[390px]"
               />
-
-              <div className="hero-stars-desktop absolute inset-0">
-                {renderStars(7)}
-              </div>
-
-              <div className="hero-card relative z-10 select-none">
+              {/* Nube Desktop */}
+              <div className="absolute inset-0 -z-10">
                 <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-[330px] lg:w-[390px]"
+                  src={CLOUD_IMG}
+                  alt=""
+                  fill
+                  className="object-contain cloud-motion-desktop"
                 />
+              </div>
+              {/* Estrellas Desktop */}
+              <div className="absolute inset-0 z-10">
+                {renderStars(7, 390, 390)}
               </div>
             </div>
           </div>
@@ -197,73 +211,49 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-        .cloud-img {
-          top: 50%;
-          left: 50%;
-          width: 680px;
-          opacity: 0.42;
-          transform: translate(-50%, -50%);
-          animation: cloud-sway 26s ease-in-out infinite;
-          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
-          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+        /* CLOUD ANIMATION */
+        .cloud-motion-desktop {
+          animation: swayDesktop 26s ease-in-out infinite alternate;
         }
-        @keyframes cloud-sway {
-          0% {
-            transform: translateX(-52%);
-          }
-          50% {
-            transform: translateX(-44%);
-          }
-          100% {
-            transform: translateX(-52%);
-          }
+        @keyframes swayDesktop {
+          0% { transform: translateX(-10%); }
+          50% { transform: translateX(10%); }
+          100% { transform: translateX(-10%); }
+        }
+
+        .cloud-motion-mobile {
+          animation: swayMobile 26s ease-in-out infinite alternate;
+        }
+        @keyframes swayMobile {
+          0% { transform: translateX(-10%); }
+          50% { transform: translateX(10%); }
+          100% { transform: translateX(-10%); }
+        }
+
+        .shadow-bullets {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row {
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 4px;
-          }
           .talents-row a {
             font-size: 10px;
             height: 24px;
             padding-left: 8px;
             padding-right: 8px;
             max-width: calc(50% - 4px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .bullets-grid {
-            grid-template-columns: 1fr;
-            gap-y: 12px;
-            margin-top: 16px;
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
           }
-          .hero-mobile-row {
-            margin-bottom: 16px;
-          }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 {
-            font-size: 65px;
-            line-height: 1.15;
-          }
           .bullet-text {
             font-size: 16px;
           }
-        }
-
-        /* Bullets recuadro */
-        .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
       `}</style>
     </section>
