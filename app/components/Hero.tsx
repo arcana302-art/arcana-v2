@@ -73,7 +73,7 @@ export default function Hero() {
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Encabezados + Imagen juntos en mobile */}
-            <div className="flex flex-col sm:flex-col mobile-head-wrapper">
+            <div className="mobile-head-wrapper">
               <div className="hero-text">
                 <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04] mb-3">
                   El universo se comunica en
@@ -86,14 +86,7 @@ export default function Hero() {
                 </h2>
               </div>
 
-              {/* Carta + nube al lado del encabezado en mobile */}
-              <div className="hero-card-mobile relative z-10 select-none sm:hidden">
-                <img
-                  src={CLOUD_IMG}
-                  alt=""
-                  aria-hidden="true"
-                  className="cloud-img absolute z-0 select-none pointer-events-none"
-                />
+              <div className="hero-card-mobile">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
@@ -194,19 +187,19 @@ export default function Hero() {
 
         @media (max-width: 639px) {
           /* Espacio entre talentos y encabezado */
-          .talents-row { margin-bottom: 20px; }
+          .talents-row { margin-bottom: 16px; }
 
           /* Botones de talentos más pequeños */
           .talents-row a {
-            font-size: 13px !important;
-            padding-left: 14px;
-            padding-right: 14px;
-            height: 36px;
+            font-size: 12px !important;
+            padding-left: 12px;
+            padding-right: 12px;
+            height: 34px;
           }
 
-          /* Hero titles */
-          .hero-title-1 { font-size: 28px; line-height: 1.1; }
-          .hero-title-2 { font-size: 31px; line-height: 1.1; }
+          /* Hero titles - un poco más grandes */
+          .hero-title-1 { font-size: 30px; line-height: 1.1; }
+          .hero-title-2 { font-size: 32px; line-height: 1.1; }
 
           /* Encabezado + imagen en fila */
           .mobile-head-wrapper {
@@ -217,18 +210,18 @@ export default function Hero() {
             gap: 16px;
           }
           .hero-text { flex: 1; }
-          .hero-card-mobile img { width: 160px !important; }
+          .hero-card-mobile img { width: 180px !important; }
 
-          /* Bullets en 3 columnas con espacio */
+          /* Bullets en 2 columnas × 3 filas */
           .bullets-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap-x: 12px;
             gap-y: 18px;
             margin-bottom: 24px;
           }
           .bullet-text {
-            font-size: 13.5px;
-            line-height: 1.35;
+            font-size: 12px;
+            line-height: 1.3;
           }
         }
       `}</style>
