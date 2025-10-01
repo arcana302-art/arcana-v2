@@ -126,15 +126,15 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
 
-            {/* Carta tamaño ajustado */}
+            {/* Carta */}
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
-                width={580}  // tamaño armonizado
-                height={815} // proporcional
+                width={560}
+                height={790}
                 priority
-                className="h-auto w-[290px] sm:w-[345px] lg:w-[400px]"
+                className="h-auto w-[280px] sm:w-[330px] lg:w-[390px]"
               />
             </div>
           </div>
@@ -148,7 +148,6 @@ export default function Hero() {
           left: 58%;
           width: 680px;
           opacity: 0.42;
-          filter: none;
           transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
           -webkit-mask-image: radial-gradient(
@@ -173,24 +172,24 @@ export default function Hero() {
           .hero-title-1 { font-size: 26px; line-height: 1.08; }
           .hero-title-2 { font-size: 28px; line-height: 1.08; }
 
-          .hero-left { padding-right: 140px; }
+          .hero-left { padding-right: 120px; }
 
           /* Carta móvil */
           .hero-card :global(img) {
-            width: 180px !important;
+            width: 200px !important;
           }
 
           /* Nube móvil */
           .cloud-img {
-            top: 48%;
-            left: 62%;
-            width: 460px;
+            top: 46%;
+            left: 60%;
+            width: 430px;
             opacity: 0.38;
             animation: cloud-sway 34s ease-in-out infinite;
           }
 
-          /* Bullets móviles: dos columnas compactas */
-          .grid-cols-1 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          /* Bullets móviles: tres columnas */
+          .grid-cols-1 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
       `}</style>
     </section>
