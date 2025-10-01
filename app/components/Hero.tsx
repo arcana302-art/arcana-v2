@@ -74,7 +74,7 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-3 mt-4 items-center">
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
@@ -86,13 +86,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.78]" // aumento 15% Mobile
+                  className="h-auto w-full scale-[0.94]" // incrementado +20%
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border-[1.5px] border-[#9434ec]/25">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -190,14 +190,14 @@ export default function Hero() {
             grid-template-columns: 1fr;
             gap-y: 12px;
             margin-top: 16px;
-            border-[1.5px]; /* borde más marcado */
+            border: 1px solid rgba(148,52,236,0.3); /* borde más marcado pero elegante */
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
           }
           .hero-mobile-row {
-            margin-bottom: 16px; /* espacio entre fila y bullets */
+            margin-bottom: 20px; /* espacio entre fila y bullets */
           }
         }
 
@@ -211,7 +211,7 @@ export default function Hero() {
             font-size: 16px;
           }
           .bullets-grid {
-            border-[1.5px]; /* borde más marcado */
+            border: 1px solid rgba(148,52,236,0.2); /* borde más marcado pero elegante */
           }
         }
 
