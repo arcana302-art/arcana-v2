@@ -81,13 +81,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.0]" // Carta ajustada para mobile
+                  className="h-auto w-1/2 mx-auto" // Reducida 50%
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-2 bullets-grid">
+            <div className="mt-2 bullets-wrapper p-4 rounded-lg shadow-bullets bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -173,41 +173,16 @@ export default function Hero() {
           }
         }
 
+        .bullets-wrapper {
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row {
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 6px 6px;
-            margin-bottom: 16px;
-          }
-          .talents-row a {
-            font-size: 10px;  /* Fuente más grande que antes pero no excesiva */
-            height: 28px;     /* Botón más compacto */
-            padding-left: 10px;
-            padding-right: 10px;
-            margin: 2px 2px 6px 0; /* Separación para 2 renglones */
-            flex: none;
-            min-width: 0;
-            text-align: left;
-          }
-          .hero-title-1 {
-            font-size: 35px;
-            line-height: 1.15;
-          }
           .hero-card-mobile img {
-            width: 95% !important; /* Carta más proporcionada */
+            width: 50% !important; /* Reducida 50% */
             height: auto;
-          }
-          .bullets-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap-x: 12px;
-            gap-y: 16px;
-            margin-bottom: 16px;
-          }
-          .bullet-text {
-            font-size: 14px;
-            line-height: 1.4;
           }
         }
 
@@ -219,6 +194,10 @@ export default function Hero() {
           }
           .bullet-text {
             font-size: 16px;
+          }
+          .bullets-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           }
         }
       `}</style>
