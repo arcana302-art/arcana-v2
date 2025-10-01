@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
+const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -30,26 +31,32 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  // Generar estrellas aleatorias
-  const generateStars = (count: number, sizeMin: number, sizeMax: number) => {
-    return Array.from({ length: count }).map(() => ({
-      top: Math.random() * 80, // evita tocar top/bottom
-      left: Math.random() * 100,
-      size: Math.random() * (sizeMax - sizeMin) + sizeMin,
-      delay: Math.random() * 2,
-    }));
-  };
-
-  const desktopStars = generateStars(7, 14, 24); // Desktop: 7 estrellas
-  const mobileStars = generateStars(7, 8, 14); // Mobile: 7 estrellas más pequeñas
+  // Generar posiciones y tamaños aleatorios para 7 estrellas
+  const stars = useMemo(() => {
+    const arr = [];
+    for (let i = 0; i < 7; i++) {
+      arr.push({
+        top: Math.random() * 80, // porcentaje del contenedor
+        left: Math.random() * 80,
+        size: Math.random() * 12 + 8, // px, aleatorio
+        dim: Math.random() * 2 + 1, // segundos para animación
+        delay: Math.random() * 5, // delay inicial
+      });
+    }
+    return arr;
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* TALENTS */}
-        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row">
+        <nav
+          aria-label="Talentos"
+          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
+        >
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -74,7 +81,7 @@ export default function Hero() {
         {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* DESKTOP TITLE */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
@@ -94,7 +101,7 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.93]" // incremento 15%
+                  className="h-auto w-full scale-[0.93]" // incremento 15% Mobile
                 />
               </div>
             </div>
@@ -111,7 +118,7 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* CTA DESKTOP */}
+            {/* CTA Desktop */}
             <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
@@ -149,44 +156,24 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
-            </div>
-
-            {/* ESTRELLAS DESKTOP */}
-            <div className="absolute top-0 left-[-12%] w-[12%] h-full pointer-events-none">
-              {desktopStars.map((star, idx) => (
+              {/* Estrellas Desktop */}
+              {stars.map((s, idx) => (
                 <span
                   key={idx}
                   className="absolute text-yellow-400"
                   style={{
-                    fontSize: star.size,
-                    top: `${star.top}%`,
-                    left: `${star.left}%`,
-                    opacity: 0.8,
+                    top: `${s.top}%`,
+                    left: `${s.left}%`,
+                    fontSize: `${s.size}px`,
+                    animation: `dim ${s.dim}s ease-in-out ${s.delay}s infinite alternate`,
+                    pointerEvents: 'none',
                   }}
                 >
-                  ✶
+                  ✦
                 </span>
               ))}
             </div>
           </div>
-        </div>
-
-        {/* ESTRELLAS MOBILE */}
-        <div className="sm:hidden absolute top-[calc(100px)] left-[calc(33%)] w-[20%] h-[180px] pointer-events-none">
-          {mobileStars.map((star, idx) => (
-            <span
-              key={idx}
-              className="absolute text-yellow-400"
-              style={{
-                fontSize: star.size,
-                top: `${star.top}%`,
-                left: `${star.left}%`,
-                opacity: 0.8,
-              }}
-            >
-              ✶
-            </span>
-          ))}
         </div>
       </div>
 
@@ -202,9 +189,24 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
+        }
+
+        @keyframes dim {
+          0% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0.2;
+          }
         }
 
         /* MOBILE */
@@ -233,6 +235,18 @@ export default function Hero() {
             font-size: 14px;
             line-height: 1.4;
           }
+
+          .hero-mobile-row {
+            margin-bottom: 16px;
+          }
+
+          /* Estrellas Mobile */
+          .hero-card-mobile {
+            position: relative;
+          }
+          .hero-card-mobile span {
+            position: absolute;
+          }
         }
 
         /* DESKTOP */
@@ -246,6 +260,7 @@ export default function Hero() {
           }
         }
 
+        /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
