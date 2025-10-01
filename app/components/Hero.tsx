@@ -34,6 +34,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -46,16 +47,16 @@ export default function Hero() {
             <Link
               key={t.href}
               href={t.href}
-              className="group rounded-full px-4 sm:px-5 h-10 inline-flex items-center
-                text-[15px] sm:text-[15px]
-                border border-[--chip-border] bg-[--chip-bg]
-                hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)]
-                transition-colors"
+              className="group rounded-full inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
               style={{
                 ['--chip-border' as any]: BTN_PURPLE,
                 ['--chip-bg' as any]: 'transparent',
                 ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
                 color: BTN_PURPLE,
+                height: 40,
+                fontSize: 15,
+                paddingLeft: 16,
+                paddingRight: 16,
               } as React.CSSProperties}
             >
               {t.label}
@@ -67,7 +68,7 @@ export default function Hero() {
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* TITLE + CARD MOBILE ALIGNED */}
+            {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
               <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-tight">
                 <span className="text-[#22172f]">El universo se comunica en </span>
@@ -81,12 +82,12 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.25]" // 5% extra tamaño sobre 20% previo
+                  className="h-auto w-full scale-[1.3]" // 5% más grande sobre tamaño anterior
                 />
               </div>
             </div>
 
-            {/* SPACING BETWEEN TITLE AND BULLETS */}
+            {/* Espacio extra entre título y bullets */}
             <div className="mt-6 sm:mt-[25%]"></div>
 
             {/* BULLETS */}
@@ -99,7 +100,7 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* BUTTONS DESKTOP */}
+            {/* CTA DESKTOP */}
             <div className="hidden lg:flex lg:gap-4 mt-5">
               <a
                 href="#"
@@ -139,7 +140,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* LOCAL STYLES */}
       <style jsx>{`
         .cloud-img {
           top: 48%;
@@ -157,8 +157,15 @@ export default function Hero() {
         @media (max-width: 639px) {
           .talents-row {
             margin-bottom: 16px;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
+          }
+          .talents-row a {
+            font-size: 9px;
+            height: 28px;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin: 2px;
           }
           .hero-title-1 {
             font-size: 35px;
@@ -192,11 +199,9 @@ export default function Hero() {
           .hero-title-1 {
             font-size: 65px;
             font-weight: normal;
-            line-height: 0.5; /* reducir espacio entre líneas a la mitad */
+            line-height: 0.8; /* reducir espacio entre renglones */
           }
-          .bullet-text {
-            font-size: 16px;
-          }
+          .bullet-text { font-size: 16px; }
         }
       `}</style>
     </section>
