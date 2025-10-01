@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
+const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -85,9 +86,59 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.78]"
+                  className="h-auto w-full scale-[0.78]" // ajuste Mobile
                 />
               </div>
+            </div>
+
+            {/* ESTRELLAS ALEATORIAS */}
+            <div className="stars-container absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+              {Array.from({ length: 7 }).map((_, idx) => {
+                const size = 18 + Math.random() * 22;
+                const top = 10 + Math.random() * 80;
+                const left = 10 + Math.random() * 30;
+                const delay = Math.random() * 5;
+
+                return (
+                  <div
+                    key={idx}
+                    className="star-container"
+                    style={{
+                      position: 'absolute',
+                      top: `${top}%`,
+                      left: `${left}%`,
+                      width: `${size}px`,
+                      height: `${size}px`,
+                      animation: `dimStar 4s ease-in-out infinite`,
+                      animationDelay: `${delay}s`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: `${size}px`,
+                        color: '#FFD700',
+                        position: 'relative',
+                        zIndex: 1,
+                      }}
+                    >
+                      ✧
+                    </span>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        width: `${size / 3}px`,
+                        height: `${size / 3}px`,
+                        borderRadius: '50%',
+                        backgroundColor: '#FFD700',
+                        zIndex: 0,
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
 
             {/* BULLETS */}
@@ -141,56 +192,6 @@ export default function Hero() {
                 className="h-auto w-[330px] lg:w-[390px]"
               />
             </div>
-
-            {/* ESTRELLAS ALEATORIAS */}
-            <div className="stars-container absolute top-0 left-0 w-full h-full pointer-events-none">
-              {Array.from({ length: 7 }).map((_, idx) => {
-                const size = 12 + Math.random() * 18; // 12px a 30px
-                const top = 10 + Math.random() * 80;
-                const left = 10 + Math.random() * 30; // solo al lado izquierdo de la carta
-                const delay = Math.random() * 5;
-
-                const miniStars = Array.from({ length: Math.floor(size / 4) }).map((__, i) => {
-                  const offsetX = Math.random() * size - size / 2;
-                  const offsetY = Math.random() * size - size / 2;
-                  const miniSize = Math.random() * (size / 4);
-                  return (
-                    <span
-                      key={i}
-                      className="star"
-                      style={{
-                        position: 'absolute',
-                        top: `${offsetY}px`,
-                        left: `${offsetX}px`,
-                        fontSize: `${miniSize}px`,
-                        color: '#FFD700',
-                      }}
-                    >
-                      ✧
-                    </span>
-                  );
-                });
-
-                return (
-                  <div
-                    key={idx}
-                    className="star"
-                    style={{
-                      position: 'absolute',
-                      top: `${top}%`,
-                      left: `${left}%`,
-                      fontSize: `${size}px`,
-                      animation: `dimStar 4s ease-in-out infinite`,
-                      animationDelay: `${delay}s`,
-                      color: '#FFD700',
-                    }}
-                  >
-                    ✧
-                    {miniStars}
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </div>
       </div>
@@ -206,14 +207,22 @@ export default function Hero() {
           -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
+
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
         }
+
         @keyframes dimStar {
           0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
+          50% { opacity: 0.3; }
         }
 
         /* MOBILE */
@@ -260,7 +269,8 @@ export default function Hero() {
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* borde ligeramente más marcado */
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          border: 1px solid rgba(148, 52, 236, 0.3);
         }
       `}</style>
     </section>
