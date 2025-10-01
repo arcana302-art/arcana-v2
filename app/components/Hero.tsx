@@ -74,6 +74,7 @@ export default function Hero() {
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
 
+              {/* MOBILE CARD */}
               <div className="hero-card-mobile sm:hidden w-full mt-4">
                 <Image
                   src={HERO_IMG}
@@ -81,13 +82,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-1/2 mx-auto" // Reducida 50%
+                  className="h-auto w-full scale-[0.5]" // Reducida al 50%
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-2 bullets-wrapper p-4 rounded-lg shadow-bullets bg-transparent">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -149,18 +150,9 @@ export default function Hero() {
           opacity: 0.42;
           transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
-          -webkit-mask-image: radial-gradient(
-            140% 120% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
-          mask-image: radial-gradient(
-            140% 120% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
+          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
-
         @keyframes cloud-sway {
           0% {
             transform: translateX(-52%);
@@ -173,16 +165,38 @@ export default function Hero() {
           }
         }
 
-        .bullets-wrapper {
-          border-radius: 12px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
         /* MOBILE */
         @media (max-width: 639px) {
+          .talents-row {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 4px;
+          }
+          .talents-row a {
+            font-size: 10px;
+            height: 24px;
+            padding-left: 8px;
+            padding-right: 8px;
+            max-width: calc(50% - 4px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .hero-title-1 {
+            font-size: 35px;
+            line-height: 1.1;
+          }
           .hero-card-mobile img {
-            width: 50% !important; /* Reducida 50% */
+            width: 100% !important;
             height: auto;
+          }
+          .bullets-grid {
+            grid-template-columns: 1fr;
+            gap-y: 12px;
+          }
+          .bullet-text {
+            font-size: 14px;
+            line-height: 1.4;
           }
         }
 
@@ -195,10 +209,11 @@ export default function Hero() {
           .bullet-text {
             font-size: 16px;
           }
-          .bullets-wrapper {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-          }
+        }
+
+        /* Bullets recuadro */
+        .shadow-bullets {
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
       `}</style>
     </section>
