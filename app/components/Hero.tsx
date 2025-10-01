@@ -70,19 +70,17 @@ export default function Hero() {
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
               <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
-                <span className="text-[#22172f] block">El universo se comunica en</span>
-                <span className="text-[#c9a6ff] block">símbolos, energía y estrellas</span>
+                <span className="text-[#22172f]">El universo se comunica en </span>
+                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-
-              {/* Carta Mobile */}
-              <div className="hero-card-mobile sm:hidden w-full mt-4">
+              <div className="hero-card-mobile sm:hidden w-full">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[2]" // Incremento 100%
+                  className="h-auto w-full scale-[1]" // Carta Mobile al 100% (ajustable según preferencia)
                 />
               </div>
             </div>
@@ -135,7 +133,7 @@ export default function Hero() {
                 width={560}
                 height={790}
                 priority
-                className="h-auto w-[330px] lg:w-[390px]"
+                className="h-auto w-[280px] lg:w-[330px]" // Carta Desktop ajustada
               />
             </div>
           </div>
@@ -150,16 +148,8 @@ export default function Hero() {
           opacity: 0.42;
           transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
-          -webkit-mask-image: radial-gradient(
-            140% 120% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
-          mask-image: radial-gradient(
-            140% 120% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
+          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
           0% {
@@ -221,8 +211,7 @@ export default function Hero() {
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          border: 1px solid rgba(148,52,236,0.2); /* bordes más marcados, elegante */
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
       `}</style>
     </section>
