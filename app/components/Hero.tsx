@@ -75,8 +75,13 @@ export default function Hero() {
             {/* Encabezados + Imagen juntos en mobile */}
             <div className="mobile-head-wrapper">
               <div className="hero-text">
-                <h1 className="hero-title-1 font-bold text-[#22172f]">
-                  El universo se comunica en símbolos, energía y estrellas
+                <h1 className="hero-title-1 text-[22px] sm:text-[30px] leading-tight">
+                  <span className="text-[#22172f] font-normal">
+                    El universo se comunica en{' '}
+                  </span>
+                  <span className="text-[#c9a6ff] font-normal">
+                    símbolos, energía y estrellas
+                  </span>
                 </h1>
               </div>
               <div className="hero-card-mobile">
@@ -191,8 +196,7 @@ export default function Hero() {
           }
 
           /* Hero titles */
-          .hero-title-1 { font-size: 22px; line-height: 1.2; }
-          .hero-title-2 { font-size: 24px; line-height: 1.2; }
+          .hero-title-1 { font-weight: normal; }
 
           /* Encabezado + imagen en fila */
           .mobile-head-wrapper {
