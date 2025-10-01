@@ -68,9 +68,15 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[30px] sm:text-[65px] font-normal leading-[1.15]">
-                <span className="text-[#22172f]">El universo se comunica en </span>
-                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+              <h1 className="hero-title-1 text-[#22172f]">
+                <span className="desktop-text">
+                  El universo se comunica en 
+                  <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
+                </span>
+                <span className="mobile-text sm:hidden">
+                  El universo se comunica en
+                  <span className="text-[#c9a6ff]"> símbolos, energía y estrellas</span>
+                </span>
               </h1>
 
               {/* Mobile: carta al lado del título */}
@@ -181,9 +187,13 @@ export default function Hero() {
             overflow: hidden;
             text-overflow: ellipsis;
           }
-          .hero-title-1 {
+          .mobile-text {
+            display: inline;
             font-size: 30px;
             line-height: 1.1;
+          }
+          .desktop-text {
+            display: none;
           }
           .hero-card-mobile img {
             width: 100% !important;
@@ -197,25 +207,18 @@ export default function Hero() {
             font-size: 14px;
             line-height: 1.4;
           }
-          .hero-title-wrapper {
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-          }
         }
 
         /* DESKTOP */
-        @media (min-width: 1024px) {
-          .hero-title-1 {
-            font-size: 65px;
-            line-height: 1.15;
+        @media (min-width: 640px) {
+          .desktop-text {
+            display: inline;
           }
-          .bullet-text {
-            font-size: 16px;
+          .mobile-text {
+            display: none;
           }
         }
 
-        /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
