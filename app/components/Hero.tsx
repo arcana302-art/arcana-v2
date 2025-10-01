@@ -72,28 +72,29 @@ export default function Hero() {
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
-            {/* Encabezados + Imagen juntos en mobile */}
-            <div className="mobile-head-wrapper sm:hidden">
-              <div className="hero-text">
-                <h1 className="hero-title-1 text-[22px] sm:text-[30px] leading-tight">
-                  <span className="text-[#22172f] font-normal">
-                    El universo se comunica en{' '}
-                  </span>
-                  <span className="text-[#c9a6ff] font-normal">
-                    símbolos, energía y estrellas
-                  </span>
-                </h1>
-              </div>
-              <div className="hero-card-mobile">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-[180px]"
-                />
-              </div>
+            
+            {/* Título siempre visible */}
+            <div className="hero-text mb-4">
+              <h1 className="hero-title-1 text-[22px] sm:text-[30px] leading-tight">
+                <span className="text-[#22172f] font-normal">
+                  El universo se comunica en{' '}
+                </span>
+                <span className="text-[#c9a6ff] font-normal">
+                  símbolos, energía y estrellas
+                </span>
+              </h1>
+            </div>
+
+            {/* Carta mobile solo en sm:hidden */}
+            <div className="hero-card-mobile sm:hidden mb-4">
+              <Image
+                src={HERO_IMG}
+                alt="Carta / símbolo místico"
+                width={560}
+                height={790}
+                priority
+                className="h-auto w-[180px]"
+              />
             </div>
 
             {/* BULLETS CON CHECKS */}
@@ -141,7 +142,7 @@ export default function Hero() {
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
-            {/* Carta */}
+            {/* Carta desktop */}
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
@@ -184,10 +185,8 @@ export default function Hero() {
         }
 
         @media (max-width: 639px) {
-          /* Espacio entre talentos y encabezado */
           .talents-row { margin-bottom: 16px; }
 
-          /* Botones de talentos más pequeños */
           .talents-row a {
             font-size: 12px !important;
             padding-left: 12px;
@@ -195,34 +194,18 @@ export default function Hero() {
             height: 34px;
           }
 
-          /* Hero titles */
           .hero-title-1 { font-weight: normal; }
 
-          /* Encabezado + imagen en fila */
-          .mobile-head-wrapper {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 16px;
-          }
-          .hero-text { flex: 1; }
           .hero-card-mobile img { width: 140px !important; }
 
-          /* Bullets en 2 columnas × 3 filas */
           .bullets-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap-x: 12px;
             gap-y: 16px;
             margin-bottom: 16px;
           }
-          .bullet-text {
-            font-size: 13px;
-            line-height: 1.4;
-          }
+          .bullet-text { font-size: 13px; line-height: 1.4; }
 
-          /* CTA botones stacked */
           .mobile-cta-buttons a {
             width: 100%;
             font-size: 14px;
