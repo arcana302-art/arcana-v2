@@ -73,14 +73,14 @@ export default function Hero() {
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile sm:hidden w-full">
+              <div className="hero-card-mobile sm:hidden w-full flex justify-center mt-4">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1]" // Carta Mobile al 100% (ajustable según preferencia)
+                  className="h-auto w-[50%]" // Carta reducida al 50% en mobile
                 />
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function Hero() {
                 width={560}
                 height={790}
                 priority
-                className="h-auto w-[280px] lg:w-[330px]" // Carta Desktop ajustada
+                className="h-auto w-[330px] lg:w-[390px]"
               />
             </div>
           </div>
@@ -148,8 +148,16 @@ export default function Hero() {
           opacity: 0.42;
           transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
-          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
-          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          -webkit-mask-image: radial-gradient(
+            140% 120% at 56% 46%,
+            #000 62%,
+            transparent 100%
+          );
+          mask-image: radial-gradient(
+            140% 120% at 56% 46%,
+            #000 62%,
+            transparent 100%
+          );
         }
         @keyframes cloud-sway {
           0% {
@@ -185,7 +193,7 @@ export default function Hero() {
             line-height: 1.1;
           }
           .hero-card-mobile img {
-            width: 100% !important;
+            width: 50% !important; /* Carta Mobile reducida al 50% */
             height: auto;
           }
           .bullets-grid {
