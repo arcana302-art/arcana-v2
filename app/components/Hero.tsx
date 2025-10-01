@@ -31,51 +31,19 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  const renderStars = (count: number, width: number, height: number) => {
-    const stars: JSX.Element[] = [];
-    const positions: { x: number; y: number; size: number }[] = [];
-
-    for (let i = 0; i < count; i++) {
-      let size = Math.random() * 12 + 8; // Tamaño 8px a 20px
-      let x: number;
-      let y: number;
-      let attempts = 0;
-
-      do {
-        x = Math.random() * (width - size);
-        y = Math.random() * (height - size);
-        attempts++;
-      } while (
-        positions.some(
-          (pos) =>
-            Math.abs(pos.x - x) < (pos.size + size) * 0.8 &&
-            Math.abs(pos.y - y) < (pos.size + size) * 0.8
-        ) &&
-        attempts < 50
-      );
-
-      positions.push({ x, y, size });
-      const dim = Math.random() * 0.8 + 0.2;
-
-      stars.push(
-        <span
-          key={i}
-          style={{
-            position: 'absolute',
-            left: `${x}px`,
-            top: `${y}px`,
-            fontSize: `${size}px`,
-            color: `rgba(255, 223, 0, ${dim})`,
-            pointerEvents: 'none',
-          }}
-        >
-          ✦
-        </span>
-      );
+  // Generar posiciones y tamaños aleatorios de estrellas
+  const stars = useMemo(() => {
+    const list: { top: string; left: string; size: number; dim: number }[] = [];
+    for (let i = 0; i < 7; i++) {
+      list.push({
+        top: `${Math.random() * 80}%`, // aleatorio pero dentro del contenedor
+        left: `${Math.random() * 90}%`,
+        size: Math.random() * 20 + 10, // tamaño entre 10 y 30px
+        dim: Math.random() * 0.5 + 0.5, // opacidad inicial
+      });
     }
-
-    return stars;
-  };
+    return list;
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
@@ -110,19 +78,19 @@ export default function Hero() {
 
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* DESKTOP TITLE */}
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
               <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
             </h1>
 
-            {/* MOBILE: Título + Carta */}
+            {/* MOBILE */}
             <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
+
               <div className="hero-card-mobile w-2/5 relative">
                 <Image
                   src={HERO_IMG}
@@ -130,20 +98,32 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.93]" // incremento 15% en mobile
+                  className="h-auto w-full scale-[0.9]"
                 />
+                <div className="stars-container absolute inset-0 pointer-events-none">
+                  {stars.map((s, idx) => (
+                    <span
+                      key={idx}
+                      className="star absolute"
+                      style={{
+                        top: s.top,
+                        left: s.left,
+                        fontSize: `${s.size * 0.7}px`,
+                        opacity: s.dim,
+                      }}
+                    >
+                      ✦
+                    </span>
+                  ))}
+                </div>
                 {/* Nube Mobile */}
-                <div className="mobile-cloud absolute top-0 left-0 w-full h-full -z-10">
+                <div className="mobile-cloud absolute inset-0 -z-10">
                   <Image
                     src={CLOUD_IMG}
                     alt=""
                     fill
                     className="object-contain cloud-motion-mobile"
                   />
-                </div>
-                {/* Estrellas Mobile */}
-                <div className="absolute inset-0 z-10">
-                  {renderStars(7, 130, 150)}
                 </div>
               </div>
             </div>
@@ -160,7 +140,6 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* CTA DESKTOP */}
             <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
@@ -183,7 +162,13 @@ export default function Hero() {
 
           {/* RIGHT */}
           <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
-            <div className="relative w-full flex justify-center items-center">
+            <img
+              src={CLOUD_IMG}
+              alt=""
+              aria-hidden="true"
+              className="cloud-img absolute z-0 select-none pointer-events-none cloud-motion-desktop"
+            />
+            <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
@@ -192,18 +177,21 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
-              {/* Nube Desktop */}
-              <div className="absolute inset-0 -z-10">
-                <Image
-                  src={CLOUD_IMG}
-                  alt=""
-                  fill
-                  className="object-contain cloud-motion-desktop"
-                />
-              </div>
-              {/* Estrellas Desktop */}
-              <div className="absolute inset-0 z-10">
-                {renderStars(7, 390, 390)}
+              <div className="stars-container absolute inset-0 pointer-events-none">
+                {stars.map((s, idx) => (
+                  <span
+                    key={idx}
+                    className="star absolute"
+                    style={{
+                      top: s.top,
+                      left: s.left,
+                      fontSize: `${s.size}px`,
+                      opacity: s.dim,
+                    }}
+                  >
+                    ✦
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -211,37 +199,62 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-        /* CLOUD ANIMATION */
+        /* Nube Desktop */
+        .cloud-img {
+          top: 50%;
+          left: 50%;
+          width: 680px;
+          opacity: 0.42;
+          transform: translate(-50%, -50%);
+        }
         .cloud-motion-desktop {
           animation: swayDesktop 26s ease-in-out infinite alternate;
         }
         @keyframes swayDesktop {
-          0% { transform: translateX(-10%); }
-          50% { transform: translateX(10%); }
-          100% { transform: translateX(-10%); }
+          0% { transform: translateX(15%); }
+          50% { transform: translateX(-15%); }
+          100% { transform: translateX(15%); }
         }
 
+        /* Nube Mobile */
         .cloud-motion-mobile {
           animation: swayMobile 26s ease-in-out infinite alternate;
         }
         @keyframes swayMobile {
-          0% { transform: translateX(-10%); }
-          50% { transform: translateX(10%); }
-          100% { transform: translateX(-10%); }
+          0% { transform: translateX(10%); }
+          50% { transform: translateX(-10%); }
+          100% { transform: translateX(10%); }
         }
 
-        .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        /* Estrellas */
+        .star {
+          color: #ffeb3b;
+          pointer-events: none;
+          animation: dim 4s ease-in-out infinite alternate;
+        }
+        @keyframes dim {
+          0% { opacity: 1; }
+          100% { opacity: 0.3; }
         }
 
         /* MOBILE */
         @media (max-width: 639px) {
+          .talents-row {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 4px;
+          }
           .talents-row a {
             font-size: 10px;
             height: 24px;
             padding-left: 8px;
             padding-right: 8px;
             max-width: calc(50% - 4px);
+          }
+          .bullets-grid {
+            grid-template-columns: 1fr;
+            gap-y: 12px;
+            margin-top: 16px;
           }
           .bullet-text {
             font-size: 14px;
@@ -251,9 +264,17 @@ export default function Hero() {
 
         /* DESKTOP */
         @media (min-width: 1024px) {
+          .hero-title-1 {
+            font-size: 65px;
+            line-height: 1.15;
+          }
           .bullet-text {
             font-size: 16px;
           }
+        }
+
+        .shadow-bullets {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
       `}</style>
     </section>
