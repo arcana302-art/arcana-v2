@@ -41,7 +41,7 @@ export default function Hero() {
         {/* FILA TALENTOS */}
         <nav
           aria-label="Talentos"
-          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4"
+          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
         >
           {talents.map((t) => (
             <Link
@@ -49,7 +49,7 @@ export default function Hero() {
               href={t.href}
               className="
                 group rounded-full px-4 sm:px-5 h-10 inline-flex items-center
-                text-[13px] sm:text-[15px]   /* 👈 más chico en mobile */
+                text-[15px] sm:text-[15.5px]
                 border border-[--chip-border] bg-[--chip-bg]
                 hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)]
                 transition-colors
@@ -69,30 +69,52 @@ export default function Hero() {
         </nav>
 
         {/* GRID HERO */}
-        <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10">
+        <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
-            {/* Títulos */}
-            <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04] mb-3">
-              El universo se comunica en
-            </h1>
-            <h2
-              className="hero-title-2 font-normal tracking-tight text-[42px] leading-[1.05] sm:text-[60px] sm:leading-[1.04] mb-4"
-              style={{ color: LIGHT_PURPLE }}
-            >
-              símbolos, energía y estrellas
-            </h2>
+            {/* Encabezados + Imagen juntos en mobile */}
+            <div className="flex flex-col sm:flex-col mobile-head-wrapper">
+              <div className="hero-text">
+                <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04] mb-3">
+                  El universo se comunica en
+                </h1>
+                <h2
+                  className="hero-title-2 font-normal tracking-tight text-[42px] leading-[1.05] sm:text-[60px] sm:leading-[1.04] mb-4"
+                  style={{ color: LIGHT_PURPLE }}
+                >
+                  símbolos, energía y estrellas
+                </h2>
+              </div>
+
+              {/* Carta + nube al lado del encabezado en mobile */}
+              <div className="hero-card-mobile relative z-10 select-none sm:hidden">
+                <img
+                  src={CLOUD_IMG}
+                  alt=""
+                  aria-hidden="true"
+                  className="cloud-img absolute z-0 select-none pointer-events-none"
+                />
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-[180px]"
+                />
+              </div>
+            </div>
 
             {/* BULLETS CON CHECKS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 mt-4 sm:mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 mt-4 sm:mt-5 bullets-grid">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
-                  <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
+                  <span
+                    className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold"
+                  >
                     ✓
                   </span>
-                  <span className="text-lg sm:text-lg md:text-base text-[#22172f]/90">
-                    {item}
-                  </span>
+                  <span className="text-lg text-[#22172f]/90">{item}</span>
                 </div>
               ))}
             </div>
@@ -119,8 +141,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* LADO DERECHO – Carta + nube */}
-          <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 flex items-center justify-center min-h-[1px]">
+          {/* LADO DERECHO – Carta + nube (solo desktop/tablet) */}
+          <div className="relative col-span-12 lg:col-span-5 xl:col-span-5 flex items-center justify-center min-h-[1px] hidden sm:flex">
             {/* Nube */}
             <img
               src={CLOUD_IMG}
@@ -128,7 +150,6 @@ export default function Hero() {
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
-
             {/* Carta */}
             <div className="hero-card relative z-10 select-none">
               <Image
@@ -137,7 +158,7 @@ export default function Hero() {
                 width={560}
                 height={790}
                 priority
-                className="h-auto w-[280px] sm:w-[330px] lg:w-[390px]"
+                className="h-auto w-[330px] lg:w-[390px]"
               />
             </div>
           </div>
@@ -166,59 +187,36 @@ export default function Hero() {
         }
 
         @keyframes cloud-sway {
-          0% {
-            transform: translateX(-52%);
-          }
-          50% {
-            transform: translateX(-44%);
-          }
-          100% {
-            transform: translateX(-52%);
-          }
+          0% { transform: translateX(-52%); }
+          50% { transform: translateX(-44%); }
+          100% { transform: translateX(-52%); }
         }
 
         @media (max-width: 639px) {
-          /* Títulos más chicos */
-          .hero-title-1 {
-            font-size: 26px;
-            line-height: 1.08;
-          }
-          .hero-title-2 {
-            font-size: 28px;
-            line-height: 1.08;
-          }
+          /* Espacio entre talentos y encabezado */
+          .talents-row { margin-bottom: 20px; }
 
-          /* Hero en 2 columnas: texto + carta */
-          .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+          /* Hero titles */
+          .hero-title-1 { font-size: 26px; line-height: 1.08; }
+          .hero-title-2 { font-size: 28px; line-height: 1.08; }
+
+          /* Encabezado + imagen en fila */
+          .mobile-head-wrapper {
+            display: flex;
+            flex-direction: row;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            gap: 16px;
           }
-          .hero-left {
-            grid-column: span 1 / span 1;
-            padding-right: 0;
-          }
-          .hero-card :global(img) {
-            width: 160px !important;
-          }
+          .hero-text { flex: 1; }
+          .hero-card-mobile img { width: 160px !important; }
 
-          /* Nube móvil */
-          .cloud-img {
-            top: 46%;
-            left: 60%;
-            width: 320px;
-            opacity: 0.38;
-            animation: cloud-sway 34s ease-in-out infinite;
-          }
-
-          /* Bullets móviles: tres columnas y texto más chico */
-          .grid-cols-1 {
+          /* Bullets en 3 columnas con espacio */
+          .bullets-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
-          }
-          .grid-cols-1 span {
-            font-size: 13px !important;
-            line-height: 1.3;
+            gap-x: 12px;
+            gap-y: 18px;
+            margin-bottom: 24px;
           }
         }
       `}</style>
