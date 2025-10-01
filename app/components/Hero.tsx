@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
-const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -33,6 +32,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -62,9 +62,10 @@ export default function Hero() {
           ))}
         </nav>
 
+        {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* DESKTOP TITLE */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
@@ -84,33 +85,9 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.93]" // imagen aumentada 20%
+                  className="h-auto w-full scale-[0.78]"
                 />
               </div>
-            </div>
-
-            {/* CONTENEDOR DE ESTRELLAS */}
-            <div className="stars-container absolute top-0 left-0 h-full w-full pointer-events-none">
-              {Array.from({ length: 7 }).map((_, idx) => {
-                const size = 8 + Math.random() * 12; // 8px a 20px
-                const top = 10 + Math.random() * 80; // solo entre 10% y 90% vertical para no tocar texto ni bullets
-                const left = 50 + Math.random() * 40; // entre 50% y 90% horizontal entre texto y carta
-                const delay = Math.random() * 5;
-                return (
-                  <span
-                    key={idx}
-                    className="star"
-                    style={{
-                      top: `${top}%`,
-                      left: `${left}%`,
-                      fontSize: `${size}px`,
-                      animationDelay: `${delay}s`,
-                    }}
-                  >
-                    ✧
-                  </span>
-                );
-              })}
             </div>
 
             {/* BULLETS */}
@@ -164,6 +141,56 @@ export default function Hero() {
                 className="h-auto w-[330px] lg:w-[390px]"
               />
             </div>
+
+            {/* ESTRELLAS ALEATORIAS */}
+            <div className="stars-container absolute top-0 left-0 w-full h-full pointer-events-none">
+              {Array.from({ length: 7 }).map((_, idx) => {
+                const size = 12 + Math.random() * 18; // 12px a 30px
+                const top = 10 + Math.random() * 80;
+                const left = 10 + Math.random() * 30; // solo al lado izquierdo de la carta
+                const delay = Math.random() * 5;
+
+                const miniStars = Array.from({ length: Math.floor(size / 4) }).map((__, i) => {
+                  const offsetX = Math.random() * size - size / 2;
+                  const offsetY = Math.random() * size - size / 2;
+                  const miniSize = Math.random() * (size / 4);
+                  return (
+                    <span
+                      key={i}
+                      className="star"
+                      style={{
+                        position: 'absolute',
+                        top: `${offsetY}px`,
+                        left: `${offsetX}px`,
+                        fontSize: `${miniSize}px`,
+                        color: '#FFD700',
+                      }}
+                    >
+                      ✧
+                    </span>
+                  );
+                });
+
+                return (
+                  <div
+                    key={idx}
+                    className="star"
+                    style={{
+                      position: 'absolute',
+                      top: `${top}%`,
+                      left: `${left}%`,
+                      fontSize: `${size}px`,
+                      animation: `dimStar 4s ease-in-out infinite`,
+                      animationDelay: `${delay}s`,
+                      color: '#FFD700',
+                    }}
+                  >
+                    ✧
+                    {miniStars}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -183,14 +210,6 @@ export default function Hero() {
           0% { transform: translateX(-52%); }
           50% { transform: translateX(-44%); }
           100% { transform: translateX(-52%); }
-        }
-
-        /* ESTRELLAS */
-        .star {
-          position: absolute;
-          color: #FFD700;
-          opacity: 1;
-          animation: dimStar 4s ease-in-out infinite;
         }
         @keyframes dimStar {
           0%, 100% { opacity: 1; }
@@ -219,18 +238,30 @@ export default function Hero() {
             gap-y: 12px;
             margin-top: 16px;
           }
-          .bullet-text { font-size: 14px; line-height: 1.4; }
-          .hero-mobile-row { margin-bottom: 16px; }
+          .bullet-text {
+            font-size: 14px;
+            line-height: 1.4;
+          }
+          .hero-mobile-row {
+            margin-bottom: 16px;
+          }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 { font-size: 65px; line-height: 1.15; }
-          .bullet-text { font-size: 16px; }
+          .hero-title-1 {
+            font-size: 65px;
+            line-height: 1.15;
+          }
+          .bullet-text {
+            font-size: 16px;
+          }
         }
 
         /* Bullets recuadro */
-        .shadow-bullets { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
+        .shadow-bullets {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* borde ligeramente más marcado */
+        }
       `}</style>
     </section>
   );
