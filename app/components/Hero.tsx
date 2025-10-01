@@ -69,20 +69,31 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
+              {/* Contenedor móvil para alinear título y carta */}
+              <div className="flex flex-row w-full sm:hidden gap-4">
+                <div className="w-1/2 flex items-center">
+                  <h1 className="hero-title-1 text-[35px] font-normal leading-[1.15]">
+                    <span className="text-[#22172f]">El universo se comunica en </span>
+                    <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+                  </h1>
+                </div>
+                <div className="w-1/2 flex justify-center">
+                  <Image
+                    src={HERO_IMG}
+                    alt="Carta / símbolo místico"
+                    width={560}
+                    height={790}
+                    priority
+                    className="h-auto w-full" // Carta al 50% dentro del contenedor w-1/2
+                  />
+                </div>
+              </div>
+
+              {/* Desktop */}
+              <h1 className="hidden sm:block hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile sm:hidden w-full flex justify-center mt-4">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-[50%]" // Carta reducida al 50% en mobile
-                />
-              </div>
             </div>
 
             {/* BULLETS */}
@@ -193,7 +204,6 @@ export default function Hero() {
             line-height: 1.1;
           }
           .hero-card-mobile img {
-            width: 50% !important; /* Carta Mobile reducida al 50% */
             height: auto;
           }
           .bullets-grid {
