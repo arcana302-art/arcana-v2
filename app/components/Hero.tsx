@@ -74,7 +74,7 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4">
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
@@ -86,7 +86,7 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.625]" // 50% original + 25%
+                  className="h-auto w-full scale-[0.78]" // incremento 25%
                 />
               </div>
             </div>
@@ -189,10 +189,14 @@ export default function Hero() {
           .bullets-grid {
             grid-template-columns: 1fr;
             gap-y: 12px;
+            margin-top: 16px; /* ajuste spacing */
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
+          }
+          .hero-mobile-row {
+            margin-bottom: 16px; /* espacio entre fila y bullets */
           }
         }
 
