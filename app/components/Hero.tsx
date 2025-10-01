@@ -2,21 +2,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
 const LIGHT_PURPLE = '#c9a6ff';
-const NUM_STARS = 7;
 
 interface Star {
   id: number;
-  size: number;      // tamaño en px
-  top: number;       // posición vertical relativa al contenedor
-  left: number;      // posición horizontal relativa al contenedor
-  delay: number;     // delay para animación dim
+  size: number;
+  top: number;   // % relativo al contenedor
+  left: number;  // % relativo al contenedor
+  rotation: number;
+  delay: number;
 }
+
+const NUM_STARS = 7;
 
 export default function Hero() {
   const talents = useMemo(
@@ -40,32 +42,32 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
+  const starsContainerRef = useRef<HTMLDivElement>(null);
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
+    if (!starsContainerRef.current) return;
+    const rect = starsContainerRef.current.getBoundingClientRect();
     const newStars: Star[] = [];
     for (let i = 0; i < NUM_STARS; i++) {
-      newStars.push({
-        id: i,
-        size: 12 + Math.random() * 18, // tamaños entre 12px y 30px
-        top: Math.random() * 80,       // % relativo al contenedor
-        left: Math.random() * 40,      // solo entre 0% y 40% para no tocar texto ni carta
-        delay: Math.random() * 5,      // delay animación dim aleatoria
-      });
+      const size = 12 + Math.random() * 18; // 12-30px
+      const top = Math.random() * 80;       // 0-80% dentro de la fila
+      const left = Math.random() * 90;      // 0-90% del lado izquierdo de la carta
+      const rotation = Math.random() * 360;
+      const delay = Math.random() * 5;
+      newStars.push({ id: i, size, top, left, rotation, delay });
     }
     setStars(newStars);
   }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* TALENTS */}
-        <nav
-          aria-label="Talentos"
-          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
-        >
+        <nav aria-label="Talentos" className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -98,11 +100,33 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative" ref={starsContainerRef}>
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
+              {/* Estrellas entre texto y carta */}
+              {stars.map((star) => (
+                <div
+                  key={star.id}
+                  className="star absolute text-yellow-400"
+                  style={{
+                    fontSize: `${star.size}px`,
+                    top: `${star.top}%`,
+                    left: `${star.left}%`,
+                    transform: `rotate(${star.rotation}deg)`,
+                    animation: `dim 3s ease-in-out ${star.delay}s infinite alternate`,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  ✧
+                  <div
+                    className="star-inner absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400"
+                    style={{ width: `${star.size / 2}px`, height: `${star.size / 2}px` }}
+                  ></div>
+                </div>
+              ))}
+
               <div className="hero-card-mobile w-2/5">
                 <Image
                   src={HERO_IMG}
@@ -110,7 +134,7 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.78]" // tamaño ajustable en mobile
+                  className="h-auto w-full scale-[0.78]" // incremento 25% previamente
                 />
               </div>
             </div>
@@ -156,26 +180,6 @@ export default function Hero() {
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
-            <div className="hero-stars-container absolute z-10 w-full h-full">
-              {stars.map((star) => (
-                <div
-                  key={star.id}
-                  className="star absolute text-yellow-400"
-                  style={{
-                    fontSize: `${star.size}px`,
-                    top: `${star.top}%`,
-                    left: `${star.left}%`,
-                    animation: `dim 3s ease-in-out ${star.delay}s infinite alternate`,
-                  }}
-                >
-                  ✧
-                  <div
-                    className="star-inner absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400"
-                    style={{ width: `${star.size / 2}px`, height: `${star.size / 2}px` }}
-                  ></div>
-                </div>
-              ))}
-            </div>
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
@@ -209,12 +213,17 @@ export default function Hero() {
 
         @keyframes dim {
           0% { opacity: 1; }
-          100% { opacity: 0; }
+          50% { opacity: 0.4; }
+          100% { opacity: 1; }
         }
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row { flex-wrap: wrap; justify-content: flex-start; gap: 4px; }
+          .talents-row {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 4px;
+          }
           .talents-row a {
             font-size: 10px;
             height: 24px;
@@ -225,20 +234,32 @@ export default function Hero() {
             overflow: hidden;
             text-overflow: ellipsis;
           }
-          .bullets-grid { grid-template-columns: 1fr; gap-y: 12px; margin-top: 16px; }
-          .bullet-text { font-size: 14px; line-height: 1.4; }
-          .hero-mobile-row { margin-bottom: 16px; }
+          .bullets-grid {
+            grid-template-columns: 1fr;
+            gap-y: 12px;
+            margin-top: 16px;
+          }
+          .bullet-text {
+            font-size: 14px;
+            line-height: 1.4;
+          }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 { font-size: 65px; line-height: 1.15; }
-          .bullet-text { font-size: 16px; }
+          .hero-title-1 {
+            font-size: 65px;
+            line-height: 1.15;
+          }
+          .bullet-text {
+            font-size: 16px;
+          }
         }
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          border: 1px solid rgba(148,52,236,0.4); /* borde ligeramente más marcado */
         }
       `}</style>
     </section>
