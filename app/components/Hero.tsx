@@ -75,17 +75,10 @@ export default function Hero() {
             {/* Encabezados + Imagen juntos en mobile */}
             <div className="mobile-head-wrapper">
               <div className="hero-text">
-                <h1 className="hero-title-1 text-[#22172f] font-normal tracking-tight text-[40px] leading-[1.05] sm:text-[56px] sm:leading-[1.04] mb-3">
-                  El universo se comunica en
+                <h1 className="hero-title-1 font-bold text-[#22172f]">
+                  El universo se comunica en símbolos, energía y estrellas
                 </h1>
-                <h2
-                  className="hero-title-2 font-normal tracking-tight text-[42px] leading-[1.05] sm:text-[60px] sm:leading-[1.04] mb-4"
-                  style={{ color: LIGHT_PURPLE }}
-                >
-                  símbolos, energía y estrellas
-                </h2>
               </div>
-
               <div className="hero-card-mobile">
                 <Image
                   src={HERO_IMG}
@@ -112,11 +105,11 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Botones CTA */}
-            <div className="mt-5 flex flex-wrap gap-4">
+            {/* Botones CTA - Mobile stacked */}
+            <div className="mt-5 flex flex-col gap-4 mobile-cta-buttons">
               <a
                 href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
+                className="w-full inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
                 style={{
                   backgroundColor: BTN_PURPLE,
                   boxShadow: '0 12px 40px -10px rgba(148,52,236,0.55)',
@@ -127,7 +120,7 @@ export default function Hero() {
 
               <a
                 href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
+                className="w-full inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
               >
                 Únete como especialista
               </a>
@@ -197,9 +190,9 @@ export default function Hero() {
             height: 34px;
           }
 
-          /* Hero titles - un poco más grandes */
-          .hero-title-1 { font-size: 30px; line-height: 1.1; }
-          .hero-title-2 { font-size: 32px; line-height: 1.1; }
+          /* Hero titles */
+          .hero-title-1 { font-size: 22px; line-height: 1.2; }
+          .hero-title-2 { font-size: 24px; line-height: 1.2; }
 
           /* Encabezado + imagen en fila */
           .mobile-head-wrapper {
@@ -207,21 +200,29 @@ export default function Hero() {
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 12px;
+            margin-bottom: 16px;
           }
           .hero-text { flex: 1; }
-          .hero-card-mobile img { width: 180px !important; }
+          .hero-card-mobile img { width: 140px !important; }
 
           /* Bullets en 2 columnas × 3 filas */
           .bullets-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap-x: 12px;
-            gap-y: 18px;
-            margin-bottom: 24px;
+            gap-y: 16px;
+            margin-bottom: 16px;
           }
           .bullet-text {
-            font-size: 12px;
-            line-height: 1.3;
+            font-size: 13px;
+            line-height: 1.4;
+          }
+
+          /* CTA botones stacked */
+          .mobile-cta-buttons a {
+            width: 100%;
+            font-size: 14px;
+            height: 44px;
           }
         }
       `}</style>
