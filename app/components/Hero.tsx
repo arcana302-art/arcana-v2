@@ -37,7 +37,7 @@ export default function Hero() {
       const size = Math.random() * 12 + 8; // tamaño aleatorio entre 8px y 20px
       const top = Math.random() * 100;
       const left = Math.random() * 100;
-      const dim = Math.random() * 0.8 + 0.2; // opacidad aleatoria entre 0.2 y 1
+      const dim = Math.random() * 0.8 + 0.2; // opacidad aleatoria
       stars.push(
         <span
           key={i}
@@ -100,18 +100,27 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
 
-              {/* Contenedor estrella + carta */}
+              {/* Contenedor estrella + carta + nube */}
               <div className="relative w-2/5 flex items-center justify-center">
+                {/* Nube detrás */}
+                <img
+                  src={CLOUD_IMG}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full opacity-30 select-none pointer-events-none"
+                />
+
                 <div className="hero-stars-mobile absolute inset-0">
                   {renderStars(7)}
                 </div>
-                <div className="hero-card-mobile w-full">
+
+                <div className="hero-card-mobile w-full z-10">
                   <Image
                     src={HERO_IMG}
                     alt="Carta / símbolo místico"
@@ -159,16 +168,19 @@ export default function Hero() {
 
           {/* RIGHT DESKTOP */}
           <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
-            <img
-              src={CLOUD_IMG}
-              alt=""
-              aria-hidden="true"
-              className="cloud-img absolute z-0 select-none pointer-events-none"
-            />
             <div className="relative w-full flex items-center justify-center">
+              {/* Nube detrás */}
+              <img
+                src={CLOUD_IMG}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-[680px] opacity-40 select-none pointer-events-none"
+              />
+
               <div className="hero-stars-desktop absolute inset-0">
                 {renderStars(7)}
               </div>
+
               <div className="hero-card relative z-10 select-none">
                 <Image
                   src={HERO_IMG}
@@ -233,6 +245,9 @@ export default function Hero() {
             font-size: 14px;
             line-height: 1.4;
           }
+          .hero-mobile-row {
+            margin-bottom: 16px;
+          }
         }
 
         /* DESKTOP */
@@ -248,8 +263,7 @@ export default function Hero() {
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          border: 1px solid rgba(148, 52, 236, 0.2);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
       `}</style>
     </section>
