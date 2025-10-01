@@ -114,7 +114,7 @@ export default function Hero() {
                   >
                     ✓
                   </span>
-                  <span className="text-lg text-[#22172f]/90">{item}</span>
+                  <span className="bullet-text text-[#22172f]/90">{item}</span>
                 </div>
               ))}
             </div>
@@ -196,9 +196,17 @@ export default function Hero() {
           /* Espacio entre talentos y encabezado */
           .talents-row { margin-bottom: 20px; }
 
+          /* Botones de talentos más pequeños */
+          .talents-row a {
+            font-size: 13px !important;
+            padding-left: 14px;
+            padding-right: 14px;
+            height: 36px;
+          }
+
           /* Hero titles */
-          .hero-title-1 { font-size: 26px; line-height: 1.08; }
-          .hero-title-2 { font-size: 28px; line-height: 1.08; }
+          .hero-title-1 { font-size: 28px; line-height: 1.1; }
+          .hero-title-2 { font-size: 31px; line-height: 1.1; }
 
           /* Encabezado + imagen en fila */
           .mobile-head-wrapper {
@@ -217,6 +225,10 @@ export default function Hero() {
             gap-x: 12px;
             gap-y: 18px;
             margin-bottom: 24px;
+          }
+          .bullet-text {
+            font-size: 13.5px;
+            line-height: 1.35;
           }
         }
       `}</style>
