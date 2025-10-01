@@ -73,7 +73,7 @@ export default function Hero() {
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Encabezados + Imagen juntos en mobile */}
-            <div className="mobile-head-wrapper">
+            <div className="mobile-head-wrapper sm:hidden">
               <div className="hero-text">
                 <h1 className="hero-title-1 text-[22px] sm:text-[30px] leading-tight">
                   <span className="text-[#22172f] font-normal">
