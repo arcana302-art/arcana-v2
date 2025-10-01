@@ -31,20 +31,18 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  // Generar posiciones y tamaños aleatorios para 7 estrellas
-  const stars = useMemo(() => {
-    const arr = [];
-    for (let i = 0; i < 7; i++) {
-      arr.push({
-        top: Math.random() * 80, // porcentaje del contenedor
-        left: Math.random() * 80,
-        size: Math.random() * 12 + 8, // px, aleatorio
-        dim: Math.random() * 2 + 1, // segundos para animación
-        delay: Math.random() * 5, // delay inicial
-      });
-    }
-    return arr;
-  }, []);
+  // Generar posiciones aleatorias de estrellas
+  const generateStars = (count: number, maxSize: number) =>
+    Array.from({ length: count }).map(() => ({
+      top: Math.random() * 80 + 10, // 10% - 90%
+      left: Math.random() * 80 + 10, // 10% - 90%
+      size: Math.random() * maxSize * 0.5 + maxSize * 0.5, // 50%-100% maxSize
+      dim: Math.random() * 3 + 2, // 2-5s
+      delay: Math.random() * 2, // 0-2s
+    }));
+
+  const starsMobile = generateStars(7, 15);
+  const starsDesktop = generateStars(7, 25);
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
@@ -89,25 +87,43 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile w-2/5">
+
+              {/* Contenedor estrella + carta */}
+              <div className="hero-mobile-card-container w-2/5 relative">
+                {/* Estrellas Mobile */}
+                {starsMobile.map((s, idx) => (
+                  <span
+                    key={idx}
+                    className="absolute text-yellow-400"
+                    style={{
+                      top: `${s.top}%`,
+                      left: `${s.left}%`,
+                      fontSize: `${s.size}px`,
+                      animation: `dim ${s.dim}s ease-in-out ${s.delay}s infinite alternate`,
+                    }}
+                  >
+                    ✦
+                  </span>
+                ))}
+
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.93]" // incremento 15% Mobile
+                  className="h-auto w-full scale-[1.08]" // incremento 15%
                 />
               </div>
             </div>
 
-            {/* Bullets */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
+            {/* BULLETS */}
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border border-[#9434ec]/20">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -118,7 +134,7 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* CTA Desktop */}
+            {/* CTA DESKTOP */}
             <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
@@ -139,7 +155,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT DESKTOP */}
           <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
             <img
               src={CLOUD_IMG}
@@ -147,17 +163,10 @@ export default function Hero() {
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
-            <div className="hero-card relative z-10 select-none">
-              <Image
-                src={HERO_IMG}
-                alt="Carta / símbolo místico"
-                width={560}
-                height={790}
-                priority
-                className="h-auto w-[330px] lg:w-[390px]"
-              />
+
+            <div className="hero-card-container relative z-10 select-none flex items-center justify-center">
               {/* Estrellas Desktop */}
-              {stars.map((s, idx) => (
+              {starsDesktop.map((s, idx) => (
                 <span
                   key={idx}
                   className="absolute text-yellow-400"
@@ -166,12 +175,20 @@ export default function Hero() {
                     left: `${s.left}%`,
                     fontSize: `${s.size}px`,
                     animation: `dim ${s.dim}s ease-in-out ${s.delay}s infinite alternate`,
-                    pointerEvents: 'none',
                   }}
                 >
                   ✦
                 </span>
               ))}
+
+              <Image
+                src={HERO_IMG}
+                alt="Carta / símbolo místico"
+                width={560}
+                height={790}
+                priority
+                className="h-auto w-[330px] lg:w-[390px]"
+              />
             </div>
           </div>
         </div>
@@ -201,12 +218,9 @@ export default function Hero() {
         }
 
         @keyframes dim {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0.2;
-          }
+          0% { opacity: 1; }
+          50% { opacity: 0.3; }
+          100% { opacity: 1; }
         }
 
         /* MOBILE */
@@ -235,17 +249,8 @@ export default function Hero() {
             font-size: 14px;
             line-height: 1.4;
           }
-
           .hero-mobile-row {
             margin-bottom: 16px;
-          }
-
-          /* Estrellas Mobile */
-          .hero-card-mobile {
-            position: relative;
-          }
-          .hero-card-mobile span {
-            position: absolute;
           }
         }
 
@@ -263,6 +268,7 @@ export default function Hero() {
         /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          border: 1px solid rgba(148,52,236,0.2);
         }
       `}</style>
     </section>
