@@ -86,13 +86,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.68]" // tamaño ajustado Mobile
+                  className="h-auto w-full scale-[0.78]" // aumento 15% Mobile
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border-[1.5px] border-[#9434ec]/25">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -190,6 +190,7 @@ export default function Hero() {
             grid-template-columns: 1fr;
             gap-y: 12px;
             margin-top: 16px;
+            border-[1.5px]; /* borde más marcado */
           }
           .bullet-text {
             font-size: 14px;
@@ -208,6 +209,9 @@ export default function Hero() {
           }
           .bullet-text {
             font-size: 16px;
+          }
+          .bullets-grid {
+            border-[1.5px]; /* borde más marcado */
           }
         }
 
