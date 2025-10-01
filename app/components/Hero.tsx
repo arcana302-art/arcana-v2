@@ -52,10 +52,10 @@ export default function Hero() {
                 ['--chip-bg' as any]: 'transparent',
                 ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
                 color: BTN_PURPLE,
-                height: 20, // Mobile reducido
-                fontSize: 6, // Mobile reducido
-                paddingLeft: 4,
-                paddingRight: 4,
+                height: 22, // Mobile ajustado
+                fontSize: 7, // Mobile más legible
+                paddingLeft: 5,
+                paddingRight: 5,
               } as React.CSSProperties}
             >
               {t.label}
