@@ -74,7 +74,7 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
+            <div className="hero-mobile-row sm:hidden flex w-full gap-3 mt-4 items-center">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
@@ -86,13 +86,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.78]" // tamaño Mobile ajustado
+                  className="h-auto w-full scale-[0.68]" // tamaño ajustado Mobile
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid shadow-bullets p-4 rounded-lg bg-transparent">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -186,23 +186,17 @@ export default function Hero() {
             overflow: hidden;
             text-overflow: ellipsis;
           }
-
-          .hero-mobile-row {
-            margin-bottom: 16px;
-          }
-
           .bullets-grid {
             grid-template-columns: 1fr;
             gap-y: 12px;
             margin-top: 16px;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            background-color: rgba(255, 255, 255, 0.0);
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
+          }
+          .hero-mobile-row {
+            margin-bottom: 16px; /* espacio entre fila y bullets */
           }
         }
 
