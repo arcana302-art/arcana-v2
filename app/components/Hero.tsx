@@ -40,7 +40,7 @@ export default function Hero() {
         {/* TALENTS */}
         <nav
           aria-label="Talentos"
-          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
+          className="flex flex-wrap gap-2 mb-3 sm:mb-4 talents-row"
         >
           {talents.map((t) => (
             <Link
@@ -52,10 +52,10 @@ export default function Hero() {
                 ['--chip-bg' as any]: 'transparent',
                 ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
                 color: BTN_PURPLE,
-                height: '40px', // Desktop
-                fontSize: '15px', // Desktop
-                paddingLeft: '16px',
-                paddingRight: '16px',
+                height: 20, // Mobile reducido
+                fontSize: 6, // Mobile reducido
+                paddingLeft: 4,
+                paddingRight: 4,
               } as React.CSSProperties}
             >
               {t.label}
@@ -81,7 +81,7 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full"
+                  className="h-auto w-full scale-[1.2]" // 20% más grande
                 />
               </div>
             </div>
@@ -156,14 +156,7 @@ export default function Hero() {
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row { margin-bottom: 16px; }
-          .talents-row a {
-            font-size: 8px !important;
-            font-family: sans-serif;
-            height: 22px;
-            padding-left: 6px;
-            padding-right: 6px;
-          }
+          .talents-row { margin-bottom: 16px; justify-content: space-between; flex-wrap: wrap; }
           .hero-title-1 { font-size: 35px; font-weight: normal; }
           .hero-card-mobile img { width: 100% !important; height: auto; }
           .bullets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap-x: 12px; gap-y: 16px; margin-bottom: 16px; }
