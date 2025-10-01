@@ -31,6 +31,16 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
+  // Generar 7 posiciones aleatorias para las estrellas
+  const stars = useMemo(() => {
+    return Array.from({ length: 7 }).map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 40}%`, // solo a la izquierda del 40% de la carta
+      size: `${8 + Math.random() * 12}px`,
+      delay: `${Math.random() * 5}s`,
+    }));
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
       {/* Línea divisoria morada */}
@@ -79,20 +89,35 @@ export default function Hero() {
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile w-2/5">
+              <div className="hero-card-mobile w-2/5 relative">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.936]" // Mobile incremento 20%
+                  className="h-auto w-full scale-[0.78]" // incrementada 20%
                 />
+                {/* ESTRELLAS MOBILE */}
+                {stars.map((s, idx) => (
+                  <span
+                    key={idx}
+                    className="absolute text-yellow-400 animate-dim"
+                    style={{
+                      top: s.top,
+                      left: s.left,
+                      fontSize: s.size,
+                      animationDelay: s.delay,
+                    }}
+                  >
+                    ✧
+                  </span>
+                ))}
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border border-gray-200">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets border border-gray-200 rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -132,36 +157,30 @@ export default function Hero() {
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
-            <div className="hero-card-wrapper relative z-10 select-none">
-              <div className="hero-card relative">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-[330px] lg:w-[390px]"
-                />
-                {/* Estrellas solo dentro del contenedor de la carta */}
-                <div className="stars-container">
-                  {Array.from({ length: 7 }).map((_, idx) => (
-                    <span
-                      key={idx}
-                      className={`star star-${idx}`}
-                      style={{
-                        top: `${Math.random() * 90}%`,
-                        left: `${Math.random() * 90}%`,
-                        fontSize: `${10 + Math.random() * 20}px`,
-                        animationDelay: `${Math.random() * 5}s`,
-                        animationDuration: `${5 + Math.random() * 5}s`,
-                      }}
-                    >
-                      ✧
-                      <span className="micro-stars">✧✧✧</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
+            <div className="hero-card relative z-10 select-none">
+              <Image
+                src={HERO_IMG}
+                alt="Carta / símbolo místico"
+                width={560}
+                height={790}
+                priority
+                className="h-auto w-[330px] lg:w-[390px]"
+              />
+              {/* ESTRELLAS DESKTOP */}
+              {stars.map((s, idx) => (
+                <span
+                  key={idx}
+                  className="absolute text-yellow-400 animate-dim"
+                  style={{
+                    top: s.top,
+                    left: s.left,
+                    fontSize: s.size,
+                    animationDelay: s.delay,
+                  }}
+                >
+                  ✧
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -179,9 +198,15 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
         }
 
         /* MOBILE */
@@ -206,29 +231,39 @@ export default function Hero() {
             gap-y: 12px;
             margin-top: 16px;
           }
-          .bullet-text { font-size: 14px; line-height: 1.4; }
-          .hero-mobile-row { margin-bottom: 16px; }
+          .bullet-text {
+            font-size: 14px;
+            line-height: 1.4;
+          }
+          .hero-mobile-row {
+            margin-bottom: 16px;
+          }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 { font-size: 65px; line-height: 1.15; }
-          .bullet-text { font-size: 16px; }
+          .hero-title-1 {
+            font-size: 65px;
+            line-height: 1.15;
+          }
+          .bullet-text {
+            font-size: 16px;
+          }
         }
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-          border: 1px solid rgba(0,0,0,0.12); /* borde más marcado */
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
-        /* Estrellas */
-        .stars-container { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:20; overflow:hidden; }
-        .star { position:absolute; color:#FFD700; opacity:0; display:inline-block; animation: dimStars linear infinite, swayStars linear infinite; }
-        .micro-stars { position:absolute; top:0; left:-2px; font-size:0.5em; opacity:0.8; color:#FFD700; }
-
-        @keyframes dimStars { 0% {opacity:0} 50% {opacity:1} 100% {opacity:0} }
-        @keyframes swayStars { 0% {transform:translateX(0)} 50% {transform:translateX(2px)} 100% {transform:translateX(0)} }
+        /* Animación dim estrellas */
+        @keyframes dim {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .animate-dim {
+          animation: dim 4s ease-in-out infinite;
+        }
       `}</style>
     </section>
   );
