@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
+const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -65,7 +66,7 @@ export default function Hero() {
         {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* DESKTOP TITLE */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
@@ -85,13 +86,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.93]" // Incremento 20% sobre escala base 0.78
+                  className="h-auto w-full scale-[0.936]" // Mobile incremento 20%
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border border-gray-200">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -121,26 +122,6 @@ export default function Hero() {
                 Únete como especialista
               </a>
             </div>
-
-            {/* ESTRELLAS */}
-            <div className="stars-container">
-              {Array.from({ length: 7 }).map((_, idx) => (
-                <span
-                  key={idx}
-                  className={`star star-${idx}`}
-                  style={{
-                    top: `${Math.random() * 80}%`,
-                    left: `${Math.random() * 50}px`,
-                    fontSize: `${10 + Math.random() * 20}px`,
-                    animationDelay: `${Math.random() * 5}s`,
-                    animationDuration: `${5 + Math.random() * 5}s`,
-                  }}
-                >
-                  ✧
-                  <span className="micro-stars">✧✧✧</span>
-                </span>
-              ))}
-            </div>
           </div>
 
           {/* RIGHT */}
@@ -151,35 +132,36 @@ export default function Hero() {
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
-            <div className="hero-card relative z-10 select-none">
-              <Image
-                src={HERO_IMG}
-                alt="Carta / símbolo místico"
-                width={560}
-                height={790}
-                priority
-                className="h-auto w-[330px] lg:w-[390px]"
-              />
-            </div>
-
-            {/* ESTRELLAS */}
-            <div className="stars-container">
-              {Array.from({ length: 7 }).map((_, idx) => (
-                <span
-                  key={idx}
-                  className={`star star-${idx}`}
-                  style={{
-                    top: `${Math.random() * 80}%`,
-                    left: `${-50 + Math.random() * 100}px`,
-                    fontSize: `${10 + Math.random() * 20}px`,
-                    animationDelay: `${Math.random() * 5}s`,
-                    animationDuration: `${5 + Math.random() * 5}s`,
-                  }}
-                >
-                  ✧
-                  <span className="micro-stars">✧✧✧</span>
-                </span>
-              ))}
+            <div className="hero-card-wrapper relative z-10 select-none">
+              <div className="hero-card relative">
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-[330px] lg:w-[390px]"
+                />
+                {/* Estrellas solo dentro del contenedor de la carta */}
+                <div className="stars-container">
+                  {Array.from({ length: 7 }).map((_, idx) => (
+                    <span
+                      key={idx}
+                      className={`star star-${idx}`}
+                      style={{
+                        top: `${Math.random() * 90}%`,
+                        left: `${Math.random() * 90}%`,
+                        fontSize: `${10 + Math.random() * 20}px`,
+                        animationDelay: `${Math.random() * 5}s`,
+                        animationDuration: `${5 + Math.random() * 5}s`,
+                      }}
+                    >
+                      ✧
+                      <span className="micro-stars">✧✧✧</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -204,9 +186,26 @@ export default function Hero() {
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row { flex-wrap: wrap; justify-content: flex-start; gap: 4px; }
-          .talents-row a { font-size: 10px; height: 24px; padding-left: 8px; padding-right: 8px; max-width: calc(50% - 4px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-          .bullets-grid { grid-template-columns: 1fr; gap-y: 12px; margin-top: 16px; }
+          .talents-row {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 4px;
+          }
+          .talents-row a {
+            font-size: 10px;
+            height: 24px;
+            padding-left: 8px;
+            padding-right: 8px;
+            max-width: calc(50% - 4px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .bullets-grid {
+            grid-template-columns: 1fr;
+            gap-y: 12px;
+            margin-top: 16px;
+          }
           .bullet-text { font-size: 14px; line-height: 1.4; }
           .hero-mobile-row { margin-bottom: 16px; }
         }
@@ -219,25 +218,17 @@ export default function Hero() {
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          border: 1px solid rgba(0,0,0,0.08);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          border: 1px solid rgba(0,0,0,0.12); /* borde más marcado */
         }
 
-        /* ESTRELLAS */
-        .stars-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; }
-        .star { position: absolute; color: #FFD700; opacity: 0; display: inline-block; animation: dimStars linear infinite, swayStars linear infinite; }
-        .micro-stars { position: absolute; top: 0; left: -2px; font-size: 0.5em; opacity: 0.8; color: #FFD700; }
-        @keyframes dimStars {
-          0% { opacity: 0; transform: scale(0.8); }
-          10% { opacity: 1; transform: scale(1); }
-          90% { opacity: 1; transform: scale(1); }
-          100% { opacity: 0; transform: scale(0.8); }
-        }
-        @keyframes swayStars {
-          0% { transform: translateX(0) rotate(0deg); }
-          50% { transform: translateX(calc(-5px + 10px * var(--rand))) rotate(5deg); }
-          100% { transform: translateX(0) rotate(0deg); }
-        }
+        /* Estrellas */
+        .stars-container { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:20; overflow:hidden; }
+        .star { position:absolute; color:#FFD700; opacity:0; display:inline-block; animation: dimStars linear infinite, swayStars linear infinite; }
+        .micro-stars { position:absolute; top:0; left:-2px; font-size:0.5em; opacity:0.8; color:#FFD700; }
+
+        @keyframes dimStars { 0% {opacity:0} 50% {opacity:1} 100% {opacity:0} }
+        @keyframes swayStars { 0% {transform:translateX(0)} 50% {transform:translateX(2px)} 100% {transform:translateX(0)} }
       `}</style>
     </section>
   );
