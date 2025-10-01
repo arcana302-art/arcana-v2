@@ -9,6 +9,10 @@ const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
 const LIGHT_PURPLE = '#c9a6ff';
 
+function random(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
 export default function Hero() {
   const talents = useMemo(
     () => [
@@ -31,30 +35,37 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  // Generar posiciones y tamaños aleatorios de estrellas
-  const stars = useMemo(() => {
-    const list: { top: string; left: string; size: number; dim: number }[] = [];
-    for (let i = 0; i < 7; i++) {
-      list.push({
-        top: `${Math.random() * 80}%`, // aleatorio pero dentro del contenedor
-        left: `${Math.random() * 90}%`,
-        size: Math.random() * 20 + 10, // tamaño entre 10 y 30px
-        dim: Math.random() * 0.5 + 0.5, // opacidad inicial
-      });
-    }
-    return list;
-  }, []);
+  const starsDesktop = useMemo(
+    () =>
+      Array.from({ length: 7 }).map((_, i) => ({
+        top: `${random(5, 95)}%`,
+        left: `${random(5, 95)}%`,
+        size: `${random(12, 24)}px`,
+        dim: random(0.3, 1),
+        delay: random(0, 5),
+      })),
+    []
+  );
+
+  const starsMobile = useMemo(
+    () =>
+      Array.from({ length: 7 }).map((_, i) => ({
+        top: `${random(5, 95)}%`,
+        left: `${random(5, 95)}%`,
+        size: `${random(8, 14)}px`,
+        dim: random(0.3, 1),
+        delay: random(0, 5),
+      })),
+    []
+  );
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        {/* TALENTS */}
-        <nav
-          aria-label="Talentos"
-          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
-        >
+        {/* Talents */}
+        <nav className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row">
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -76,59 +87,54 @@ export default function Hero() {
           ))}
         </nav>
 
+        {/* Hero Grid */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
+            {/* Desktop Title */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
               <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
             </h1>
 
-            {/* MOBILE */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
+            {/* Mobile Title + Card */}
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-
-              <div className="hero-card-mobile w-2/5 relative">
+              <div className="hero-card-mobile w-2/5">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.9]"
+                  className="h-auto w-full scale-[0.93]" // incremento 15%
                 />
-                <div className="stars-container absolute inset-0 pointer-events-none">
-                  {stars.map((s, idx) => (
-                    <span
-                      key={idx}
-                      className="star absolute"
-                      style={{
-                        top: s.top,
-                        left: s.left,
-                        fontSize: `${s.size * 0.7}px`,
-                        opacity: s.dim,
-                      }}
-                    >
-                      ✦
-                    </span>
-                  ))}
-                </div>
-                {/* Nube Mobile */}
-                <div className="mobile-cloud absolute inset-0 -z-10">
-                  <Image
-                    src={CLOUD_IMG}
-                    alt=""
-                    fill
-                    className="object-contain cloud-motion-mobile"
-                  />
-                </div>
               </div>
             </div>
 
-            {/* BULLETS */}
+            {/* Stars Container */}
+            <div className="stars-container hidden sm:block absolute top-0 left-0 w-full h-full pointer-events-none">
+              {starsDesktop.map((s, idx) => (
+                <span
+                  key={idx}
+                  className="star"
+                  style={{
+                    top: s.top,
+                    left: s.left,
+                    fontSize: s.size,
+                    opacity: s.dim,
+                    animationDelay: `${s.delay}s`,
+                  }}
+                >
+                  ✦
+                </span>
+              ))}
+            </div>
+
+            {/* Bullets */}
             <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
@@ -140,6 +146,7 @@ export default function Hero() {
               ))}
             </div>
 
+            {/* CTA Desktop */}
             <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
@@ -161,12 +168,12 @@ export default function Hero() {
           </div>
 
           {/* RIGHT */}
-          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
+          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px]">
             <img
               src={CLOUD_IMG}
               alt=""
               aria-hidden="true"
-              className="cloud-img absolute z-0 select-none pointer-events-none cloud-motion-desktop"
+              className="cloud-img absolute z-0 select-none pointer-events-none"
             />
             <div className="hero-card relative z-10 select-none">
               <Image
@@ -177,64 +184,44 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
-              <div className="stars-container absolute inset-0 pointer-events-none">
-                {stars.map((s, idx) => (
-                  <span
-                    key={idx}
-                    className="star absolute"
-                    style={{
-                      top: s.top,
-                      left: s.left,
-                      fontSize: `${s.size}px`,
-                      opacity: s.dim,
-                    }}
-                  >
-                    ✦
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        /* Nube Desktop */
         .cloud-img {
           top: 50%;
-          left: 50%;
+          left: 0%;
           width: 680px;
           opacity: 0.42;
-          transform: translate(-50%, -50%);
-        }
-        .cloud-motion-desktop {
-          animation: swayDesktop 26s ease-in-out infinite alternate;
-        }
-        @keyframes swayDesktop {
-          0% { transform: translateX(15%); }
-          50% { transform: translateX(-15%); }
-          100% { transform: translateX(15%); }
+          transform: translateY(-50%);
+          animation: cloud-sway 20s ease-in-out infinite alternate;
+          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
 
-        /* Nube Mobile */
-        .cloud-motion-mobile {
-          animation: swayMobile 26s ease-in-out infinite alternate;
-        }
-        @keyframes swayMobile {
-          0% { transform: translateX(10%); }
-          50% { transform: translateX(-10%); }
-          100% { transform: translateX(10%); }
+        @keyframes cloud-sway {
+          0% {
+            left: 0%;
+          }
+          100% {
+            left: 20%;
+          }
         }
 
-        /* Estrellas */
+        /* Stars */
         .star {
-          color: #ffeb3b;
-          pointer-events: none;
-          animation: dim 4s ease-in-out infinite alternate;
+          position: absolute;
+          color: #FFD700;
+          display: block;
+          animation: dim 3s ease-in-out infinite alternate;
         }
+
         @keyframes dim {
           0% { opacity: 1; }
-          100% { opacity: 0.3; }
+          50% { opacity: 0.3; }
+          100% { opacity: 1; }
         }
 
         /* MOBILE */
@@ -250,6 +237,9 @@ export default function Hero() {
             padding-left: 8px;
             padding-right: 8px;
             max-width: calc(50% - 4px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .bullets-grid {
             grid-template-columns: 1fr;
@@ -259,6 +249,19 @@ export default function Hero() {
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
+          }
+          .hero-mobile-row {
+            margin-bottom: 16px;
+          }
+
+          /* Stars Mobile */
+          .hero-mobile-row::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
           }
         }
 
@@ -273,6 +276,7 @@ export default function Hero() {
           }
         }
 
+        /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
