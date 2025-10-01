@@ -31,20 +31,6 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  // Generar posiciones y tamaños aleatorias para las estrellas
-  const stars = useMemo(() => {
-    const arr = [];
-    for (let i = 0; i < 7; i++) {
-      arr.push({
-        top: `${Math.random() * 80}%`, // solo dentro del contenedor de la carta
-        left: `${Math.random() * 90}%`,
-        size: `${10 + Math.random() * 14}px`, // tamaños 10-24px
-        delay: `${Math.random() * 5}s`,
-      });
-    }
-    return arr;
-  }, []);
-
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
@@ -76,10 +62,9 @@ export default function Hero() {
           ))}
         </nav>
 
-        {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
             {/* DESKTOP TITLE */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
@@ -87,46 +72,49 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
-              {/* Estrellas */}
-              <div className="stars-container absolute top-0 left-0 w-2/5 h-full pointer-events-none">
-                {stars.map((s, idx) => (
-                  <span
-                    key={idx}
-                    className="absolute text-yellow-400 animate-dim"
-                    style={{
-                      top: s.top,
-                      left: s.left,
-                      fontSize: s.size,
-                      animationDelay: s.delay,
-                    }}
-                  >
-                    ✧
-                  </span>
-                ))}
-              </div>
-
-              {/* Título */}
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-
-              {/* Carta */}
-              <div className="hero-card-mobile w-2/5 relative">
+              <div className="hero-card-mobile w-2/5">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.78]" // tamaño mobile incrementado 20%
+                  className="h-auto w-full scale-[0.93]" // imagen aumentada 20%
                 />
               </div>
             </div>
 
+            {/* CONTENEDOR DE ESTRELLAS */}
+            <div className="stars-container absolute top-0 left-0 h-full w-full pointer-events-none">
+              {Array.from({ length: 7 }).map((_, idx) => {
+                const size = 8 + Math.random() * 12; // 8px a 20px
+                const top = 10 + Math.random() * 80; // solo entre 10% y 90% vertical para no tocar texto ni bullets
+                const left = 50 + Math.random() * 40; // entre 50% y 90% horizontal entre texto y carta
+                const delay = Math.random() * 5;
+                return (
+                  <span
+                    key={idx}
+                    className="star"
+                    style={{
+                      top: `${top}%`,
+                      left: `${left}%`,
+                      fontSize: `${size}px`,
+                      animationDelay: `${delay}s`,
+                    }}
+                  >
+                    ✧
+                  </span>
+                );
+              })}
+            </div>
+
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border border-[#9434ec]/30">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -175,23 +163,6 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
-              {/* Estrellas desktop */}
-              <div className="stars-container-desktop absolute top-0 left-[-50px] w-[390px] h-full pointer-events-none">
-                {stars.map((s, idx) => (
-                  <span
-                    key={idx}
-                    className="absolute text-yellow-400 animate-dim"
-                    style={{
-                      top: s.top,
-                      left: s.left,
-                      fontSize: s.size,
-                      animationDelay: s.delay,
-                    }}
-                  >
-                    ✧
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -209,23 +180,21 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% {
-            transform: translateX(-52%);
-          }
-          50% {
-            transform: translateX(-44%);
-          }
-          100% {
-            transform: translateX(-52%);
-          }
+          0% { transform: translateX(-52%); }
+          50% { transform: translateX(-44%); }
+          100% { transform: translateX(-52%); }
         }
 
-        @keyframes dim {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.2; }
+        /* ESTRELLAS */
+        .star {
+          position: absolute;
+          color: #FFD700;
+          opacity: 1;
+          animation: dimStar 4s ease-in-out infinite;
         }
-        .animate-dim {
-          animation: dim 6s ease-in-out infinite;
+        @keyframes dimStar {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
 
         /* MOBILE */
@@ -250,29 +219,18 @@ export default function Hero() {
             gap-y: 12px;
             margin-top: 16px;
           }
-          .bullet-text {
-            font-size: 14px;
-            line-height: 1.4;
-          }
+          .bullet-text { font-size: 14px; line-height: 1.4; }
+          .hero-mobile-row { margin-bottom: 16px; }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 {
-            font-size: 65px;
-            line-height: 1.15;
-          }
-          .bullet-text {
-            font-size: 16px;
-          }
+          .hero-title-1 { font-size: 65px; line-height: 1.15; }
+          .bullet-text { font-size: 16px; }
         }
 
         /* Bullets recuadro */
-        .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-          border-radius: 12px;
-          border: 1px solid rgba(148,52,236,0.3);
-        }
+        .shadow-bullets { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
       `}</style>
     </section>
   );
