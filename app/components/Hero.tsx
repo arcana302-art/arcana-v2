@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
+const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -32,6 +33,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -65,14 +67,14 @@ export default function Hero() {
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* Desktop Title */}
-            <h1 className="hero-title-1 hidden sm:block lg:block text-[65px] font-normal leading-[1.15]">
+            {/* DESKTOP TITLE */}
+            <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
               <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
             </h1>
 
-            {/* Mobile: Título + Carta lado a lado */}
-            <div className="hero-mobile-row flex sm:hidden w-full gap-4 mt-4 items-center">
+            {/* MOBILE: Título + Carta lado a lado */}
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
@@ -84,13 +86,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.897]" // +15% tamaño
+                  className="h-auto w-full scale-[0.78]" // tamaño Mobile ajustado
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
+            <div className="mt-4 bullets-grid shadow-bullets p-4 rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -156,9 +158,15 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
         }
 
         /* MOBILE */
@@ -178,17 +186,23 @@ export default function Hero() {
             overflow: hidden;
             text-overflow: ellipsis;
           }
+
+          .hero-mobile-row {
+            margin-bottom: 16px;
+          }
+
           .bullets-grid {
             grid-template-columns: 1fr;
             gap-y: 12px;
             margin-top: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background-color: rgba(255, 255, 255, 0.0);
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
-          }
-          .hero-mobile-row {
-            margin-bottom: 16px;
           }
         }
 
@@ -205,7 +219,7 @@ export default function Hero() {
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
       `}</style>
     </section>
