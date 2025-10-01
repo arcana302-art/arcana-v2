@@ -79,14 +79,22 @@ export default function Hero() {
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile w-2/5">
+              <div className="hero-card-mobile w-2/5 relative">
+                {/* ESTRELLAS */}
+                <div className="stars-container">
+                  {Array.from({ length: 7 }).map((_, idx) => (
+                    <span key={idx} className={`star star-${idx}`}>
+                      ✧
+                    </span>
+                  ))}
+                </div>
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.94]" // incrementado +20%
+                  className="h-auto w-full scale-[0.78]" // ajuste Mobile
                 />
               </div>
             </div>
@@ -133,6 +141,14 @@ export default function Hero() {
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
             <div className="hero-card relative z-10 select-none">
+              {/* ESTRELLAS */}
+              <div className="stars-container">
+                {Array.from({ length: 7 }).map((_, idx) => (
+                  <span key={idx} className={`star star-${idx}`}>
+                    ✧
+                  </span>
+                ))}
+              </div>
               <Image
                 src={HERO_IMG}
                 alt="Carta / símbolo místico"
@@ -158,15 +174,9 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% {
-            transform: translateX(-52%);
-          }
-          50% {
-            transform: translateX(-44%);
-          }
-          100% {
-            transform: translateX(-52%);
-          }
+          0% { transform: translateX(-52%); }
+          50% { transform: translateX(-44%); }
+          100% { transform: translateX(-52%); }
         }
 
         /* MOBILE */
@@ -190,14 +200,13 @@ export default function Hero() {
             grid-template-columns: 1fr;
             gap-y: 12px;
             margin-top: 16px;
-            border: 1px solid rgba(148,52,236,0.3); /* borde más marcado pero elegante */
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
           }
           .hero-mobile-row {
-            margin-bottom: 20px; /* espacio entre fila y bullets */
+            margin-bottom: 16px;
           }
         }
 
@@ -210,14 +219,44 @@ export default function Hero() {
           .bullet-text {
             font-size: 16px;
           }
-          .bullets-grid {
-            border: 1px solid rgba(148,52,236,0.2); /* borde más marcado pero elegante */
-          }
         }
 
         /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ESTRELLAS */
+        .stars-container {
+          position: absolute;
+          top: 0;
+          left: -40px;
+          width: 40px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          pointer-events: none;
+          z-index: 20;
+        }
+        .star {
+          color: #FFD700;
+          opacity: 0;
+          animation: dimStars 6s linear infinite;
+        }
+        .star-0 { font-size: 18px; animation-delay: 0s; }
+        .star-1 { font-size: 14px; animation-delay: 0.8s; }
+        .star-2 { font-size: 22px; animation-delay: 1.4s; }
+        .star-3 { font-size: 10px; animation-delay: 2s; }
+        .star-4 { font-size: 25px; animation-delay: 2.6s; }
+        .star-5 { font-size: 16px; animation-delay: 3.2s; }
+        .star-6 { font-size: 20px; animation-delay: 3.8s; }
+
+        @keyframes dimStars {
+          0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+          10% { opacity: 1; transform: scale(1) rotate(10deg); }
+          90% { opacity: 1; transform: scale(1) rotate(-10deg); }
+          100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
         }
       `}</style>
     </section>
