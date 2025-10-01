@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
-const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -33,7 +32,6 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
-      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -67,10 +65,16 @@ export default function Hero() {
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* MOBILE TITLE + CARD */}
-            <div className="hero-title-wrapper-mobile hidden sm:flex flex-row items-center gap-4 w-full">
-              <h1 className="hero-title-mobile text-[#22172f] text-[30px] leading-[1.1] w-3/5">
-                El universo se comunica en<br />
+            {/* Desktop Title */}
+            <h1 className="hero-title-1 hidden sm:block lg:block text-[65px] font-normal leading-[1.15]">
+              <span className="text-[#22172f]">El universo se comunica en </span>
+              <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+            </h1>
+
+            {/* Mobile: Título + Carta lado a lado */}
+            <div className="hero-mobile-row flex sm:hidden w-full gap-4 mt-4 items-center">
+              <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
+                El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
               <div className="hero-card-mobile w-2/5">
@@ -80,16 +84,10 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.897]" // incremento 15%
+                  className="h-auto w-full scale-[0.897]" // +15% tamaño
                 />
               </div>
             </div>
-
-            {/* DESKTOP TITLE */}
-            <h1 className="hero-title-1 hidden lg:block text-[65px] font-normal leading-[1.15]">
-              <span className="text-[#22172f]">El universo se comunica en </span>
-              <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
-            </h1>
 
             {/* BULLETS */}
             <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
@@ -104,7 +102,7 @@ export default function Hero() {
             </div>
 
             {/* CTA DESKTOP */}
-            <div className="hidden lg:flex lg:gap-4 mt-5">
+            <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
@@ -180,15 +178,17 @@ export default function Hero() {
             overflow: hidden;
             text-overflow: ellipsis;
           }
-          .hero-title-1 { display: none; } /* Ocultar título Desktop */
-          .hero-title-mobile { display: flex; }
           .bullets-grid {
             grid-template-columns: 1fr;
             gap-y: 12px;
+            margin-top: 16px;
           }
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
+          }
+          .hero-mobile-row {
+            margin-bottom: 16px;
           }
         }
 
