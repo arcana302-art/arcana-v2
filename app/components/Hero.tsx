@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
-const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -67,20 +66,22 @@ export default function Hero() {
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* MOBILE: TÍTULO + CARTA 60/40 */}
-            <div className="flex w-full sm:hidden gap-2 items-center mb-4">
-              <h1 className="hero-title-1 text-[30px] font-normal leading-[1.15] w-3/5">
+            {/* TITLE + CARD MOBILE */}
+            <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
+              <h1 className="hero-title-1 text-[30px] sm:text-[65px] font-normal leading-[1.15]">
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="w-2/5">
+
+              {/* Mobile: carta al lado del título */}
+              <div className="hero-card-mobile flex sm:hidden w-2/5 ml-4">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.5]" // Reducida al 50%
+                  className="h-auto w-full scale-[0.5]"
                 />
               </div>
             </div>
@@ -118,7 +119,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT DESKTOP */}
+          {/* RIGHT */}
           <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
             <img
               src={CLOUD_IMG}
@@ -152,9 +153,15 @@ export default function Hero() {
           mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
         }
 
         /* MOBILE */
@@ -175,8 +182,12 @@ export default function Hero() {
             text-overflow: ellipsis;
           }
           .hero-title-1 {
-            font-size: 30px; /* reducido para 5 renglones */
-            line-height: 1.15;
+            font-size: 30px;
+            line-height: 1.1;
+          }
+          .hero-card-mobile img {
+            width: 100% !important;
+            height: auto;
           }
           .bullets-grid {
             grid-template-columns: 1fr;
@@ -185,6 +196,11 @@ export default function Hero() {
           .bullet-text {
             font-size: 14px;
             line-height: 1.4;
+          }
+          .hero-title-wrapper {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
           }
         }
 
