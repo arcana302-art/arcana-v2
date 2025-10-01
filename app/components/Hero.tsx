@@ -40,22 +40,22 @@ export default function Hero() {
         {/* TALENTS */}
         <nav
           aria-label="Talentos"
-          className="flex flex-wrap gap-2 mb-3 sm:mb-4 talents-row"
+          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
         >
           {talents.map((t) => (
             <Link
               key={t.href}
               href={t.href}
-              className="group rounded-full inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
+              className="group rounded-full px-4 sm:px-5 h-10 inline-flex items-center
+                text-[15px] sm:text-[15px]
+                border border-[--chip-border] bg-[--chip-bg]
+                hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)]
+                transition-colors"
               style={{
                 ['--chip-border' as any]: BTN_PURPLE,
                 ['--chip-bg' as any]: 'transparent',
                 ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
                 color: BTN_PURPLE,
-                height: 22, // Mobile ajustado
-                fontSize: 7, // Mobile más legible
-                paddingLeft: 5,
-                paddingRight: 5,
               } as React.CSSProperties}
             >
               {t.label}
@@ -81,10 +81,13 @@ export default function Hero() {
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.2]" // 20% más grande
+                  className="h-auto w-full scale-[1.25]" // 5% extra tamaño sobre 20% previo
                 />
               </div>
             </div>
+
+            {/* SPACING BETWEEN TITLE AND BULLETS */}
+            <div className="mt-6 sm:mt-[25%]"></div>
 
             {/* BULLETS */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 mt-4 sm:mt-5 bullets-grid">
@@ -96,14 +99,20 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* BUTTON DESKTOP LEFT */}
-            <div className="hidden lg:flex lg:justify-start mt-5">
+            {/* BUTTONS DESKTOP */}
+            <div className="hidden lg:flex lg:gap-4 mt-5">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
                 style={{ backgroundColor: BTN_PURPLE, boxShadow: '0 12px 40px -10px rgba(148,52,236,0.55)' }}
               >
                 Agendar una consulta
+              </a>
+              <a
+                href="#"
+                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
+              >
+                Únete como especialista
               </a>
             </div>
           </div>
@@ -126,16 +135,6 @@ export default function Hero() {
                 className="h-auto w-[330px] lg:w-[390px]"
               />
             </div>
-
-            {/* BUTTON DESKTOP RIGHT */}
-            <div className="mt-5">
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
-              >
-                Únete como especialista
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -156,18 +155,48 @@ export default function Hero() {
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row { margin-bottom: 16px; justify-content: space-between; flex-wrap: wrap; }
-          .hero-title-1 { font-size: 35px; font-weight: normal; }
-          .hero-card-mobile img { width: 100% !important; height: auto; }
-          .bullets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap-x: 12px; gap-y: 16px; margin-bottom: 16px; }
-          .bullet-text { font-size: 14px; line-height: 1.4; }
-          .hero-title-wrapper { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; }
+          .talents-row {
+            margin-bottom: 16px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+          }
+          .hero-title-1 {
+            font-size: 35px;
+            font-weight: normal;
+            line-height: 1.1;
+          }
+          .hero-card-mobile img {
+            width: 100% !important;
+            height: auto;
+          }
+          .bullets-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap-x: 12px;
+            gap-y: 16px;
+            margin-bottom: 16px;
+          }
+          .bullet-text {
+            font-size: 14px;
+            line-height: 1.4;
+          }
+          .hero-title-wrapper {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+          }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 { font-size: 65px; font-weight: normal; }
-          .bullet-text { font-size: 16px; }
+          .hero-title-1 {
+            font-size: 65px;
+            font-weight: normal;
+            line-height: 0.5; /* reducir espacio entre líneas a la mitad */
+          }
+          .bullet-text {
+            font-size: 16px;
+          }
         }
       `}</style>
     </section>
