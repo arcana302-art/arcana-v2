@@ -72,37 +72,30 @@ export default function Hero() {
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
               <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
-                <span className="text-[#22172f]">
-                  El universo se comunica en{' '}
-                </span>
-                <span className="text-[#c9a6ff]">
-                  símbolos, energía y estrellas
-                </span>
+                <span className="text-[#22172f]">El universo se comunica en </span>
+                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
 
-              {/* Card Mobile */}
-              <div className="hero-card-mobile sm:hidden w-full">
+              <div className="hero-card-mobile sm:hidden w-full mt-4">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.35]" // +5%
+                  className="h-auto w-full scale-[1.2]" // 20% más grande
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-2 bullets-grid">
+            <div className="mt-4 bullets-grid">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
                     ✓
                   </span>
-                  <span className="bullet-text text-[#22172f]/90">
-                    {item}
-                  </span>
+                  <span className="bullet-text text-[#22172f]/90">{item}</span>
                 </div>
               ))}
             </div>
@@ -190,25 +183,25 @@ export default function Hero() {
             flex-wrap: wrap;
           }
           .talents-row a {
-            font-size: 10px;
-            height: 24px;
-            padding-left: 6px;
-            padding-right: 6px;
+            font-size: 9px;
+            height: 28px;
+            padding-left: 8px;
+            padding-right: 8px;
             margin: 2px;
           }
           .hero-title-1 {
             font-size: 35px;
-            line-height: 1.1;
+            line-height: 1.2;
           }
           .hero-card-mobile img {
             width: 100% !important;
             height: auto;
           }
           .bullets-grid {
+            display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap-x: 12px;
-            gap-y: 16px;
-            margin-bottom: 16px;
+            gap-y: 14px;
           }
           .bullet-text {
             font-size: 14px;
