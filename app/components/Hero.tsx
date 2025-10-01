@@ -73,28 +73,24 @@ export default function Hero() {
           {/* LADO IZQUIERDO */}
           <div className="hero-left col-span-12 lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             
-            {/* Título siempre visible */}
-            <div className="hero-text mb-4">
-              <h1 className="hero-title-1 text-[22px] sm:text-[30px] leading-tight">
-                <span className="text-[#22172f] font-normal">
-                  El universo se comunica en{' '}
-                </span>
-                <span className="text-[#c9a6ff] font-normal">
-                  símbolos, energía y estrellas
-                </span>
+            {/* Título Desktop y Mobile */}
+            <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-4">
+              <h1 className="hero-title-1 text-[22px] sm:text-[50px] leading-tight font-normal">
+                <span className="text-[#22172f]">El universo se comunica en </span>
+                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-            </div>
 
-            {/* Carta mobile solo en sm:hidden */}
-            <div className="hero-card-mobile sm:hidden mb-4">
-              <Image
-                src={HERO_IMG}
-                alt="Carta / símbolo místico"
-                width={560}
-                height={790}
-                priority
-                className="h-auto w-[180px]"
-              />
+              {/* Carta Mobile alineada con título */}
+              <div className="hero-card-mobile sm:hidden mt-4 sm:mt-0">
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-[180px]"
+                />
+              </div>
             </div>
 
             {/* BULLETS CON CHECKS */}
@@ -194,7 +190,7 @@ export default function Hero() {
             height: 34px;
           }
 
-          .hero-title-1 { font-weight: normal; }
+          .hero-title-1 { font-weight: normal; font-size: 22px; }
 
           .hero-card-mobile img { width: 140px !important; }
 
@@ -211,6 +207,16 @@ export default function Hero() {
             font-size: 14px;
             height: 44px;
           }
+
+          .hero-title-wrapper {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+          }
+        }
+
+        @media (min-width: 640px) {
+          .hero-title-1 { font-size: 50px; }
         }
       `}</style>
     </section>
