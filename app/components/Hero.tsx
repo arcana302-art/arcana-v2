@@ -31,19 +31,22 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  // Generar 7 posiciones aleatorias para las estrellas
+  // Generar posiciones y tamaños aleatorias para las estrellas
   const stars = useMemo(() => {
-    return Array.from({ length: 7 }).map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 40}%`, // solo a la izquierda del 40% de la carta
-      size: `${8 + Math.random() * 12}px`,
-      delay: `${Math.random() * 5}s`,
-    }));
+    const arr = [];
+    for (let i = 0; i < 7; i++) {
+      arr.push({
+        top: `${Math.random() * 80}%`, // solo dentro del contenedor de la carta
+        left: `${Math.random() * 90}%`,
+        size: `${10 + Math.random() * 14}px`, // tamaños 10-24px
+        delay: `${Math.random() * 5}s`,
+      });
+    }
+    return arr;
   }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
-      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -84,21 +87,9 @@ export default function Hero() {
             </h1>
 
             {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
-              <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
-                El universo se comunica en <br />
-                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
-              </h1>
-              <div className="hero-card-mobile w-2/5 relative">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-full scale-[0.78]" // incrementada 20%
-                />
-                {/* ESTRELLAS MOBILE */}
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
+              {/* Estrellas */}
+              <div className="stars-container absolute top-0 left-0 w-2/5 h-full pointer-events-none">
                 {stars.map((s, idx) => (
                   <span
                     key={idx}
@@ -114,10 +105,28 @@ export default function Hero() {
                   </span>
                 ))}
               </div>
+
+              {/* Título */}
+              <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
+                El universo se comunica en <br />
+                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
+              </h1>
+
+              {/* Carta */}
+              <div className="hero-card-mobile w-2/5 relative">
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-full scale-[0.78]" // tamaño mobile incrementado 20%
+                />
+              </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets border border-gray-200 rounded-lg bg-transparent">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent border border-[#9434ec]/30">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -166,21 +175,23 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
-              {/* ESTRELLAS DESKTOP */}
-              {stars.map((s, idx) => (
-                <span
-                  key={idx}
-                  className="absolute text-yellow-400 animate-dim"
-                  style={{
-                    top: s.top,
-                    left: s.left,
-                    fontSize: s.size,
-                    animationDelay: s.delay,
-                  }}
-                >
-                  ✧
-                </span>
-              ))}
+              {/* Estrellas desktop */}
+              <div className="stars-container-desktop absolute top-0 left-[-50px] w-[390px] h-full pointer-events-none">
+                {stars.map((s, idx) => (
+                  <span
+                    key={idx}
+                    className="absolute text-yellow-400 animate-dim"
+                    style={{
+                      top: s.top,
+                      left: s.left,
+                      fontSize: s.size,
+                      animationDelay: s.delay,
+                    }}
+                  >
+                    ✧
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -209,6 +220,14 @@ export default function Hero() {
           }
         }
 
+        @keyframes dim {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.2; }
+        }
+        .animate-dim {
+          animation: dim 6s ease-in-out infinite;
+        }
+
         /* MOBILE */
         @media (max-width: 639px) {
           .talents-row {
@@ -235,9 +254,6 @@ export default function Hero() {
             font-size: 14px;
             line-height: 1.4;
           }
-          .hero-mobile-row {
-            margin-bottom: 16px;
-          }
         }
 
         /* DESKTOP */
@@ -254,15 +270,8 @@ export default function Hero() {
         /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-
-        /* Animación dim estrellas */
-        @keyframes dim {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        .animate-dim {
-          animation: dim 4s ease-in-out infinite;
+          border-radius: 12px;
+          border: 1px solid rgba(148,52,236,0.3);
         }
       `}</style>
     </section>
