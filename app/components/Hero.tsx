@@ -9,10 +9,6 @@ const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
 const LIGHT_PURPLE = '#c9a6ff';
 
-function random(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
-
 export default function Hero() {
   const talents = useMemo(
     () => [
@@ -35,37 +31,47 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  const starsDesktop = useMemo(
-    () =>
-      Array.from({ length: 7 }).map((_, i) => ({
-        top: `${random(5, 95)}%`,
-        left: `${random(5, 95)}%`,
-        size: `${random(12, 24)}px`,
-        dim: random(0.3, 1),
-        delay: random(0, 5),
-      })),
-    []
-  );
+  // Estrellas Desktop
+  const starsDesktop = useMemo(() => {
+    const arr = [];
+    for (let i = 0; i < 7; i++) {
+      arr.push({
+        top: `${10 + Math.random() * 70}%`,
+        left: `${5 + Math.random() * 40}%`,
+        size: `${15 + Math.random() * 25}px`,
+        dim: 0.5 + Math.random() * 0.5,
+        delay: Math.random() * 5,
+      });
+    }
+    return arr;
+  }, []);
 
-  const starsMobile = useMemo(
-    () =>
-      Array.from({ length: 7 }).map((_, i) => ({
-        top: `${random(5, 95)}%`,
-        left: `${random(5, 95)}%`,
-        size: `${random(8, 14)}px`,
-        dim: random(0.3, 1),
-        delay: random(0, 5),
-      })),
-    []
-  );
+  // Estrellas Mobile
+  const starsMobile = useMemo(() => {
+    const arr = [];
+    for (let i = 0; i < 7; i++) {
+      arr.push({
+        top: `${10 + Math.random() * 70}%`,
+        left: `${5 + Math.random() * 40}%`,
+        size: `${10 + Math.random() * 15}px`,
+        dim: 0.5 + Math.random() * 0.5,
+        delay: Math.random() * 5,
+      });
+    }
+    return arr;
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        {/* Talents */}
-        <nav className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row">
+        {/* TALENTS */}
+        <nav
+          aria-label="Talentos"
+          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
+        >
           {talents.map((t) => (
             <Link
               key={t.href}
@@ -87,23 +93,23 @@ export default function Hero() {
           ))}
         </nav>
 
-        {/* Hero Grid */}
+        {/* GRID HERO */}
         <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
-            {/* Desktop Title */}
+          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
+            {/* DESKTOP TITLE */}
             <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
               <span className="text-[#22172f]">El universo se comunica en </span>
               <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
             </h1>
 
-            {/* Mobile Title + Card */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center">
+            {/* MOBILE: Título + Carta lado a lado */}
+            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
               <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
                 El universo se comunica en <br />
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
-              <div className="hero-card-mobile w-2/5">
+              <div className="hero-card-mobile w-2/5 relative">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
@@ -112,30 +118,31 @@ export default function Hero() {
                   priority
                   className="h-auto w-full scale-[0.93]" // incremento 15%
                 />
+
+                {/* Estrellas Mobile */}
+                <div className="stars-mobile absolute top-0 left-0 w-full h-full pointer-events-none">
+                  {starsMobile.map((s, idx) => (
+                    <span
+                      key={idx}
+                      className="star"
+                      style={{
+                        top: s.top,
+                        left: s.left,
+                        fontSize: s.size,
+                        opacity: s.dim,
+                        animation: `dim 4s ease-in-out infinite alternate`,
+                        animationDelay: `${s.delay}s`,
+                      }}
+                    >
+                      ✦
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Stars Container */}
-            <div className="stars-container hidden sm:block absolute top-0 left-0 w-full h-full pointer-events-none">
-              {starsDesktop.map((s, idx) => (
-                <span
-                  key={idx}
-                  className="star"
-                  style={{
-                    top: s.top,
-                    left: s.left,
-                    fontSize: s.size,
-                    opacity: s.dim,
-                    animationDelay: `${s.delay}s`,
-                  }}
-                >
-                  ✦
-                </span>
-              ))}
-            </div>
-
-            {/* Bullets */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
+            {/* BULLETS */}
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent relative z-10">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -146,7 +153,7 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* CTA Desktop */}
+            {/* CTA DESKTOP */}
             <div className="hidden lg:flex lg:gap-6 mt-5">
               <a
                 href="#"
@@ -168,13 +175,15 @@ export default function Hero() {
           </div>
 
           {/* RIGHT */}
-          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px]">
+          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
+            {/* NUBE */}
             <img
               src={CLOUD_IMG}
               alt=""
               aria-hidden="true"
               className="cloud-img absolute z-0 select-none pointer-events-none"
             />
+
             <div className="hero-card relative z-10 select-none">
               <Image
                 src={HERO_IMG}
@@ -184,6 +193,26 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
+
+              {/* Estrellas Desktop */}
+              <div className="stars-desktop absolute top-0 left-0 w-full h-full pointer-events-none">
+                {starsDesktop.map((s, idx) => (
+                  <span
+                    key={idx}
+                    className="star"
+                    style={{
+                      top: s.top,
+                      left: s.left,
+                      fontSize: s.size,
+                      opacity: s.dim,
+                      animation: `dim 4s ease-in-out infinite alternate`,
+                      animationDelay: `${s.delay}s`,
+                    }}
+                  >
+                    ✦
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -192,93 +221,48 @@ export default function Hero() {
       <style jsx>{`
         .cloud-img {
           top: 50%;
-          left: 0%;
+          left: 50%;
           width: 680px;
           opacity: 0.42;
-          transform: translateY(-50%);
-          animation: cloud-sway 20s ease-in-out infinite alternate;
-          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
-          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          transform: translate(-50%, -50%);
+          animation: cloud-sway 26s ease-in-out infinite alternate;
         }
-
         @keyframes cloud-sway {
-          0% {
-            left: 0%;
-          }
-          100% {
-            left: 20%;
-          }
-        }
-
-        /* Stars */
-        .star {
-          position: absolute;
-          color: #FFD700;
-          display: block;
-          animation: dim 3s ease-in-out infinite alternate;
+          0% { transform: translateX(-52%); }
+          50% { transform: translateX(-44%); }
+          100% { transform: translateX(-52%); }
         }
 
         @keyframes dim {
           0% { opacity: 1; }
-          50% { opacity: 0.3; }
-          100% { opacity: 1; }
+          100% { opacity: 0.3; }
         }
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row {
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 4px;
-          }
           .talents-row a {
             font-size: 10px;
             height: 24px;
             padding-left: 8px;
             padding-right: 8px;
             max-width: calc(50% - 4px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
           }
-          .bullets-grid {
-            grid-template-columns: 1fr;
-            gap-y: 12px;
-            margin-top: 16px;
-          }
-          .bullet-text {
-            font-size: 14px;
-            line-height: 1.4;
-          }
-          .hero-mobile-row {
-            margin-bottom: 16px;
-          }
-
-          /* Stars Mobile */
-          .hero-mobile-row::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-          }
+          .bullet-text { font-size: 14px; line-height: 1.4; }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 {
-            font-size: 65px;
-            line-height: 1.15;
-          }
-          .bullet-text {
-            font-size: 16px;
-          }
+          .hero-title-1 { font-size: 65px; line-height: 1.15; }
+          .bullet-text { font-size: 16px; }
         }
 
         /* Bullets recuadro */
-        .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        .shadow-bullets { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+
+        .star {
+          position: absolute;
+          color: #FFD700;
+          pointer-events: none;
         }
       `}</style>
     </section>
