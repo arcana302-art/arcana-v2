@@ -69,31 +69,20 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              {/* Contenedor móvil para alinear título y carta */}
-              <div className="flex flex-row w-full sm:hidden gap-4">
-                <div className="w-1/2 flex items-center">
-                  <h1 className="hero-title-1 text-[35px] font-normal leading-[1.15]">
-                    <span className="text-[#22172f]">El universo se comunica en </span>
-                    <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
-                  </h1>
-                </div>
-                <div className="w-1/2 flex justify-center">
-                  <Image
-                    src={HERO_IMG}
-                    alt="Carta / símbolo místico"
-                    width={560}
-                    height={790}
-                    priority
-                    className="h-auto w-full" // Carta al 50% dentro del contenedor w-1/2
-                  />
-                </div>
-              </div>
-
-              {/* Desktop */}
-              <h1 className="hidden sm:block hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
+              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
+              <div className="hero-card-mobile sm:hidden w-full">
+                <Image
+                  src={HERO_IMG}
+                  alt="Carta / símbolo místico"
+                  width={560}
+                  height={790}
+                  priority
+                  className="h-auto w-full scale-[0.5]" // Reducida al 50% solo mobile
+                />
+              </div>
             </div>
 
             {/* BULLETS */}
@@ -159,17 +148,10 @@ export default function Hero() {
           opacity: 0.42;
           transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
-          -webkit-mask-image: radial-gradient(
-            140% 120% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
-          mask-image: radial-gradient(
-            140% 120% at 56% 46%,
-            #000 62%,
-            transparent 100%
-          );
+          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
         }
+
         @keyframes cloud-sway {
           0% {
             transform: translateX(-52%);
@@ -200,10 +182,11 @@ export default function Hero() {
             text-overflow: ellipsis;
           }
           .hero-title-1 {
-            font-size: 35px;
+            font-size: 30px; /* REDUCIDO DE 35px a 30px */
             line-height: 1.1;
           }
           .hero-card-mobile img {
+            width: 100% !important;
             height: auto;
           }
           .bullets-grid {
@@ -229,7 +212,7 @@ export default function Hero() {
 
         /* Bullets recuadro */
         .shadow-bullets {
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
       `}</style>
     </section>
