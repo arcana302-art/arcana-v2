@@ -46,7 +46,7 @@ export default function Hero() {
             <Link
               key={t.href}
               href={t.href}
-              className="group rounded-full px-4 sm:px-5 inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
+              className="group rounded-full inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
               style={{
                 ['--chip-border' as any]: BTN_PURPLE,
                 ['--chip-bg' as any]: 'transparent',
@@ -54,6 +54,8 @@ export default function Hero() {
                 color: BTN_PURPLE,
                 height: '40px', // Desktop
                 fontSize: '15px', // Desktop
+                paddingLeft: '16px',
+                paddingRight: '16px',
               } as React.CSSProperties}
             >
               {t.label}
@@ -67,19 +69,19 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE ALIGNED */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[40px] sm:text-[65px] font-normal leading-tight">
+              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-tight">
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
 
-              <div className="hero-card-mobile sm:hidden">
+              <div className="hero-card-mobile sm:hidden w-full">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-[180px]"
+                  className="h-auto w-full"
                 />
               </div>
             </div>
@@ -155,9 +157,15 @@ export default function Hero() {
         /* MOBILE */
         @media (max-width: 639px) {
           .talents-row { margin-bottom: 16px; }
-          .talents-row a { font-size: 8px !important; font-family: sans-serif; height: 24px; padding-left: 8px; padding-right: 8px; }
-          .hero-title-1 { font-size: 40px; font-weight: normal; }
-          .hero-card-mobile img { width: 140px !important; }
+          .talents-row a {
+            font-size: 8px !important;
+            font-family: sans-serif;
+            height: 22px;
+            padding-left: 6px;
+            padding-right: 6px;
+          }
+          .hero-title-1 { font-size: 35px; font-weight: normal; }
+          .hero-card-mobile img { width: 100% !important; height: auto; }
           .bullets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap-x: 12px; gap-y: 16px; margin-bottom: 16px; }
           .bullet-text { font-size: 14px; line-height: 1.4; }
           .hero-title-wrapper { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; }
