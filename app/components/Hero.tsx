@@ -52,8 +52,8 @@ export default function Hero() {
                 ['--chip-bg' as any]: 'transparent',
                 ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
                 color: BTN_PURPLE,
-                height: '40px', // desktop
-                fontSize: '15px',
+                height: '40px', // Desktop
+                fontSize: '15px', // Desktop
               } as React.CSSProperties}
             >
               {t.label}
@@ -67,7 +67,7 @@ export default function Hero() {
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE ALIGNED */}
             <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[30px] sm:text-[60px] font-normal leading-tight">
+              <h1 className="hero-title-1 text-[40px] sm:text-[65px] font-normal leading-tight">
                 <span className="text-[#22172f]">El universo se comunica en </span>
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
@@ -155,17 +155,17 @@ export default function Hero() {
         /* MOBILE */
         @media (max-width: 639px) {
           .talents-row { margin-bottom: 16px; }
-          .talents-row a { font-size: 8px !important; font-family: sans-serif; height: 34px; padding-left: 10px; padding-right: 10px; }
-          .hero-title-1 { font-size: 30px; font-weight: normal; }
+          .talents-row a { font-size: 8px !important; font-family: sans-serif; height: 24px; padding-left: 8px; padding-right: 8px; }
+          .hero-title-1 { font-size: 40px; font-weight: normal; }
           .hero-card-mobile img { width: 140px !important; }
           .bullets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap-x: 12px; gap-y: 16px; margin-bottom: 16px; }
-          .bullet-text { font-size: 18px; line-height: 1.4; }
+          .bullet-text { font-size: 14px; line-height: 1.4; }
           .hero-title-wrapper { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 { font-size: 60px; font-weight: normal; }
+          .hero-title-1 { font-size: 65px; font-weight: normal; }
           .bullet-text { font-size: 16px; }
         }
       `}</style>
