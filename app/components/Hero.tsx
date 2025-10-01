@@ -76,20 +76,20 @@ export default function Hero() {
                 <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
               </h1>
 
-              <div className="hero-card-mobile sm:hidden w-full mt-4">
+              <div className="hero-card-mobile sm:hidden w-full">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[1.2]" // 20% más grande
+                  className="h-auto w-full scale-[1.05]" // +5% tamaño
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid">
+            <div className="mt-2 bullets-grid">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -178,30 +178,34 @@ export default function Hero() {
         /* MOBILE */
         @media (max-width: 639px) {
           .talents-row {
-            margin-bottom: 16px;
-            justify-content: flex-start;
             flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 6px 6px;
+            margin-bottom: 16px;
           }
           .talents-row a {
-            font-size: 9px;
-            height: 28px;
+            font-size: 9px;  /* Tamaño de texto reducido */
+            height: 28px;    /* Altura más pequeña */
             padding-left: 8px;
             padding-right: 8px;
-            margin: 2px;
+            flex: none;
+            min-width: 0;
+            margin: 0;
+            text-align: center;
           }
           .hero-title-1 {
             font-size: 35px;
-            line-height: 1.2;
+            line-height: 1.15;
           }
           .hero-card-mobile img {
             width: 100% !important;
             height: auto;
           }
           .bullets-grid {
-            display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap-x: 12px;
-            gap-y: 14px;
+            gap-y: 16px;
+            margin-bottom: 16px;
           }
           .bullet-text {
             font-size: 14px;
@@ -213,7 +217,7 @@ export default function Hero() {
         @media (min-width: 1024px) {
           .hero-title-1 {
             font-size: 65px;
-            line-height: 1.15; /* ligero espacio entre líneas */
+            line-height: 1.15;
           }
           .bullet-text {
             font-size: 16px;
