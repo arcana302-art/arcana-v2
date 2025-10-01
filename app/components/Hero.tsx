@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const HERO_IMG = '/brand/hero-card-eye.png';
 const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
+const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -32,6 +33,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria morada */}
       <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -66,27 +68,27 @@ export default function Hero() {
           {/* LEFT */}
           <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center">
             {/* TITLE + CARD MOBILE */}
-            <div className="hero-title-wrapper flex flex-row items-center justify-between sm:flex-row sm:items-center sm:gap-6">
-              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15] w-1/2">
+            <div className="hero-title-wrapper flex flex-col sm:flex-row sm:items-center sm:gap-6">
+              <h1 className="hero-title-1 text-[35px] sm:text-[65px] font-normal leading-[1.15]">
                 <span className="text-[#22172f] block">El universo se comunica en</span>
                 <span className="text-[#c9a6ff] block">símbolos, energía y estrellas</span>
               </h1>
 
-              {/* MOBILE CARD */}
-              <div className="hero-card-mobile sm:hidden w-1/2 ml-2">
+              {/* Carta Mobile */}
+              <div className="hero-card-mobile sm:hidden w-full mt-4">
                 <Image
                   src={HERO_IMG}
                   alt="Carta / símbolo místico"
                   width={560}
                   height={790}
                   priority
-                  className="h-auto w-full scale-[0.5]"
+                  className="h-auto w-full scale-[2]" // Incremento 100%
                 />
               </div>
             </div>
 
             {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 rounded-lg border border-[rgba(148,52,236,0.3)] shadow-lg bg-transparent">
+            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent">
               {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
@@ -98,7 +100,7 @@ export default function Hero() {
             </div>
 
             {/* CTA DESKTOP */}
-            <div className="hidden lg:flex lg:gap-6 mt-6">
+            <div className="hidden lg:flex lg:gap-4 mt-5">
               <a
                 href="#"
                 className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
@@ -148,32 +150,80 @@ export default function Hero() {
           opacity: 0.42;
           transform: translate(-50%, -50%);
           animation: cloud-sway 26s ease-in-out infinite;
-          -webkit-mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
-          mask-image: radial-gradient(140% 120% at 56% 46%, #000 62%, transparent 100%);
+          -webkit-mask-image: radial-gradient(
+            140% 120% at 56% 46%,
+            #000 62%,
+            transparent 100%
+          );
+          mask-image: radial-gradient(
+            140% 120% at 56% 46%,
+            #000 62%,
+            transparent 100%
+          );
         }
         @keyframes cloud-sway {
-          0% { transform: translateX(-52%); }
-          50% { transform: translateX(-44%); }
-          100% { transform: translateX(-52%); }
+          0% {
+            transform: translateX(-52%);
+          }
+          50% {
+            transform: translateX(-44%);
+          }
+          100% {
+            transform: translateX(-52%);
+          }
         }
 
         /* MOBILE */
         @media (max-width: 639px) {
-          .talents-row { flex-wrap: wrap; justify-content: flex-start; gap: 4px; }
-          .talents-row a { font-size: 10px; height: 24px; padding-left: 8px; padding-right: 8px; max-width: calc(50% - 4px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-          .hero-title-1 { font-size: 35px; line-height: 1.1; }
-          .bullets-grid { grid-template-columns: 1fr; gap-y: 12px; }
-          .bullet-text { font-size: 14px; line-height: 1.4; }
+          .talents-row {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 4px;
+          }
+          .talents-row a {
+            font-size: 10px;
+            height: 24px;
+            padding-left: 8px;
+            padding-right: 8px;
+            max-width: calc(50% - 4px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .hero-title-1 {
+            font-size: 35px;
+            line-height: 1.1;
+          }
+          .hero-card-mobile img {
+            width: 100% !important;
+            height: auto;
+          }
+          .bullets-grid {
+            grid-template-columns: 1fr;
+            gap-y: 12px;
+          }
+          .bullet-text {
+            font-size: 14px;
+            line-height: 1.4;
+          }
         }
 
         /* DESKTOP */
         @media (min-width: 1024px) {
-          .hero-title-1 { font-size: 65px; line-height: 1.15; }
-          .bullet-text { font-size: 16px; }
+          .hero-title-1 {
+            font-size: 65px;
+            line-height: 1.15;
+          }
+          .bullet-text {
+            font-size: 16px;
+          }
         }
 
         /* Bullets recuadro */
-        .shadow-bullets { box-shadow: 0 6px 20px rgba(0,0,0,0.12); border-radius: 12px; }
+        .shadow-bullets {
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          border: 1px solid rgba(148,52,236,0.2); /* bordes más marcados, elegante */
+        }
       `}</style>
     </section>
   );
