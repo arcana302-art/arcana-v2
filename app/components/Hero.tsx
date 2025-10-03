@@ -34,12 +34,12 @@ export default function Hero() {
   // Estrellas Desktop
   const starsDesktop = useMemo(() => {
     const arr = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 8; i++) {
       arr.push({
-        top: `${10 + Math.random() * 70}%`,
-        left: `${5 + Math.random() * 40}%`,
-        size: `${15 + Math.random() * 25}px`,
-        dim: 0.5 + Math.random() * 0.5,
+        top: `${20 + Math.random() * 50}%`,
+        left: `${40 + Math.random() * 20}%`,
+        size: `${12 + Math.random() * 28}px`,
+        dim: 0.4 + Math.random() * 0.6,
         delay: Math.random() * 5,
       });
     }
@@ -49,12 +49,12 @@ export default function Hero() {
   // Estrellas Mobile
   const starsMobile = useMemo(() => {
     const arr = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       arr.push({
-        top: `${10 + Math.random() * 70}%`,
-        left: `${5 + Math.random() * 40}%`,
-        size: `${10 + Math.random() * 15}px`,
-        dim: 0.5 + Math.random() * 0.5,
+        top: `${25 + Math.random() * 40}%`,
+        left: `${30 + Math.random() * 30}%`,
+        size: `${10 + Math.random() * 18}px`,
+        dim: 0.4 + Math.random() * 0.6,
         delay: Math.random() * 5,
       });
     }
@@ -63,8 +63,15 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
-      {/* Línea divisoria morada */}
-      <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
+      {/* Línea divisoria morada curva */}
+      <svg
+        className="absolute left-0 right-0 top-0 w-full h-[14px] text-[#9434ec] z-[1]"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+        viewBox="0 0 1440 14"
+      >
+        <path fill="currentColor" d="M0,6 C480,20 960,-8 1440,6 L1440,0 L0,0 Z"></path>
+      </svg>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* TALENTS */}
@@ -76,71 +83,16 @@ export default function Hero() {
             <Link
               key={t.href}
               href={t.href}
-              className="group rounded-full inline-flex items-center border border-[--chip-border] bg-[--chip-bg] hover:bg-[--chip-bg-hover] hover:shadow-[0_0_0_3px_rgba(148,52,236,0.15)] transition-colors"
-              style={{
-                ['--chip-border' as any]: BTN_PURPLE,
-                ['--chip-bg' as any]: 'transparent',
-                ['--chip-bg-hover' as any]: 'rgba(148,52,236,0.06)',
-                color: BTN_PURPLE,
-                height: 40,
-                fontSize: 15,
-                paddingLeft: 16,
-                paddingRight: 16,
-              } as React.CSSProperties}
+              className="rounded-xl px-3 py-1.5 text-sm font-semibold text-white bg-[#9434ec] hover:bg-[#7a28c7] transition"
             >
               {t.label}
             </Link>
           ))}
         </nav>
 
-        {/* GRID HERO */}
-        <div className="relative mt-0 grid grid-cols-12 gap-y-4 lg:gap-x-10 hero-grid">
+        <div className="grid grid-cols-12 gap-6 lg:gap-12 items-center">
           {/* LEFT */}
-          <div className="hero-left col-span-12 lg:col-span-6 flex flex-col justify-center relative">
-            {/* DESKTOP TITLE */}
-            <h1 className="hero-title-1 hidden sm:block text-[65px] font-normal leading-[1.15]">
-              <span className="text-[#22172f]">El universo se comunica en </span>
-              <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
-            </h1>
-
-            {/* MOBILE: Título + Carta lado a lado */}
-            <div className="hero-mobile-row sm:hidden flex w-full gap-4 mt-4 items-center relative">
-              <h1 className="mobile-text w-3/5 text-[#22172f] text-[30px] leading-[1.15] font-normal">
-                El universo se comunica en <br />
-                <span className="text-[#c9a6ff]">símbolos, energía y estrellas</span>
-              </h1>
-              <div className="hero-card-mobile w-2/5 relative">
-                <Image
-                  src={HERO_IMG}
-                  alt="Carta / símbolo místico"
-                  width={560}
-                  height={790}
-                  priority
-                  className="h-auto w-full scale-[0.93]" // incremento 15%
-                />
-
-                {/* Estrellas Mobile */}
-                <div className="stars-mobile absolute top-0 left-0 w-full h-full pointer-events-none">
-                  {starsMobile.map((s, idx) => (
-                    <span
-                      key={idx}
-                      className="star"
-                      style={{
-                        top: s.top,
-                        left: s.left,
-                        fontSize: s.size,
-                        opacity: s.dim,
-                        animation: `dim 4s ease-in-out infinite alternate`,
-                        animationDelay: `${s.delay}s`,
-                      }}
-                    >
-                      ✦
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
+          <div className="col-span-12 lg:col-span-6">
             {/* BULLETS */}
             <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent relative z-10">
               {bullets.map((item, idx) => (
@@ -175,7 +127,7 @@ export default function Hero() {
           </div>
 
           {/* RIGHT */}
-          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px] hidden sm:flex">
+          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px]">
             {/* NUBE */}
             <img
               src={CLOUD_IMG}
@@ -193,26 +145,46 @@ export default function Hero() {
                 priority
                 className="h-auto w-[330px] lg:w-[390px]"
               />
+            </div>
 
-              {/* Estrellas Desktop */}
-              <div className="stars-desktop absolute top-0 left-0 w-full h-full pointer-events-none">
-                {starsDesktop.map((s, idx) => (
-                  <span
-                    key={idx}
-                    className="star"
-                    style={{
-                      top: s.top,
-                      left: s.left,
-                      fontSize: s.size,
-                      opacity: s.dim,
-                      animation: `dim 4s ease-in-out infinite alternate`,
-                      animationDelay: `${s.delay}s`,
-                    }}
-                  >
-                    ✦
-                  </span>
-                ))}
-              </div>
+            {/* Estrellas Desktop */}
+            <div className="stars-desktop absolute inset-0 pointer-events-none hidden lg:block">
+              {starsDesktop.map((s, idx) => (
+                <span
+                  key={idx}
+                  className="star"
+                  style={{
+                    top: s.top,
+                    left: s.left,
+                    fontSize: s.size,
+                    opacity: s.dim,
+                    animation: `dim 4s ease-in-out infinite alternate`,
+                    animationDelay: `${s.delay}s`,
+                  }}
+                >
+                  ✦
+                </span>
+              ))}
+            </div>
+
+            {/* Estrellas Mobile */}
+            <div className="stars-mobile absolute inset-0 pointer-events-none lg:hidden">
+              {starsMobile.map((s, idx) => (
+                <span
+                  key={idx}
+                  className="star"
+                  style={{
+                    top: s.top,
+                    left: s.left,
+                    fontSize: s.size,
+                    opacity: s.dim,
+                    animation: `dim 4s ease-in-out infinite alternate`,
+                    animationDelay: `${s.delay}s`,
+                  }}
+                >
+                  ✦
+                </span>
+              ))}
             </div>
           </div>
         </div>
