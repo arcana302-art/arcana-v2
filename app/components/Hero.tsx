@@ -31,161 +31,88 @@ export default function Hero() {
     'Obtén seguridad para decidir con confianza',
   ];
 
-  // Estrellas Desktop
-  const starsDesktop = useMemo(() => {
-    const arr = [];
-    for (let i = 0; i < 8; i++) {
-      arr.push({
-        top: `${20 + Math.random() * 50}%`,
-        left: `${40 + Math.random() * 20}%`,
-        size: `${12 + Math.random() * 28}px`,
-        dim: 0.4 + Math.random() * 0.6,
-        delay: Math.random() * 5,
-      });
-    }
-    return arr;
-  }, []);
-
-  // Estrellas Mobile
-  const starsMobile = useMemo(() => {
-    const arr = [];
-    for (let i = 0; i < 6; i++) {
-      arr.push({
-        top: `${25 + Math.random() * 40}%`,
-        left: `${30 + Math.random() * 30}%`,
-        size: `${10 + Math.random() * 18}px`,
-        dim: 0.4 + Math.random() * 0.6,
-        delay: Math.random() * 5,
-      });
-    }
-    return arr;
-  }, []);
-
   return (
     <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
-      {/* Línea divisoria morada curva */}
-      <svg
-        className="absolute left-0 right-0 top-0 w-full h-[14px] text-[#9434ec] z-[1]"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        viewBox="0 0 1440 14"
-      >
-        <path fill="currentColor" d="M0,6 C480,20 960,-8 1440,6 L1440,0 L0,0 Z"></path>
-      </svg>
+      {/* Línea divisoria morada */}
+      <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
-        {/* TALENTS */}
-        <nav
-          aria-label="Talentos"
-          className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
-        >
-          {talents.map((t) => (
-            <Link
-              key={t.href}
-              href={t.href}
-              className="rounded-xl px-3 py-1.5 text-sm font-semibold text-white bg-[#9434ec] hover:bg-[#7a28c7] transition"
-            >
-              {t.label}
-            </Link>
-          ))}
-        </nav>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 grid grid-cols-12 gap-6">
+        {/* LEFT */}
+        <div className="col-span-12 lg:col-span-6 flex flex-col justify-center">
+          {/* TÍTULO */}
+          <h1 className="hero-title-1 font-bold tracking-tight text-4xl sm:text-[38px] lg:text-[65px] leading-tight mb-4">
+            <span className="text-[#9434ec]">El universo</span>{' '}
+            <span className="text-[#22172f]">se comunica en símbolos, energía y estrellas</span>
+          </h1>
 
-        <div className="grid grid-cols-12 gap-6 lg:gap-12 items-center">
-          {/* LEFT */}
-          <div className="col-span-12 lg:col-span-6">
-            {/* BULLETS */}
-            <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent relative z-10">
-              {bullets.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2 mt-2">
-                  <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
-                    ✓
-                  </span>
-                  <span className="bullet-text text-[#22172f]/90">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA DESKTOP */}
-            <div className="hidden lg:flex lg:gap-6 mt-5">
+          {/* TALENTS */}
+          <nav
+            aria-label="Talentos"
+            className="flex flex-wrap gap-3 sm:gap-3.5 mb-3 sm:mb-4 talents-row"
+          >
+            {talents.map((t, idx) => (
               <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
-                style={{
-                  backgroundColor: BTN_PURPLE,
-                  boxShadow: '0 12px 40px -10px rgba(148,52,236,0.55)',
-                }}
+                key={idx}
+                href={t.href}
+                className="talent-btn inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-[#22172f] bg-white shadow-sm ring-1 ring-[#e2d6f7] hover:bg-[#f6edff] transition"
               >
-                Agendar una consulta
+                {t.label}
               </a>
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
-              >
-                Únete como especialista
-              </a>
-            </div>
+            ))}
+          </nav>
+
+          {/* BULLETS */}
+          <div className="mt-4 bullets-grid p-4 shadow-bullets rounded-lg bg-transparent relative z-10">
+            {bullets.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-2 mt-2">
+                <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
+                  ✓
+                </span>
+                <span className="bullet-text text-[#22172f]/90">{item}</span>
+              </div>
+            ))}
           </div>
 
-          {/* RIGHT */}
-          <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px]">
-            {/* NUBE */}
-            <img
-              src={CLOUD_IMG}
-              alt=""
-              aria-hidden="true"
-              className="cloud-img absolute z-0 select-none pointer-events-none"
+          {/* CTA DESKTOP */}
+          <div className="hidden lg:flex lg:gap-6 mt-5">
+            <a
+              href="#"
+              className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
+              style={{
+                backgroundColor: BTN_PURPLE,
+                boxShadow: '0 12px 40px -10px rgba(148,52,236,0.55)',
+              }}
+            >
+              Agendar una consulta
+            </a>
+            <a
+              href="#"
+              className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
+            >
+              Únete como especialista
+            </a>
+          </div>
+        </div>
+
+        {/* RIGHT */}
+        <div className="relative col-span-12 lg:col-span-6 flex flex-col items-center justify-center min-h-[1px]">
+          {/* NUBE */}
+          <img
+            src={CLOUD_IMG}
+            alt=""
+            aria-hidden="true"
+            className="cloud-img absolute z-0 select-none pointer-events-none"
+          />
+
+          <div className="hero-card relative z-10 select-none">
+            <Image
+              src={HERO_IMG}
+              alt="Carta / símbolo místico"
+              width={560}
+              height={790}
+              priority
+              className="h-auto w-[330px] lg:w-[390px]"
             />
-
-            <div className="hero-card relative z-10 select-none">
-              <Image
-                src={HERO_IMG}
-                alt="Carta / símbolo místico"
-                width={560}
-                height={790}
-                priority
-                className="h-auto w-[330px] lg:w-[390px]"
-              />
-            </div>
-
-            {/* Estrellas Desktop */}
-            <div className="stars-desktop absolute inset-0 pointer-events-none hidden lg:block">
-              {starsDesktop.map((s, idx) => (
-                <span
-                  key={idx}
-                  className="star"
-                  style={{
-                    top: s.top,
-                    left: s.left,
-                    fontSize: s.size,
-                    opacity: s.dim,
-                    animation: `dim 4s ease-in-out infinite alternate`,
-                    animationDelay: `${s.delay}s`,
-                  }}
-                >
-                  ✦
-                </span>
-              ))}
-            </div>
-
-            {/* Estrellas Mobile */}
-            <div className="stars-mobile absolute inset-0 pointer-events-none lg:hidden">
-              {starsMobile.map((s, idx) => (
-                <span
-                  key={idx}
-                  className="star"
-                  style={{
-                    top: s.top,
-                    left: s.left,
-                    fontSize: s.size,
-                    opacity: s.dim,
-                    animation: `dim 4s ease-in-out infinite alternate`,
-                    animationDelay: `${s.delay}s`,
-                  }}
-                >
-                  ✦
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </div>
@@ -205,11 +132,6 @@ export default function Hero() {
           100% { transform: translateX(-52%); }
         }
 
-        @keyframes dim {
-          0% { opacity: 1; }
-          100% { opacity: 0.3; }
-        }
-
         /* MOBILE */
         @media (max-width: 639px) {
           .talents-row a {
@@ -217,7 +139,7 @@ export default function Hero() {
             height: 24px;
             padding-left: 8px;
             padding-right: 8px;
-            max-width: calc(50% - 4px);
+            max-width: calc(50% - 4px); /* fuerza 2 renglones */
           }
           .bullet-text { font-size: 14px; line-height: 1.4; }
         }
@@ -225,17 +147,16 @@ export default function Hero() {
         /* DESKTOP */
         @media (min-width: 1024px) {
           .hero-title-1 { font-size: 65px; line-height: 1.15; }
+          .talents-row a {
+            font-size: 15px;
+            height: auto;
+            padding: 10px 18px;
+          }
           .bullet-text { font-size: 16px; }
         }
 
         /* Bullets recuadro */
         .shadow-bullets { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-
-        .star {
-          position: absolute;
-          color: #FFD700;
-          pointer-events: none;
-        }
       `}</style>
     </section>
   );
