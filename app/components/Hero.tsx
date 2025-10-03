@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 
 const HERO_IMG = '/brand/hero-card-eye.png';
-const CLOUD_IMG = '/brand/Nube1.png';
 const BTN_PURPLE = '#9434ec';
-const LIGHT_PURPLE = '#c9a6ff';
 
 export default function Hero() {
   const talents = useMemo(
@@ -22,32 +20,22 @@ export default function Hero() {
     []
   );
 
+  const bullets = [
+    'Conecta con videntes, sanadores y guías',
+    'Descubre tu camino de vida y amor',
+    'Explora talentos como Tarot y Astrología',
+    'Ilumina las áreas que se sienten estancadas',
+    'Encuentra claridad y respuestas clave',
+    'Obtén seguridad para decidir con confianza',
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-[#FBF3FB] pt-8 pb-12 sm:pb-16">
-      {/* Línea divisoria curva */}
-      <svg
-        className="absolute left-0 right-0 top-0 w-full h-6 text-[#9434ec] z-[1]"
-        viewBox="0 0 1440 50"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,20 C480,60 960,-20 1440,20"
-          stroke="currentColor"
-          strokeWidth="2"
-          fill="transparent"
-        />
-      </svg>
+    <section className="relative overflow-hidden bg-[#FBF3FB] pt-6 sm:pt-8 pb-12 sm:pb-14">
+      {/* Línea divisoria moderna */}
+      <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#9434ec] z-[1]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        {/* TITLE */}
-        <h1 className="text-3xl sm:text-5xl leading-snug text-center font-normal text-[#1f1630] mb-6">
-          El universo se comunica en{' '}
-          <span className="text-[#9434ec]">símbolos, energía y estrellas.</span>
-        </h1>
-
-        {/* TALENTS */}
+        {/* TALENTS - arriba del título */}
         <nav
           aria-label="Talentos"
           className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6"
@@ -63,18 +51,17 @@ export default function Hero() {
           ))}
         </nav>
 
+        {/* TITLE */}
+        <h1 className="text-3xl sm:text-5xl leading-snug text-center font-normal text-[#1f1630] mb-6">
+          El universo se comunica en{' '}
+          <span className="text-[#9434ec]">símbolos, energía y estrellas.</span>
+        </h1>
+
         {/* LEFT: BULLETS */}
         <div className="grid grid-cols-12 gap-6 items-center">
           <div className="col-span-12 lg:col-span-6">
             <div className="bullets-grid p-4 shadow-bullets rounded-lg bg-transparent relative z-10">
-              {[
-                'Conecta con videntes, sanadores y guías',
-                'Descubre tu camino de vida y amor',
-                'Explora talentos como Tarot y Astrología',
-                'Ilumina las áreas que se sienten estancadas',
-                'Encuentra claridad y respuestas clave',
-                'Obtén seguridad para decidir con confianza',
-              ].map((item, idx) => (
+              {bullets.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 mt-2">
                   <span className="flex-shrink-0 mt-1 h-5 w-5 flex items-center justify-center rounded-full bg-[#9434ec] text-white text-sm font-bold">
                     ✓
@@ -82,26 +69,6 @@ export default function Hero() {
                   <span className="bullet-text text-[#22172f]/90">{item}</span>
                 </div>
               ))}
-            </div>
-
-            {/* CTA DESKTOP */}
-            <div className="hidden lg:flex lg:gap-6 mt-5">
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-white text-base font-semibold"
-                style={{
-                  backgroundColor: BTN_PURPLE,
-                  boxShadow: '0 12px 40px -10px rgba(148,52,236,0.55)',
-                }}
-              >
-                Agendar una consulta
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-2xl px-6 h-14 text-[#1f1630] font-semibold bg-transparent ring-1 ring-[#9434ec] hover:bg-[#9434ec]/10 transition"
-              >
-                Únete como especialista
-              </a>
             </div>
           </div>
 
@@ -122,7 +89,6 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-        /* Bullets recuadro */
         .shadow-bullets {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
