@@ -10,14 +10,14 @@ import Security from "@/components/Security";
 import FAQ from "@/components/FAQ";
 import Freebies from "@/components/Freebies";
 import JoinAsExpert from "@/components/JoinAsExpert";
-import CartaNatal from "@/components/CartaNatal"; // NUEVO
+import CartaNatalAvanzada from "@/components/CartaNatalAvanzada";
 
 export default function Page() {
   return (
     <main className="bg-[#17031F] text-white">
       <Hero />
       <Gancho />
-      <CartaNatal /> {/* NUEVO */}
+      <CartaNatalAvanzada />
       <HowItWorks />
       <Benefits />
       <Categories />
