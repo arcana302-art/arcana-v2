@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Gancho from "@/components/Gancho"; // NUEVO
 import HowItWorks from "@/components/HowItWorks";
 import Benefits from "@/components/Benefits";
 import Categories from "@/components/Categories";
@@ -17,6 +18,7 @@ export default function Page() {
   return (
     <main className="bg-[#17031F] text-white">
       <Hero />
+      <Gancho /> {/* NUEVO */}
       <HowItWorks />
       <Benefits />
       <Categories />
