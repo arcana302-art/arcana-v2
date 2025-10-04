@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
-import Gancho from "@/components/Gancho"; // NUEVO
-import CartaAstral from "@/components/CartaAstral"; // NUEVO
+import Gancho from "@/components/Gancho";
 import HowItWorks from "@/components/HowItWorks";
 import Benefits from "@/components/Benefits";
 import Categories from "@/components/Categories";
@@ -11,16 +10,14 @@ import Security from "@/components/Security";
 import FAQ from "@/components/FAQ";
 import Freebies from "@/components/Freebies";
 import JoinAsExpert from "@/components/JoinAsExpert";
-
-// ⚠️ Import deliberadamente SIN footer.
-// El footer lo pinta layout.tsx para evitar duplicados.
+import CartaNatal from "@/components/CartaNatal"; // NUEVO
 
 export default function Page() {
   return (
     <main className="bg-[#17031F] text-white">
       <Hero />
-      <Gancho />         {/* NUEVO: sección gancho, horóscopos y escala de conciencia */}
-      <CartaAstral />    {/* NUEVO: sección interactiva para calcular carta astral */}
+      <Gancho />
+      <CartaNatal /> {/* NUEVO */}
       <HowItWorks />
       <Benefits />
       <Categories />
