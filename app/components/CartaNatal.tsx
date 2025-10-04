@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 
 type FormData = {
   name: string;
@@ -26,7 +25,6 @@ export default function CartaNatal() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  // Datos de ejemplo de planetas
   const planets: PlanetData[] = [
     { name: 'Sol', icon: '☉', coordinate: '20 Cap 30°43′' },
     { name: 'Luna', icon: '☽', coordinate: '15 Tau 12°10′' },
@@ -56,7 +54,6 @@ export default function CartaNatal() {
           Calcula tu <span className="text-[#9434ec]">Carta Natal</span>
         </h2>
 
-        {/* Formulario */}
         {!submitted && (
           <form
             onSubmit={handleSubmit}
@@ -105,7 +102,6 @@ export default function CartaNatal() {
           </form>
         )}
 
-        {/* Resultados */}
         {submitted && (
           <div className="space-y-8">
             <div className="bg-[#1f0d3f] rounded-xl p-6 shadow-lg">
@@ -139,59 +135,20 @@ export default function CartaNatal() {
               </div>
             </div>
 
-            {/* Círculo natal */}
             <div className="relative w-full max-w-md mx-auto">
               <svg
                 viewBox="0 0 400 400"
                 className="w-full h-auto"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* Círculo exterior */}
-                <circle
-                  cx="200"
-                  cy="200"
-                  r="180"
-                  stroke="#9434ec"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                {/* Divisiones de casas */}
+                <circle cx="200" cy="200" r="180" stroke="#9434ec" strokeWidth="2" fill="none" />
                 {Array.from({ length: 12 }).map((_, i) => {
                   const angle = (i * 360) / 12 - 90;
                   const x = 200 + 180 * Math.cos((angle * Math.PI) / 180);
                   const y = 200 + 180 * Math.sin((angle * Math.PI) / 180);
-                  return (
-                    <line
-                      key={i}
-                      x1="200"
-                      y1="200"
-                      x2={x}
-                      y2={y}
-                      stroke="#fff"
-                      strokeWidth="1"
-                    />
-                  );
+                  return <line key={i} x1="200" y1="200" x2={x} y2={y} stroke="#fff" strokeWidth="1" />;
                 })}
-                {/* Planetas de ejemplo */}
                 {planets.map((p, idx) => {
                   const angle = (idx * 360) / planets.length - 90;
                   const x = 200 + 150 * Math.cos((angle * Math.PI) / 180);
-                  const y = 200 + 150 * Math.sin((angle * Math.PI) / 180);
-                  return (
-                    <circle
-                      key={idx}
-                      cx={x}
-                      cy={y}
-                      r="10"
-                      fill={idx % 2 === 0 ? 'blue' : 'red'}
-                    />
-                  );
-                })}
-              </svg>
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
+                  const y = 200 + 150 * Math.sin((angle
