@@ -141,14 +141,41 @@ export default function CartaNatal() {
                 className="w-full h-auto"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                {/* Círculo base */}
                 <circle cx="200" cy="200" r="180" stroke="#9434ec" strokeWidth="2" fill="none" />
+
+                {/* Divisiones de 12 casas */}
                 {Array.from({ length: 12 }).map((_, i) => {
                   const angle = (i * 360) / 12 - 90;
                   const x = 200 + 180 * Math.cos((angle * Math.PI) / 180);
                   const y = 200 + 180 * Math.sin((angle * Math.PI) / 180);
                   return <line key={i} x1="200" y1="200" x2={x} y2={y} stroke="#fff" strokeWidth="1" />;
                 })}
+
+                {/* Planetas posicionados en círculo */}
                 {planets.map((p, idx) => {
                   const angle = (idx * 360) / planets.length - 90;
                   const x = 200 + 150 * Math.cos((angle * Math.PI) / 180);
-                  const y = 200 + 150 * Math.sin((angle
+                  const y = 200 + 150 * Math.sin((angle * Math.PI) / 180);
+                  return (
+                    <text
+                      key={idx}
+                      x={x}
+                      y={y}
+                      textAnchor="middle"
+                      alignmentBaseline="middle"
+                      fontSize="18"
+                      fill="#fff"
+                    >
+                      {p.icon}
+                    </text>
+                  );
+                })}
+              </svg>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
