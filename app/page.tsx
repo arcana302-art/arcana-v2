@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
-import Gancho from "@/components/Gancho"; // NUEVO: Carta Astral / Gancho
+import Gancho from "@/components/Gancho"; // NUEVO
+import CartaAstral from "@/components/CartaAstral"; // NUEVO
 import HowItWorks from "@/components/HowItWorks";
 import Benefits from "@/components/Benefits";
 import Categories from "@/components/Categories";
@@ -17,13 +18,9 @@ import JoinAsExpert from "@/components/JoinAsExpert";
 export default function Page() {
   return (
     <main className="bg-[#17031F] text-white">
-      {/* Hero principal */}
       <Hero />
-
-      {/* Gancho de Carta Astral */}
-      <Gancho /> 
-
-      {/* Secciones informativas y funcionales */}
+      <Gancho />         {/* NUEVO: sección gancho, horóscopos y escala de conciencia */}
+      <CartaAstral />    {/* NUEVO: sección interactiva para calcular carta astral */}
       <HowItWorks />
       <Benefits />
       <Categories />
