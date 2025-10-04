@@ -2,90 +2,82 @@
 
 import { useState } from 'react';
 
-interface CartaAstralProps {}
+export default function CartaAstral() {
+  const [fechaNacimiento, setFechaNacimiento] = useState('');
+  const [horaNacimiento, setHoraNacimiento] = useState('');
+  const [ciudadNacimiento, setCiudadNacimiento] = useState('');
+  const [resultado, setResultado] = useState<string | null>(null);
 
-export default function CartaAstral({}: CartaAstralProps) {
-  const [nombre, setNombre] = useState('');
-  const [fecha, setFecha] = useState('');
-  const [hora, setHora] = useState('');
-  const [lugar, setLugar] = useState('');
-  const [showCarta, setShowCarta] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (nombre && fecha && hora && lugar) {
-      setShowCarta(true);
+  const handleCalcular = () => {
+    if (!fechaNacimiento || !horaNacimiento || !ciudadNacimiento) {
+      alert('Por favor completa todos los campos.');
+      return;
     }
+
+    // Simulación de cálculo de carta astral
+    const ejemploResultado = `
+      Carta Astral generada para:
+      Fecha: ${fechaNacimiento}
+      Hora: ${horaNacimiento}
+      Ciudad: ${ciudadNacimiento}
+
+      Signo Solar: Aries
+      Signo Lunar: Tauro
+      Ascendente: Géminis
+    `;
+
+    setResultado(ejemploResultado);
   };
 
   return (
-    <section className="relative bg-[#17031F] py-16 px-6 sm:px-12 lg:px-24 text-center">
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-8">
-        Tu <span className="text-[#9434EC]">Carta Astral</span>
+    <section className="bg-[#22172F] text-white py-12 px-6 sm:px-12 rounded-lg shadow-lg my-12 max-w-4xl mx-auto">
+      <h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center">
+        Calcula tu Carta Astral
       </h2>
 
-      {!showCarta && (
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto bg-[#1F0F2B] rounded-2xl p-8 flex flex-col gap-4 shadow-lg"
-        >
-          <input
-            type="text"
-            placeholder="Nombre"
-            className="p-3 rounded-lg text-black"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            required
-          />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div>
+          <label className="block mb-1 font-medium">Fecha de nacimiento</label>
           <input
             type="date"
-            placeholder="Fecha de nacimiento"
-            className="p-3 rounded-lg text-black"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-            required
+            value={fechaNacimiento}
+            onChange={(e) => setFechaNacimiento(e.target.value)}
+            className="w-full p-2 rounded text-black"
           />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Hora de nacimiento</label>
           <input
             type="time"
-            placeholder="Hora de nacimiento"
-            className="p-3 rounded-lg text-black"
-            value={hora}
-            onChange={(e) => setHora(e.target.value)}
-            required
+            value={horaNacimiento}
+            onChange={(e) => setHoraNacimiento(e.target.value)}
+            className="w-full p-2 rounded text-black"
           />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Ciudad de nacimiento</label>
           <input
             type="text"
-            placeholder="Ciudad de nacimiento"
-            className="p-3 rounded-lg text-black"
-            value={lugar}
-            onChange={(e) => setLugar(e.target.value)}
-            required
+            value={ciudadNacimiento}
+            onChange={(e) => setCiudadNacimiento(e.target.value)}
+            placeholder="Ej. Ciudad de México"
+            className="w-full p-2 rounded text-black"
           />
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-[#9434EC] to-[#C9A6FF] text-white font-semibold py-3 rounded-xl mt-4 hover:opacity-90 transition"
-          >
-            Generar Carta Astral
-          </button>
-        </form>
-      )}
+        </div>
+      </div>
 
-      {showCarta && (
-        <div className="mt-12">
-          {/* Aquí se puede insertar librería o canvas para mostrar carta astral */}
-          <div className="bg-[#1F0F2B] rounded-2xl p-8 shadow-lg">
-            <p className="text-[#D9D9D9] mb-4">
-              Carta astral de <span className="text-[#9434EC]">{nombre}</span>
-            </p>
-            <p className="text-sm text-[#A1A1A1] mb-6">
-              Fecha: {fecha} | Hora: {hora} | Lugar: {lugar}
-            </p>
-            <div className="border border-[#9434EC] rounded-lg h-96 flex items-center justify-center">
-              <p className="text-[#9434EC]">
-                Aquí se mostrará la representación visual de tu carta astral
-              </p>
-            </div>
-          </div>
+      <div className="text-center">
+        <button
+          onClick={handleCalcular}
+          className="bg-[#9434ec] hover:bg-[#7a2fc0] px-6 py-3 rounded-lg font-semibold transition"
+        >
+          Calcular carta astral
+        </button>
+      </div>
+
+      {resultado && (
+        <div className="mt-6 p-4 bg-[#33274A] rounded-lg whitespace-pre-line text-white font-mono">
+          {resultado}
         </div>
       )}
     </section>
