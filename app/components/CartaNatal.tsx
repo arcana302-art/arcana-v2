@@ -1,167 +1,114 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import * as d3 from 'd3';
-import sweph from 'sweph';
+import { useState } from 'react';
+import Image from 'next/image';
+import { calculateNatalChart } from './utils/astro'; // Función para cálculos astronómicos
 
-export default function CartaNatalAvanzada() {
-  const [fecha, setFecha] = useState('');
-  const [hora, setHora] = useState('');
-  const [ciudad, setCiudad] = useState('');
-  const [planets, setPlanets] = useState<any[]>([]);
-  const [ascendente, setAscendente] = useState<number | null>(null);
-  const [showResult, setShowResult] = useState(false);
+const PLANETS = [
+  { name: 'Sol', icon: '/icons/sun.svg' },
+  { name: 'Luna', icon: '/icons/moon.svg' },
+  { name: 'Mercurio', icon: '/icons/mercury.svg' },
+  { name: 'Venus', icon: '/icons/venus.svg' },
+  { name: 'Marte', icon: '/icons/mars.svg' },
+  { name: 'Júpiter', icon: '/icons/jupiter.svg' },
+  { name: 'Saturno', icon: '/icons/saturn.svg' },
+  { name: 'Urano', icon: '/icons/uranus.svg' },
+  { name: 'Neptuno', icon: '/icons/neptune.svg' },
+  { name: 'Plutón', icon: '/icons/pluto.svg' },
+];
 
-  const signos = [
-    'Aries','Tauro','Géminis','Cáncer','Leo','Virgo',
-    'Libra','Escorpio','Sagitario','Capricornio','Acuario','Piscis'
-  ];
+export default function CartaNatal() {
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [city, setCity] = useState('');
+  const [coords, setCoords] = useState({ lat: '', lon: '' });
+  const [result, setResult] = useState<any>(null);
 
-  const generarCarta = () => {
-    if (!fecha || !hora) {
-      alert('Completa fecha y hora.');
-      return;
-    }
-
-    const [anio, mes, dia] = fecha.split('-').map(Number);
-    const [horaNum, minNum] = hora.split(':').map(Number);
-    const jd = sweph.julday(anio, mes, dia) + (horaNum + minNum / 60)/24;
-
-    const planetNames = ['Sol','Luna','Mercurio','Venus','Marte','Júpiter','Saturno','Urano','Neptuno','Plutón'];
-
-    const positions = [];
-    for(let i=0;i<10;i++){
-      const p = sweph.calc(jd, i);
-      positions.push({
-        name: planetNames[i],
-        longitude: p.longitude,
-        latitude: p.latitude,
-      });
-    }
-
-    // Ascendente simple: usar posición Sol como proxy (solo ejemplo)
-    const asc = sweph.ascendant(jd) || 0;
-
-    setPlanets(positions);
-    setAscendente(asc);
-    setShowResult(true);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Cálculo astronómico
+    const data = calculateNatalChart({ name, date, time, city, coords });
+    setResult(data);
   };
 
-  // Dibujo de la carta
-  useEffect(() => {
-    if (!showResult) return;
-
-    const width = 500;
-    const height = 500;
-    const radius = 220;
-
-    d3.select('#carta-avanzada').selectAll('*').remove();
-
-    const svg = d3.select('#carta-avanzada')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height);
-
-    const centerX = width/2;
-    const centerY = height/2;
-
-    // Círculo zodiacal
-    svg.append('circle')
-      .attr('cx', centerX)
-      .attr('cy', centerY)
-      .attr('r', radius)
-      .attr('fill', 'none')
-      .attr('stroke', '#FFD700')
-      .attr('stroke-width', 2);
-
-    // Divisiones de casas
-    for(let i=0;i<12;i++){
-      const angle = (i/12) * 2*Math.PI - Math.PI/2;
-      const x = centerX + radius * Math.cos(angle);
-      const y = centerY + radius * Math.sin(angle);
-      svg.append('line')
-        .attr('x1', centerX)
-        .attr('y1', centerY)
-        .attr('x2', x)
-        .attr('y2', y)
-        .attr('stroke', '#FFD700')
-        .attr('stroke-width', 1);
-      // Signo
-      const textX = centerX + (radius + 15) * Math.cos(angle + Math.PI/12);
-      const textY = centerY + (radius + 15) * Math.sin(angle + Math.PI/12);
-      svg.append('text')
-        .attr('x', textX)
-        .attr('y', textY)
-        .attr('text-anchor', 'middle')
-        .attr('alignment-baseline','middle')
-        .attr('fill','#FFD700')
-        .attr('font-size','12px')
-        .text(signos[i]);
-    }
-
-    // Planetas
-    planets.forEach(p => {
-      const angle = (p.longitude/360)*2*Math.PI - Math.PI/2;
-      const x = centerX + radius*0.85*Math.cos(angle);
-      const y = centerY + radius*0.85*Math.sin(angle);
-
-      svg.append('circle')
-        .attr('cx', x)
-        .attr('cy', y)
-        .attr('r', 12)
-        .attr('fill','#9434ec');
-
-      svg.append('title').text(`${p.name}: ${p.longitude.toFixed(1)}°`);
-
-      svg.append('text')
-        .attr('x', x)
-        .attr('y', y+4)
-        .attr('text-anchor','middle')
-        .attr('fill','white')
-        .attr('font-size','10px')
-        .text(p.name);
-    });
-
-    // Ascendente
-    if(ascendente!==null){
-      const angle = (ascendente/360)*2*Math.PI - Math.PI/2;
-      const x = centerX + radius * Math.cos(angle);
-      const y = centerY + radius * Math.sin(angle);
-      svg.append('circle')
-        .attr('cx', x)
-        .attr('cy', y)
-        .attr('r', 10)
-        .attr('fill','orange');
-      svg.append('text')
-        .attr('x', x)
-        .attr('y', y+4)
-        .attr('text-anchor','middle')
-        .attr('fill','white')
-        .attr('font-size','10px')
-        .text('Asc');
-    }
-  }, [showResult]);
-
   return (
-    <section className="bg-[#1F0F2E] py-12 px-6 sm:px-12">
-      <h2 className="text-3xl sm:text-4xl font-semibold mb-6 text-center text-[#FFD700]">
-        Carta Natal Interactiva
-      </h2>
+    <section className="bg-[#17031F] text-white py-12 px-4">
+      <h2 className="text-3xl font-bold mb-6 text-center">Calcula tu Carta Natal</h2>
 
-      <div className="max-w-3xl mx-auto bg-[#2A1A3C] p-6 rounded-xl shadow-lg">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <input type="date" value={fecha} onChange={e=>setFecha(e.target.value)} className="p-2 rounded-md text-black w-full" />
-          <input type="time" value={hora} onChange={e=>setHora(e.target.value)} className="p-2 rounded-md text-black w-full" />
-          <input type="text" value={ciudad} onChange={e=>setCiudad(e.target.value)} className="p-2 rounded-md text-black w-full" placeholder="Ciudad" />
+      {/* Formulario */}
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto flex flex-col gap-4 bg-[#1f0f2a] p-6 rounded-xl shadow-lg">
+        <input
+          type="text"
+          placeholder="Nombre"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="p-2 rounded bg-[#2c1b3b] border border-[#9434ec]"
+        />
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="p-2 rounded bg-[#2c1b3b] border border-[#9434ec]"
+        />
+        <input
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          className="p-2 rounded bg-[#2c1b3b] border border-[#9434ec]"
+        />
+        <input
+          type="text"
+          placeholder="Ciudad"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="p-2 rounded bg-[#2c1b3b] border border-[#9434ec]"
+        />
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Latitud (ej: 20.67N)"
+            value={coords.lat}
+            onChange={(e) => setCoords({ ...coords, lat: e.target.value })}
+            className="p-2 rounded bg-[#2c1b3b] border border-[#9434ec] flex-1"
+          />
+          <input
+            type="text"
+            placeholder="Longitud (ej: 100.35W)"
+            value={coords.lon}
+            onChange={(e) => setCoords({ ...coords, lon: e.target.value })}
+            className="p-2 rounded bg-[#2c1b3b] border border-[#9434ec] flex-1"
+          />
         </div>
-        <button onClick={generarCarta} className="w-full bg-[#9434ec] hover:bg-[#c470ff] text-white font-semibold py-2 rounded-lg transition">
-          Generar Carta Natal
+        <button type="submit" className="bg-[#9434ec] hover:bg-[#c379ff] text-white font-bold py-2 rounded mt-2">
+          Calcular Carta Natal
         </button>
-      </div>
+      </form>
 
-      {showResult && (
-        <div className="mt-8 flex flex-col items-center">
-          <div id="carta-avanzada" className="relative w-[500px] h-[500px]" />
+      {/* Resultado */}
+      {result && (
+        <div className="mt-10 max-w-5xl mx-auto bg-[#1f0f2a] p-6 rounded-xl shadow-lg">
+          <h3 className="text-2xl font-bold mb-4">{result.name}, tu Carta Natal</h3>
+          <p><strong>Fecha:</strong> {result.date} | <strong>Hora:</strong> {result.time}</p>
+          <p><strong>Ciudad:</strong> {result.city} | <strong>Coordenadas:</strong> {result.coords.lat}, {result.coords.lon}</p>
+          <p><strong>Hora UTC:</strong> {result.utc} | <strong>Hora Sidérea:</strong> {result.sidereal}</p>
+          <p><strong>Método:</strong> {result.method} | <strong>Signo Solar:</strong> {result.sunSign} | <strong>Ascendente:</strong> {result.ascendant}</p>
+
+          {/* Tabla de planetas */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
+            {result.planets.map((p: any) => (
+              <div key={p.name} className="flex flex-col items-center bg-[#2c1b3b] p-3 rounded-lg">
+                <Image src={p.icon} alt={p.name} width={32} height={32} />
+                <span className="mt-2">{p.name}</span>
+                <span className="text-sm">{p.position}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Círculo natal */}
+          <div className="mt-8 flex justify-center">
+            <canvas id="natalChart" width={500} height={500} className="bg-[#17031F] rounded-full border border-[#9434ec]"></canvas>
+          </div>
         </div>
       )}
     </section>
