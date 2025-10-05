@@ -52,10 +52,11 @@ export default function Hero() {
         </nav>
 
         {/* TITLE */}
-        <h1 className="text-4xl sm:text-6xl leading-snug text-center font-semibold text-[#1f1630] mb-8 tracking-tight">
-          El universo se comunica en{' '}
+        <h1 className="text-5xl sm:text-7xl leading-snug text-center font-semibold text-[#1f1630] mb-10 tracking-tight">
+          El universo se comunica en
+          <br />
           <span className="text-[#9434ec] animate-glow">
-            símbolos, energía y estrellas.
+            símbolos, energía y estrellas
           </span>
         </h1>
 
@@ -106,8 +107,8 @@ export default function Hero() {
               0 0 12px rgba(148, 52, 236, 0.3);
           }
           50% {
-            text-shadow: 0 0 14px rgba(148, 52, 236, 0.6),
-              0 0 24px rgba(148, 52, 236, 0.5);
+            text-shadow: 0 0 16px rgba(148, 52, 236, 0.7),
+              0 0 30px rgba(148, 52, 236, 0.5);
           }
           100% {
             text-shadow: 0 0 6px rgba(148, 52, 236, 0.4),
@@ -116,7 +117,7 @@ export default function Hero() {
         }
 
         .animate-glow {
-          animation: glowPulse 3s ease-in-out infinite;
+          animation: glowPulse 3.5s ease-in-out infinite;
         }
       `}</style>
     </section>
