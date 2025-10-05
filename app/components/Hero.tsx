@@ -52,9 +52,11 @@ export default function Hero() {
         </nav>
 
         {/* TITLE */}
-        <h1 className="text-3xl sm:text-5xl leading-snug text-center font-normal text-[#1f1630] mb-6">
+        <h1 className="text-4xl sm:text-6xl leading-snug text-center font-semibold text-[#1f1630] mb-8 tracking-tight">
           El universo se comunica en{' '}
-          <span className="text-[#9434ec]">símbolos, energía y estrellas.</span>
+          <span className="text-[#9434ec] animate-glow">
+            símbolos, energía y estrellas.
+          </span>
         </h1>
 
         {/* LEFT: BULLETS */}
@@ -95,6 +97,26 @@ export default function Hero() {
         .bullet-text {
           font-size: 15px;
           line-height: 1.45;
+        }
+
+        /* ✨ Efecto de brillo animado */
+        @keyframes glowPulse {
+          0% {
+            text-shadow: 0 0 6px rgba(148, 52, 236, 0.4),
+              0 0 12px rgba(148, 52, 236, 0.3);
+          }
+          50% {
+            text-shadow: 0 0 14px rgba(148, 52, 236, 0.6),
+              0 0 24px rgba(148, 52, 236, 0.5);
+          }
+          100% {
+            text-shadow: 0 0 6px rgba(148, 52, 236, 0.4),
+              0 0 12px rgba(148, 52, 236, 0.3);
+          }
+        }
+
+        .animate-glow {
+          animation: glowPulse 3s ease-in-out infinite;
         }
       `}</style>
     </section>
