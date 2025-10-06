@@ -10,7 +10,6 @@ export default function CartaNatalAvanzada() {
   const [resultado, setResultado] = useState<any>(null);
 
   const generarCarta = () => {
-    // Simulación básica
     const coordenadas = {
       sol: { signo: 'Géminis', grado: 15 },
       luna: { signo: 'Escorpio', grado: 22 },
