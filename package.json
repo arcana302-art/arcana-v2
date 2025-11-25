@@ -10,7 +10,10 @@
   "dependencies": {
     "next": "14.2.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "lucide-react": "latest",
+    "@heroicons/react": "2.1.5",
+    "clsx": "2.1.1"
   },
   "devDependencies": {
     "autoprefixer": "10.4.19",
