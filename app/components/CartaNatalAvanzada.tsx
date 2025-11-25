@@ -12,15 +12,20 @@ export default function CartaNatalAvanzada() {
   const [lugar, setLugar] = useState('');
   const [sinHora, setSinHora] = useState(false);
 
-  const enviarDatos = () => {
-    const params = new URLSearchParams({
+  const enviar = () => {
+    if (!nombre || !fecha || !lugar) {
+      alert("Por favor completa todos los campos obligatorios");
+      return;
+    }
+
+    const query = new URLSearchParams({
       nombre,
       fecha,
-      hora: sinHora ? 'Sin hora' : hora,
       lugar,
+      hora: sinHora ? "Sin hora" : hora,
     });
 
-    router.push(`/carta?${params.toString()}`);
+    router.push(`/carta-natal/resultado?${query.toString()}`);
   };
 
   return (
@@ -30,10 +35,7 @@ export default function CartaNatalAvanzada() {
           Calcula tu Carta Natal
         </h2>
 
-        {/* FORMULARIO */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-
-          {/* Nombre */}
           <input
             type="text"
             placeholder="Nombre completo"
@@ -42,7 +44,6 @@ export default function CartaNatalAvanzada() {
             className="p-3 rounded-lg border border-[#9434ec]/40 focus:ring-2 focus:ring-[#9434ec] outline-none"
           />
 
-          {/* Fecha */}
           <input
             type="date"
             value={fecha}
@@ -50,33 +51,15 @@ export default function CartaNatalAvanzada() {
             className="p-3 rounded-lg border border-[#9434ec]/40 focus:ring-2 focus:ring-[#9434ec] outline-none"
           />
 
-          {/* Hora */}
-          <div className="flex flex-col">
+          {!sinHora && (
             <input
               type="time"
               value={hora}
               onChange={(e) => setHora(e.target.value)}
-              disabled={sinHora}
-              className={`p-3 rounded-lg border border-[#9434ec]/40 focus:ring-2 focus:ring-[#9434ec] outline-none ${
-                sinHora ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
+              className="p-3 rounded-lg border border-[#9434ec]/40 focus:ring-2 focus:ring-[#9434ec] outline-none"
             />
+          )}
 
-            {/* CHECKBOX – OPCIONAL */}
-            <label className="flex items-center gap-2 mt-2 text-sm">
-              <input
-                type="checkbox"
-                checked={sinHora}
-                onChange={(e) => {
-                  setSinHora(e.target.checked);
-                  if (e.target.checked) setHora('');
-                }}
-              />
-              No conozco mi hora de nacimiento (opcional)
-            </label>
-          </div>
-
-          {/* Lugar */}
           <input
             type="text"
             placeholder="Lugar de nacimiento"
@@ -86,9 +69,21 @@ export default function CartaNatalAvanzada() {
           />
         </div>
 
-        {/* BOTÓN */}
+        {/* Casilla para indicar que no conoce la hora */}
+        <div className="flex items-center gap-2 mb-6">
+          <input
+            type="checkbox"
+            id="sinHora"
+            checked={sinHora}
+            onChange={(e) => setSinHora(e.target.checked)}
+          />
+          <label htmlFor="sinHora" className="text-sm">
+            No conozco mi hora de nacimiento (opcional)
+          </label>
+        </div>
+
         <button
-          onClick={enviarDatos}
+          onClick={enviar}
           className="bg-[#9434ec] hover:bg-[#7a2bc0] text-white font-semibold py-3 px-8 rounded-full transition w-full sm:w-auto block mx-auto"
         >
           Generar Carta Natal
